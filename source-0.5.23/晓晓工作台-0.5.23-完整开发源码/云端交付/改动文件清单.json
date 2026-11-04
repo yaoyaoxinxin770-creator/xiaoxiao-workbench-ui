@@ -1,0 +1,178 @@
+{
+  "baseline": "晓晓工作台-0.5.23-完整开发源码（提交 e5fd53c，与 SOURCE_MANIFEST.json 一致）",
+  "pathsRelativeTo": "晓晓工作台-0.5.23-完整开发源码/",
+  "note": "baselineSha256 可在本机先核对：一致说明该文件自 0.5.23 起未被本机改动，可直接应用补丁；不一致需逐文件合并。不含 云端交付/ 本身。",
+  "files": [
+    {
+      "path": "desktop-app/test-agent-prompt-diff.mjs",
+      "status": "added",
+      "sha256": "dd32f90bb475f182fd831be2036205cbffa5631068df768a221d8297b90908e0",
+      "bytes": 3019
+    },
+    {
+      "path": "infinite-canvas/web/src/app/(user)/video/agent-prompt-diff.ts",
+      "status": "added",
+      "sha256": "79d0aaeb7b3c09d20fdaa16f5465b1db71c87f4d07ba806ea1a22ac7bdd01d10",
+      "bytes": 5517
+    },
+    {
+      "path": "infinite-canvas/web/src/app/(user)/video/components/codex-agent-panel.tsx",
+      "status": "modified",
+      "baselineSha256": "fa43e9b6bfa55204f218b40eca8f3cabc95ad7f9adce7e29ff3f583f94e877dd",
+      "sha256": "12a8091f6fbaf0a8d6828e40dd662889f5131a6722e3f86c9f879bf357c84385",
+      "bytes": 64756
+    },
+    {
+      "path": "infinite-canvas/web/src/app/(user)/video/components/video-gallery.tsx",
+      "status": "modified",
+      "baselineSha256": "2e064e305da9cbb7dd03034f54d7b6762d1959e617ab3808da44d57e17f3c641",
+      "sha256": "4a46a6c4d5cbe1fe31b1032ae11b89b5ecd49515a76e725bf7ffd09bacbed0f1",
+      "bytes": 18364
+    },
+    {
+      "path": "infinite-canvas/web/src/app/(user)/video/components/video-studio.tsx",
+      "status": "modified",
+      "baselineSha256": "128f9c8bd26bcf945d2002143264124aa754f3b128b318fae9032e9155aba91e",
+      "sha256": "7f4ab138e18b35591538f2fcb5813e19ea89a655ae84f11a3a6a57fc2764f7be",
+      "bytes": 59503
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_components/agent-panel.tsx",
+      "status": "added",
+      "sha256": "2af643d4c4d0de792ce05cc4a190998c910e600e3cefa0a01f1bd9a10a5967e8",
+      "bytes": 9634
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_components/assets-view.tsx",
+      "status": "added",
+      "sha256": "49c8b90394b45a3d11744147694d631c1266a8fe08d7a29058c561c9eb7002b0",
+      "bytes": 21143
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_components/projects-view.tsx",
+      "status": "added",
+      "sha256": "5e659c6f9154a5864963f06ea12c2b550844911cf92eaa5e51efb0275e59d07d",
+      "bytes": 10448
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_components/prompt-panel.tsx",
+      "status": "added",
+      "sha256": "d4af966c2f5081490b79016050d186c36ddf72728d0731437cf23127d4882726",
+      "bytes": 18600
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_components/schemes.ts",
+      "status": "added",
+      "sha256": "028e406783851abedca25c6c722a6c5b412e2f4f7f8e82bb0bdbfdce7998ad87",
+      "bytes": 8793
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_components/shell.tsx",
+      "status": "added",
+      "sha256": "f6a0a913ee379485cad87672932244919debb8ccd374ce214adc44a628392c0d",
+      "bytes": 10492
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_components/studio-view.tsx",
+      "status": "added",
+      "sha256": "c8f0d4c60b52bf6e8bf39bdc062b7032eeb3d2cf672158b301d330c44b9da3ea",
+      "bytes": 26788
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_components/video-detail-modal.tsx",
+      "status": "added",
+      "sha256": "5de30170c495b0f7799535723a279864180ab7eb5c647bdca8241bb461a0b641",
+      "bytes": 9212
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_components/video-tile.tsx",
+      "status": "added",
+      "sha256": "cdc4fe6c6f26b49ae994ce86c1bba303ab9b13ab5848036387dfd5cfc8e3ce5d",
+      "bytes": 7028
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_mock/mock-art.tsx",
+      "status": "added",
+      "sha256": "dceadfc0058581fa837f40be470b5b4a141a98f31165f4f7e27ea5e1b4f55cbe",
+      "bytes": 11507
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_mock/mock-data.ts",
+      "status": "added",
+      "sha256": "e965aae3d4fbb8737648c4f5aa4576cae7a7395dd67adc2817c4e570ab6ffa4e",
+      "bytes": 15273
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/_mock/preview-bridge.ts",
+      "status": "added",
+      "sha256": "572171fdb20b90a0b028ad7e2dc84f1242344dcc3739d63e9296f118b1f65464",
+      "bytes": 1200
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/design-preview.css",
+      "status": "added",
+      "sha256": "0ad10ef4070776aa80c0ffd230c9cb4bab350536285e864be4ea37ee1dcee6d7",
+      "bytes": 87035
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/overview/page.tsx",
+      "status": "added",
+      "sha256": "043746a224675735990abb7941b1a7daf333388bf50c71ab95fee9d1a4dd218e",
+      "bytes": 3844
+    },
+    {
+      "path": "infinite-canvas/web/src/app/design-preview/page.tsx",
+      "status": "added",
+      "sha256": "45684adf712608c4c2681866b852fdc6bdd112457ff611ff6bb39f1398768b2f",
+      "bytes": 4127
+    },
+    {
+      "path": "infinite-canvas/web/src/app/layout.tsx",
+      "status": "modified",
+      "baselineSha256": "844120ae1dcabc013bf6b7329538b4ddb62defd0d7bf9c0bb328e7ffefc12f5a",
+      "sha256": "b5b88de7b6f790820e0392084dbb59dea29cb490f86e7e5956c102e0007fb009",
+      "bytes": 1735
+    },
+    {
+      "path": "infinite-canvas/web/src/app/workbench-v3.css",
+      "status": "added",
+      "sha256": "be5121b1aaeb7478f4feb326cca0a6e5ca557e2a2069c8cdc275e086d314bf8f",
+      "bytes": 31528
+    },
+    {
+      "path": "infinite-canvas/web/src/components/layout/user-status-actions.tsx",
+      "status": "modified",
+      "baselineSha256": "80e3e4db7fee5e1120ea96e25c44a433c01d661ffd356edfc13a15716ed1a3a7",
+      "sha256": "67e2d6cc70afe58fff0b5deac7aa05f8e081addddf4612984c17e618d94dfb71",
+      "bytes": 8732
+    },
+    {
+      "path": "infinite-canvas/web/src/lib/app-theme.ts",
+      "status": "modified",
+      "baselineSha256": "263042268be8cdbee8afccc5314e9fe6d7cc35957e8f09a92220b4f2dc2ad33c",
+      "sha256": "b0a7088a322126ebf112c6808c50b16cc1bb767bb2308a319837ea9e631adf0b",
+      "bytes": 9684
+    },
+    {
+      "path": "infinite-canvas/web/src/stores/use-theme-store.ts",
+      "status": "modified",
+      "baselineSha256": "6a208fb022f7f820c2ec09feba5a8c7809388f5593e4f7ad2cafb9693fb7a875",
+      "sha256": "2b9ec099a2e3a0529c796b9a6d3e909360d0b34076f1fd3c7676a913ecf58e74",
+      "bytes": 996
+    },
+    {
+      "path": "infinite-canvas/web/src/stores/use-workbench-layout-store.ts",
+      "status": "modified",
+      "baselineSha256": "1e836e9b70b500ea8671f705b62980e900099ff854c8af7389eff9e52420658b",
+      "sha256": "fedeab84ed3a8d3757a73e93f669dcb408d824279ca91faf6564e90d9414b4dc",
+      "bytes": 1642
+    },
+    {
+      "path": "工作台功能保留规则.md",
+      "status": "modified",
+      "baselineSha256": "e9a5e155e8d3cbd7b7d55c207927cf6519d34c385aefc4940aa6cfd30593cd6d",
+      "sha256": "799a6f082f27f383b6abc138370e8bc2bacd5daa968c3f26c4b98a199e83fe31",
+      "bytes": 28927
+    }
+  ]
+}

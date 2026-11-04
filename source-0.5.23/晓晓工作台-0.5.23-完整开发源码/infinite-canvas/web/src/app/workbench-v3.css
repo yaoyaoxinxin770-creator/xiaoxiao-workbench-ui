@@ -213,42 +213,29 @@ html:root[data-skin="comic"] body::after {
 [data-toolbar-group]:empty {
     display: none;
 }
+/* 分隔线画在两组之间原有的 8px 间隙里，不增加宽度：工具栏宽度与 0.5.23 相同（本机界面检查要求 1440 宽窗口下高度 ≤56px）。 */
 [data-toolbar-group="view"] {
     position: relative;
-}
-[data-toolbar-group="create"]:not(:empty) + [data-toolbar-group="view"] {
-    padding-left: 11px;
 }
 [data-toolbar-group="create"]:not(:empty) + [data-toolbar-group="view"]::before {
     content: "";
     position: absolute;
-    left: 0;
+    left: -4.5px;
     top: 6px;
     bottom: 6px;
     width: 1px;
     background: var(--border);
 }
-[data-auto-match-toggle] {
-    gap: 7px !important;
-}
-[data-auto-match-toggle]::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    flex: none;
-    border-radius: 50%;
-    background: currentColor;
-    opacity: 0.35;
-    transition:
-        opacity var(--wb-dur) var(--wb-ease),
-        box-shadow var(--wb-dur) var(--wb-ease);
-}
-[data-auto-match-toggle][aria-pressed="true"]::before {
-    opacity: 1;
-    box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 22%, transparent);
-}
+/* 开关类按钮开启时外圈柔光，不占布局空间。 */
+[data-auto-match-toggle][aria-pressed="true"],
 [data-agent-toggle][aria-pressed="true"] {
     box-shadow: 0 0 22px -8px var(--primary) !important;
+}
+
+/* 切换文件夹、项目或“视频 / 资产”时内容轻微淡入（仅在挂载或重新显示时播放一次）。 */
+[data-video-gallery],
+[data-video-elements] {
+    animation: wb-fade-up 0.28s var(--wb-ease-out) backwards;
 }
 
 /* ---------- 4. 视频卡片（直角纯画面，只增加悬停与状态表现） ---------- */
@@ -294,17 +281,10 @@ html:root[data-skin="comic"] body::after {
 [data-video-actions] > button[aria-pressed="true"] {
     transform: none;
 }
-[data-video-actions] > button:hover {
+/* 已收藏的星号保持无实体底色；编号位置不动，选择圈直接覆盖原编号（与原有验收一致）。 */
+[data-video-actions] > button:not([aria-pressed="true"]):hover {
     background: var(--primary) !important;
     color: var(--primary-foreground) !important;
-}
-[data-video-tile] [data-video-number] {
-    transition: transform var(--wb-dur) var(--wb-ease);
-}
-[data-video-tile]:has([data-media-selection]):hover [data-video-number],
-[data-video-tile]:has([data-media-selection]):focus-within [data-video-number],
-[data-video-tile]:has([data-media-selection] input:checked) [data-video-number] {
-    transform: translateX(32px);
 }
 [data-video-tile][data-status="生成中"]::before {
     content: "";
@@ -840,12 +820,12 @@ html:root[data-skin="comic"] [data-video-tile] [data-video-number] {
     text-shadow: none;
     box-shadow: 2px 2px 0 #1b1a17;
 }
-html:root[data-skin="comic"] [data-video-actions] > button {
+html:root[data-skin="comic"] [data-video-actions] > button:not([aria-pressed="true"]) {
     background: #fffdf7 !important;
     color: #1b1a17 !important;
     box-shadow: 2px 2px 0 #1b1a17;
 }
-html:root[data-skin="comic"] [data-video-actions] > button:hover {
+html:root[data-skin="comic"] [data-video-actions] > button:not([aria-pressed="true"]):hover {
     background: #ffc93c !important;
 }
 html:root[data-skin="comic"] [data-video-tile][data-status="生成中"]::before {
@@ -901,6 +881,12 @@ html:root[data-skin="comic"] .ant-modal .ant-modal-content {
     from {
         opacity: 0;
         transform: translateY(14px) scale(0.985);
+    }
+}
+@keyframes wb-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
     }
 }
 @keyframes wb-agent-in {

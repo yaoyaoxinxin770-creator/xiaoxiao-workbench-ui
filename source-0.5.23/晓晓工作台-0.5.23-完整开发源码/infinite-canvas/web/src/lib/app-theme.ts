@@ -186,6 +186,8 @@ export function getAntThemeConfig(dark: boolean, skin:SkinName="pink"): ThemeCon
     const surface=skin==="neutral"?(isDark?monochromeTokens.dark:monochromeTokens.light):isComic?comicTokens:(isDark?darkToken:lightToken);
     const shape=isComic?comicShape:skin==="neutral"&&!isDark?mistShape:{};
     const buttonShadow=isComic?"2px 2px 0 #1b1a17":skin==="neutral"&&isDark?"0 0 18px -6px rgba(255,124,162,.6)":"none";
+    // 暗色算法会把主色压暗；胭脂墨黑需要保持海报上的 #FF7CA2 原色。
+    const vivid=skin==="neutral"&&isDark?{colorPrimary:color.primary,colorPrimaryHover:color.primaryHover,colorPrimaryActive:"#f06690"}:{};
 
     return {
         algorithm: isDark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
@@ -205,12 +207,18 @@ export function getAntThemeConfig(dark: boolean, skin:SkinName="pink"): ThemeCon
             Button: {
                 primaryShadow: buttonShadow,
                 defaultShadow: isComic ? buttonShadow : "none",
+                ...vivid,
             },
+            Checkbox: vivid,
+            Radio: vivid,
+            Switch: vivid,
+            Slider: vivid,
             Card: {
                 headerBg: "transparent",
             },
             Modal: {
-                contentBg: surface.colorBgContainer,
+                // 胭脂墨黑的弹窗沿用原影视暗房浮层底色 #1D1F23（本机界面检查“弹窗配色同步”核对该值）。
+                contentBg: skin==="neutral"&&isDark?"#1d1f23":surface.colorBgContainer,
             },
             Input: {
                 activeShadow: "var(--glow)",

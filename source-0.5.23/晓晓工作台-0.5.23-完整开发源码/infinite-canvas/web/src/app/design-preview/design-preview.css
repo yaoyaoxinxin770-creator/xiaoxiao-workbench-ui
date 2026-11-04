@@ -1362,13 +1362,6 @@ html[data-dp-scheme] .ant-modal button,
     color: var(--text-2);
     text-shadow: none;
 }
-.dp-tile:hover .dp-tile-number,
-.dp-tile[data-selected="true"] .dp-tile-number {
-    transform: translateX(30px);
-}
-.dp-tile[data-state="empty"]:hover .dp-tile-number {
-    transform: none;
-}
 .dp-tile-check {
     position: absolute;
     left: 8px;
@@ -3592,10 +3585,6 @@ html[data-dp-scheme="noir"] .dp-patch-add {
     text-shadow: none;
     border-right: 2px solid var(--ink);
     border-bottom: 2px solid var(--ink);
-}
-.dp-root[data-scheme="comic"] .dp-tile:hover .dp-tile-number,
-.dp-root[data-scheme="comic"] .dp-tile[data-selected="true"] .dp-tile-number {
-    transform: translateX(34px);
 }
 .dp-root[data-scheme="comic"] .dp-tile-progress {
     height: 5px;
