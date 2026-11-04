@@ -1,0 +1,33 @@
+"use client";
+import {writeElementDrag} from "../element-drag";
+import {useEffect,useMemo,useRef,useState,type ReactNode} from "react";
+import {requestVideoPoster} from "../video-poster";
+import { AtSign, Expand, FileText, Music2, Pin, Video } from "lucide-react";
+import type { Asset } from "@/stores/use-asset-store";
+import {useVideoStudioStore} from "@/stores/use-video-studio-store";
+import {elementCategory} from "../element-model";
+import {notifyLocalAssetLoadError} from "@/services/api/local-assets";
+import {LocalAssetMenu} from "./local-asset-menu";
+import { ElementFavoriteButton } from "./element-favorite-button";
+import { buildWaveformHeights, formatAudioSeconds } from "./element-audio-strip";
+
+export function ElementThumbnail({asset,eager=false}:{asset:Asset;eager?:boolean}) {
+ const ref=useRef<HTMLSpanElement>(null),[poster,setPoster]=useState(""),[visible,setVisible]=useState(eager);
+ useEffect(()=>{if(visible)return;const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){setVisible(true);observer.disconnect();}},{rootMargin:"160px"});if(ref.current)observer.observe(ref.current);return()=>observer.disconnect();},[visible]);
+ const waveBars=useMemo(()=>asset.kind==="audio"?buildWaveformHeights(asset.id+":"+asset.title,18):[],[asset.id,asset.kind,asset.title]);
+ useEffect(()=>{setPoster("");if(asset.kind!=="video"||asset.coverUrl)return;const abort=new AbortController();let url="",requested=false;const logId=typeof asset.metadata?.generationLogId==="string"?asset.metadata.generationLogId:undefined;const observer=new IntersectionObserver(entries=>{if(requested||!entries.some(e=>e.isIntersecting))return;requested=true;requestVideoPoster({id:asset.id,url:asset.data.url,storageKey:asset.data.storageKey||"",bytes:asset.data.bytes,logId},abort.signal).then(blob=>{if(blob&&!abort.signal.aborted){url=URL.createObjectURL(blob);setPoster(url);}});});if(ref.current)observer.observe(ref.current);return()=>{abort.abort();observer.disconnect();if(url)URL.revokeObjectURL(url);};},[asset.id,asset.kind,asset.coverUrl,asset.kind==="video"?asset.data.url:""]);
+ const backdropUrl=asset.kind==="image"?asset.data.dataUrl:asset.kind==="video"?(poster||asset.coverUrl):"";
+ return <span ref={ref} data-element-thumbnail className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden bg-secondary/50">{visible&&backdropUrl&&<span aria-hidden className="pointer-events-none absolute inset-0 scale-110 bg-cover bg-center opacity-25 blur-md" style={{backgroundImage:`url("${backdropUrl}")`}}/>}{asset.kind==="image"?(visible?<img draggable={false} src={asset.data.dataUrl} alt={asset.title} loading={eager?"eager":"lazy"} decoding="async" onError={()=>{if(asset.localFile)notifyLocalAssetLoadError(asset);}} className="relative z-[1] size-full object-contain"/>:null):asset.kind==="video"?(poster||asset.coverUrl?<img src={poster||asset.coverUrl} alt={asset.title} loading="lazy" decoding="async" onError={()=>{if(asset.localFile)notifyLocalAssetLoadError(asset);}} className="relative z-[1] size-full object-contain"/>:<Video className="size-10 opacity-40"/>):asset.kind==="audio"?<span className="relative z-[1] flex size-full flex-col items-center justify-center gap-2 px-3"><Music2 className="size-5 text-primary/80"/><span className="flex h-7 w-full items-center gap-0.5">{waveBars.map((h,i)=><span key={i} className="flex-1 rounded-full bg-primary/35" style={{height:`${Math.max(22,h)}%`}}/>)}</span>{Number(asset.data.durationMs)>0&&<span className="font-mono text-xs text-muted-foreground">{formatAudioSeconds((asset.data.durationMs||0)/1000)}</span>}</span>:<FileText className="size-10 opacity-40"/>}</span>;
+}
+
+export function ElementAssetCard({asset,eager=false,selected=false,onInspect,onOpen,onReference,actionLabel="编辑元素",disabled=false,selectControl,draggable=false}:{asset:Asset;eager?:boolean;selected?:boolean;onInspect?:()=>void;onOpen:()=>void;onReference:()=>void;actionLabel?:string;disabled?:boolean;selectControl?:ReactNode;draggable?:boolean}) {
+ const rule=useVideoStudioStore(s=>s.projects.find(p=>p.id===s.activeProjectId)?.elementRules?.[asset.id]);
+ return <LocalAssetMenu asset={asset} hideRelink><article data-element-card={asset.id} data-selected={selected||undefined} data-reference-disabled={rule?.disabled||undefined} className={"group relative min-w-0 self-start overflow-hidden rounded-xl border bg-card transition-colors "+(selected?"border-primary ring-2 ring-primary/20":"border-border hover:border-primary/60")}>
+ <button type="button" draggable={draggable} aria-label={(onInspect?"检视元素 ":actionLabel+" ")+asset.title} disabled={disabled} title={asset.localFile?.path} className={"block w-full text-left "+(draggable?"cursor-grab active:cursor-grabbing":"")} onDragStart={event=>{writeElementDrag(event.dataTransfer,asset);}} onClick={()=>onInspect?onInspect():onOpen()} onDoubleClick={onInspect?onOpen:undefined}>
+ <ElementThumbnail asset={asset} eager={eager}/>
+ <span className="flex items-center gap-2 p-2.5">{rule?.disabled?<span className="text-xs text-muted-foreground">已禁用</span>:Number(rule?.priority)>0?<span className="rounded bg-primary/12 px-1.5 py-0.5 text-xs font-semibold text-primary">优先{rule?.priority}</span>:null}<span className="min-w-0 flex-1 truncate text-xs font-semibold" title={asset.title}>{asset.title}</span>{Number(asset.metadata?.elementPinnedAt)>0&&<Pin aria-label="已置顶" className="size-3 shrink-0"/>}<span className="shrink-0 rounded-full bg-secondary px-2 py-0.5 text-xs text-muted-foreground">{elementCategory(asset)}</span></span>
+ </button>
+ <div data-element-actions className="pointer-events-none absolute right-2 top-2 z-[2] flex flex-col gap-1 opacity-0 transition-opacity group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100"><button type="button" aria-label={"引用到提示词 "+asset.title} title={rule?.disabled?"此元素已禁用":"引用到当前提示词"} disabled={disabled||rule?.disabled} className="flex size-8 items-center justify-center rounded-full bg-black/45 text-white backdrop-blur-sm hover:bg-primary" onClick={event=>{event.stopPropagation();onReference();}}><AtSign className="size-4"/></button>{onInspect&&<button type="button" aria-label={actionLabel+" "+asset.title} title="放大查看与完整编辑" disabled={disabled} className="flex size-8 items-center justify-center rounded-full bg-black/45 text-white backdrop-blur-sm hover:bg-black/70" onClick={event=>{event.stopPropagation();onOpen();}}><Expand className="size-3.5"/></button>}<ElementFavoriteButton asset={asset}/></div>
+ {selectControl}
+ </article></LocalAssetMenu>;
+}

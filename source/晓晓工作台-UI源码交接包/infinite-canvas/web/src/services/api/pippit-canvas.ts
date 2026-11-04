@@ -1,0 +1,10 @@
+import { workbench } from './workbench';
+import {useVideoStudioStore} from '@/stores/use-video-studio-store';
+import {placementFor} from '@/app/(user)/video/studio-model';
+import type {GenerationLog} from '@/app/(user)/video/page';
+export type CanvasReport={synced:number;skipped:number;failed:number;errors:{taskId:string;error:string}[];disabled?:boolean};
+export type CanvasSettings={browser?:{ready:boolean;error?:string};target:null|{url:string;title:string;auto:boolean};lastReport:CanvasReport|null};
+export const pippitCanvasSettings=(projectKey:string):Promise<CanvasSettings>=>workbench().pippitCanvasSettings(projectKey);
+export const configurePippitCanvas=(projectKey:string,url:string,auto:boolean):Promise<CanvasSettings>=>workbench().pippitCanvasConfigure({projectKey,url,auto});
+export const syncPippitCanvas=(projectKey:string,logs:GenerationLog[],automatic=false):Promise<CanvasReport>=>workbench().pippitCanvasSync({projectKey,automatic,items:[...new Map(logs.filter(l=>l.status==='成功'&&l.video&&l.task?.id?.startsWith('pippit:')&&!l.task.canvasNodeId).map(l=>[l.task!.id,{taskId:l.task!.id,title:l.title||'工作台生成视频'}])).values()]});
+export const autoSyncPippitCanvas=(log:GenerationLog)=>syncPippitCanvas(placementFor(useVideoStudioStore.getState().placements,log.id).projectId,[log],true);

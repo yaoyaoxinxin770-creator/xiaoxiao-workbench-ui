@@ -1,0 +1,9 @@
+"use client";
+import Link from "next/link";
+import {usePathname} from "next/navigation";
+import {navigationTools} from "@/constant/navigation-tools";
+import {useWorkspaceTabsStore} from "@/stores/use-workspace-tabs-store";
+import {useVideoStudioStore} from "@/stores/use-video-studio-store";
+import {useWorkbenchLayoutStore} from "@/stores/use-workbench-layout-store";
+const labels:Record<string,string>={canvas:"画布",projects:"项目",video:"视频",image:"生图",jimeng:"自动发送",prompts:"模板库",assets:"公共库"};
+export function AppNavigation(){const collapsed=useWorkbenchLayoutStore(s=>s.railCollapsed);const pathname=usePathname(),tabs=useWorkspaceTabsStore(),studio=useVideoStudioStore();if(collapsed)return null;return <aside className="workbench-rail" aria-label="工作台功能导航"><Link href="/projects" className="workbench-brand" title="晓晓的AI工作台">晓</Link><nav aria-label="工作台导航">{["canvas","projects","video","image","jimeng","prompts","assets"].map(slug=>{const tool=navigationTools.find(t=>t.slug===slug)!,Icon=tool.icon,last=tabs.tabs.find(t=>t.id===tabs.lastByKind[slug])||tabs.tabs.filter(t=>t.kind===slug).at(-1),selected=pathname===('/'+slug)||pathname.startsWith('/'+slug+'/');return <Link key={slug} href={last?.href||('/'+slug)} data-rail-divider={slug==="jimeng"?"true":undefined} title={slug==="assets"?"跨项目公共素材库":slug==="prompts"?"提示词模板库":tool.label} aria-label={tool.label} aria-current={selected?"page":undefined} onClick={event=>{if(last?.kind==="video")studio.selectProject(last.target);if(["projects","jimeng","typetale","video"].includes(slug)){event.preventDefault();window.dispatchEvent(new CustomEvent("xiaoxiao:navigate",{detail:last?.href||('/'+slug)}));}}}><Icon size={20}/><span>{labels[slug]}</span></Link>;})}</nav><span className="workbench-edition" title="晓晓工作台 · 暖樱焕新版">II</span></aside>;}

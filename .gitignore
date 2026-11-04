@@ -1,0 +1,6 @@
+# 依赖与构建产物（本机按锁文件重新安装/构建）
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+.DS_Store

@@ -1,0 +1,2310 @@
+{
+  "formatVersion": 1,
+  "preparedFor": "UI design and mergeable source handoff",
+  "userFacingDate": "2026-11-04",
+  "createdAtUtc": "2026-11-04T09:39:45.171Z",
+  "desktopSourceVersion": "0.5.22",
+  "installedPackageVersion": "0.5.21",
+  "runningProcessVersion": "not inspected",
+  "frontendStack": {
+    "next": "16.2.9",
+    "react": "19.2.5",
+    "typescript": "^5"
+  },
+  "sourceTreeChangedByThisExport": false,
+  "sourceFiles": [
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/ai-logs/page.tsx",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/ai-logs/page.tsx",
+      "bytes": 9839,
+      "sha256": "4d073718119e5aea661b13c3fc6a53a19848228dd19d0f7f48268a441b2439e9"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/assets/page.tsx",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/assets/page.tsx",
+      "bytes": 14228,
+      "sha256": "45d389b7b839eb9d2ee2310bce0703d0c1bc82b9f7c7ef8160c18eb1dc59d7a5"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/assets/use-admin-assets.ts",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/assets/use-admin-assets.ts",
+      "bytes": 4075,
+      "sha256": "ce2e63a3ef1ca3a4df439d7c09f93ff44d25be60071a4822d49f7b66a03b25db"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/credit-logs/page.tsx",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/credit-logs/page.tsx",
+      "bytes": 11277,
+      "sha256": "bdf26cdfe0963379ff543dc225d1c2f53bf2b727a5e899768a5073908862a9fb"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/credit-logs/use-admin-credit-logs.ts",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/credit-logs/use-admin-credit-logs.ts",
+      "bytes": 3740,
+      "sha256": "d527db78db018bd5ed35741dcd689a643bb81ba86c66b441366282bab526f491"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/layout.tsx",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/layout.tsx",
+      "bytes": 6253,
+      "sha256": "2d9ec531886a752033277365a4b0d9849f604ade046a93b189cf98c6190cb082"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/page.tsx",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/page.tsx",
+      "bytes": 120,
+      "sha256": "993ef76dcca9d319bd9da41a45ddc9cc49908fa9c6bcfc66ce70a97e4d287ab7"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/prompts/page.tsx",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/prompts/page.tsx",
+      "bytes": 16995,
+      "sha256": "696dca003862a179291f4e3603423e464f8c332d292ba32f7ef880c87f680f81"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/prompts/use-admin-prompts.ts",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/prompts/use-admin-prompts.ts",
+      "bytes": 7000,
+      "sha256": "c3699b8a81123b93bfb8ed7237695142455551dc3cc7697501ca3dc03351ab7e"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/settings/page.tsx",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/settings/page.tsx",
+      "bytes": 85445,
+      "sha256": "835fb7bd83976c144041afd54c4bfa2fe4e026b7e8d018d07e9ef6ce8066a15c"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/skills/page.tsx",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/skills/page.tsx",
+      "bytes": 36398,
+      "sha256": "88a420d78d70f9ddb03a66585edb10c2eca1e4115726b9edc5f829fedbd289a3"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/users/page.tsx",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/users/page.tsx",
+      "bytes": 12410,
+      "sha256": "2a0aae505247b80cc415b66a0bbdcc4c5c57936cfd9b181c8163cc32ae63bdc5"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(admin)/admin/users/use-admin-users.ts",
+      "path": "infinite-canvas/web/src/app/(admin)/admin/users/use-admin-users.ts",
+      "bytes": 4137,
+      "sha256": "cf862b4500a239ee31cffcdfc55f5f77e61a8c1342e4233c5ef6ece5adc436c3"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/asset-library/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/asset-library/page.tsx",
+      "bytes": 17738,
+      "sha256": "f3374639621bd6338594be6d21217afbfdabef7239794823541a4caffebd7346"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/assets/asset-transfer.ts",
+      "path": "infinite-canvas/web/src/app/(user)/assets/asset-transfer.ts",
+      "bytes": 3014,
+      "sha256": "f02b1a4074865a1352d0dc532815f993bb783cfaae31548dc2ada7ac0c6b0bbf"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/assets/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/assets/page.tsx",
+      "bytes": 23055,
+      "sha256": "d59337bc3150c3ad7c27ce0cccca3a281b2c8431e66e7c52fa0c91bb108c0a48"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-context.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-context.ts",
+      "bytes": 7422,
+      "sha256": "22f9a684d0f102b6fd97a7513aba5671d9e40e0de5c635576e630e09e237c829"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-memory.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-memory.ts",
+      "bytes": 7571,
+      "sha256": "8209e58af6440e648381e1e7eba3620e24c08c9d5eb6ff2d0c85f65f965ad414"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-references.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-references.ts",
+      "bytes": 6396,
+      "sha256": "cd36c93dab85b15c8280809aceaa0570f99e8a449cc5319dc2f597cde9df9f00"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-runtime.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-runtime.ts",
+      "bytes": 19968,
+      "sha256": "60c07806301f9b981ae9944be1f0c293ce6bcaa5cee045c6714b4f94cc005099"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-skills.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-skills.ts",
+      "bytes": 7486,
+      "sha256": "2c0833925889e1e97bdda7ac11093e57c612e812fb26c0f8f7e38c8857263abb"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-tools.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/canvas-agent-tools.ts",
+      "bytes": 27471,
+      "sha256": "909f6b6ca19469def784d338cbcd6c6c623e40d1e57df9a2a5b7f8315195aef6"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/pippit-canvas-agent.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/pippit-canvas-agent.ts",
+      "bytes": 7760,
+      "sha256": "7fd1028592a46b5315587a44d2c4f4583c91c72e13e7ccc4a7e89c50a0efb504"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/audio.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/audio.ts",
+      "bytes": 6772,
+      "sha256": "685ef880cfe915a8f468b6fbc367b9f52471ab44b6a602cd4c24ad69281e6df0"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/core.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/core.ts",
+      "bytes": 17688,
+      "sha256": "00eb1a1def62ae91c192fca7a91dc9525ec2ffa4203c6bb3a7d673d3c6703d6c"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/image-character-sheet.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/image-character-sheet.ts",
+      "bytes": 13547,
+      "sha256": "21f395d51a6b61525e73462b533fea9b23722316ed0fbec122d88716619a0c90"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/image-storyboard.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/image-storyboard.ts",
+      "bytes": 9811,
+      "sha256": "554d1ddc45aa2abb654c927e9afa0c6f3e941c8e1f9f18d552dc46208167b94d"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/image.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/image.ts",
+      "bytes": 12369,
+      "sha256": "be4d482d1bd355979639f957462c86548fad8721f2b48337a65d1e07471cc0b4"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/organize.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/organize.ts",
+      "bytes": 8333,
+      "sha256": "f5b2bd046f819c267b1b26b8452952ceb4e62a0567638a320ab5b6e33a5930b2"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/script.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/script.ts",
+      "bytes": 13568,
+      "sha256": "d59ad4e94b8e83d11e7390afef82295f145f6504be922adaba112f48789c1d1e"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/video-editing.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/video-editing.ts",
+      "bytes": 7804,
+      "sha256": "938aa956cebb010a569dc8c39a39b69b55c671309d8871cd403b92cbedb4f726"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/video-extension.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/video-extension.ts",
+      "bytes": 11337,
+      "sha256": "65ffbdb3555c7b58869fa7d808f9c5b410f246388d30f78b9cf71792e93c6f8b"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/video-multi-shot.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/video-multi-shot.ts",
+      "bytes": 9072,
+      "sha256": "1e7733697be6ab5211f1596905e7f6e1808b8b51fb3116a273be9f85303f7160"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/video-single-shot.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/video-single-shot.ts",
+      "bytes": 5837,
+      "sha256": "78b506c609b96f5d0376fa0db2bb9b643ef3b09ad956a57ee55f971bea1b3431"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/video.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/video.ts",
+      "bytes": 16599,
+      "sha256": "0321eeb73dd8bfbf1ff3fc0a271fa46aa252e11bfbe4f9b71a9efb2676224a95"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/workflow.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/skills/workflow.ts",
+      "bytes": 13171,
+      "sha256": "e2cbcd58d77e7eb90e95da5e0d7ef3bd00ad1bebc727bb8f35293bb77baa95ad"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/agent/use-codex-agent.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/agent/use-codex-agent.ts",
+      "bytes": 18868,
+      "sha256": "ba24ae4ac3827b21ccce8ee1648297075faff155a278da81bd24865f86a430e5"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/asset-picker-modal.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/asset-picker-modal.tsx",
+      "bytes": 19426,
+      "sha256": "be941a9cb7c5ee0380f8ee86fc8c2e9bcc3e21ccb632392501a4ccbf4f933487"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-agent-skill-popover.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-agent-skill-popover.tsx",
+      "bytes": 11875,
+      "sha256": "7c35061da9402679606122d4ec19b96a7ea6270e484a4cac8c1d3885c51dfc9f"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-assistant-composer.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-assistant-composer.tsx",
+      "bytes": 9981,
+      "sha256": "4329892b9363a208e08bee3aba91a009c27434e7dd4792928c868b61c69305a4"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-assistant-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-assistant-panel.tsx",
+      "bytes": 61856,
+      "sha256": "f5e68ef71e9d8ed268c21a78f431925fc4282cd68b0113790834ade06f202741"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-audio-settings-popover.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-audio-settings-popover.tsx",
+      "bytes": 8979,
+      "sha256": "e7905654dadebcc2c3cd5c86f110dd8323bc1a02dce038451bc6996413292796"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-camera-control.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-camera-control.tsx",
+      "bytes": 20086,
+      "sha256": "da6c5f64a2dc833b2420b21a63b38389bf6cd21cb3d2a3b66c30ff4f89ac451c"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-codex-connect-view.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-codex-connect-view.tsx",
+      "bytes": 7292,
+      "sha256": "a677032a8ab15b9f47d9cd02c76e4849e919956cebccc02d7436b904e7e06a76"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-config-composer.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-config-composer.tsx",
+      "bytes": 19151,
+      "sha256": "3a3bc57d6bae406cefe1039d8e99ae49768c3f62b7e0aa67131de2395611cb14"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-config-node-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-config-node-panel.tsx",
+      "bytes": 17656,
+      "sha256": "21cdc755e89cea95879acaa9daf0ccd3051038a21994e11ff92d55c0f798421d"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-connections.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-connections.tsx",
+      "bytes": 3637,
+      "sha256": "6107ed81dab3092220a6ccaa0bb0dc8cdf2bf8a8aa81865f4f5ecb698343bc39"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-context-menu.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-context-menu.tsx",
+      "bytes": 3019,
+      "sha256": "6d1fd2919b9d8c394fe7cf5dd25f9ac565222bfa3b22595430d1f819f8d9b2e9"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-delete-projects-dialog.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-delete-projects-dialog.tsx",
+      "bytes": 1740,
+      "sha256": "b900f46d28fe342cb91b8db174c610efde8165b99325b132d93567d8a27581ac"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-director-node-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-director-node-panel.tsx",
+      "bytes": 1302,
+      "sha256": "bfbe274dc4ed5d84166b8ae6439d2a7295279e72820d64c269ca89656ee3129b"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-director.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-director.tsx",
+      "bytes": 5699,
+      "sha256": "b5af1ad62344353098ff0186a89565896364250a6ac30ca57e091608f957a72a"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-image-settings-popover.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-image-settings-popover.tsx",
+      "bytes": 6814,
+      "sha256": "f6936282f7c31a09b2d7d2bb3ab5c2a508147a847522deb87a5b2bb43024cd03"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-image-toolbar-settings-modal.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-image-toolbar-settings-modal.tsx",
+      "bytes": 10341,
+      "sha256": "a1a28c8130d132b94d9840b3ead59a72967e399d7416ae3814216cef62608b8d"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-image-toolbar-tools.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-image-toolbar-tools.tsx",
+      "bytes": 7099,
+      "sha256": "4afcad93bbfea4e12a7351579559c2985ff82e1904c053cb2a5c3584e00f5e56"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-mini-map.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-mini-map.tsx",
+      "bytes": 6041,
+      "sha256": "50aa1f167518c8e7c89e933dad601a5556ac0402d53537d9cbe462ef6ba2fe42"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-angle-dialog.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-angle-dialog.tsx",
+      "bytes": 5108,
+      "sha256": "a0f40f24f806e77f10acc5517003f6d32a9ad71d00a74f898de2516abbe847b9"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-crop-dialog.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-crop-dialog.tsx",
+      "bytes": 11907,
+      "sha256": "8d265aecbe7f6181c023b679262345b4da89adc001dc07acb1af94a66a9059e0"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-generation.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-generation.ts",
+      "bytes": 14590,
+      "sha256": "6467e802da91ddd8c7ba8c540d6d8bb09b09429521abbb6eb8ac75a859ff7b95"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-hover-toolbar.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-hover-toolbar.tsx",
+      "bytes": 19282,
+      "sha256": "b398f30c7d71165f29c175ec35f52dff7bce2bdc25b6e8a1892c75093f7ebe56"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-mask-edit-dialog.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-mask-edit-dialog.tsx",
+      "bytes": 15034,
+      "sha256": "c0bac89705274c84cc5c4aa8cc6513470307dac32bd5f4e49ccdbcb0d38271be"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-prompt-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-prompt-panel.tsx",
+      "bytes": 20171,
+      "sha256": "7fcc9c065db6ed0762241678799c263cc99f9457beef993095cebd640835abca"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-reference-bar.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-reference-bar.tsx",
+      "bytes": 4325,
+      "sha256": "82db1dce52b5a2bd27d861f51e89d8edf2b2602a618b14c6571d518375ad3b02"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-split-dialog.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-split-dialog.tsx",
+      "bytes": 12074,
+      "sha256": "4356c2163a1fe5ffcc9c6c9ddc3e1aa67f0e214343e3b77b3ef3b062c1320ae8"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-upscale-dialog.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node-upscale-dialog.tsx",
+      "bytes": 6436,
+      "sha256": "c44516d2466b14354534ceb27cceb31badb529eba3b3bc19f7322ca3a9a3a197"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-node.tsx",
+      "bytes": 47510,
+      "sha256": "65e1ea64f5419ea3a003d2d11a475c23de05cd52ad4a0660aad8042189d70d69"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-panorama-viewer.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-panorama-viewer.tsx",
+      "bytes": 9894,
+      "sha256": "f9df030e616f14825fd7d16c6dc00449d49bdd930964a3e01322ff28e9f8a24c"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-project-card.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-project-card.tsx",
+      "bytes": 4751,
+      "sha256": "468671983d8929c6067da07dd5ff130f8dd181dca09df6e71d4558ae6b192244"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-prompt-chip-input.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-prompt-chip-input.tsx",
+      "bytes": 30247,
+      "sha256": "b7d51bfbe5cfc8bac7937c8f807163524bdf23c9da97615018924a50eb73c138"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-prompt-library.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-prompt-library.tsx",
+      "bytes": 1143,
+      "sha256": "c9fb3397a413aab6d071d2fc60a328d9ca137ad926fe520562a68f1c1d49ae35"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-resource-mention-textarea.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-resource-mention-textarea.tsx",
+      "bytes": 13208,
+      "sha256": "aa052be8b4a0aadc3ea56b4aa778e4c980fdcc7aed5c071449cb2f969320f534"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-side-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-side-panel.tsx",
+      "bytes": 35387,
+      "sha256": "d0dd325187f33df184d03f881a8fb7950663799319cc506dd3d15b5ee637c185"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-toolbar.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-toolbar.tsx",
+      "bytes": 16879,
+      "sha256": "28a102e7f320d62b8027cd321dcb604e32a1e60845ed1de7f7fdcaa0e41fb10d"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-video-settings-popover.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-video-settings-popover.tsx",
+      "bytes": 33744,
+      "sha256": "cbb88eaa926509c89d1feec765eb17991f6242a8fc5a537ac17f7f6a75bf5fb3"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-zoom-controls.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/canvas-zoom-controls.tsx",
+      "bytes": 4600,
+      "sha256": "8f7e202d00826e7fdd41830e3db9e041d5560bc438c1418d7447a63c7f54a3e5"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/components/infinite-canvas.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/components/infinite-canvas.tsx",
+      "bytes": 12036,
+      "sha256": "885e59da51a9c996260082b0658f4a033630652f81da2da1a54f65be517b7316"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/constants.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/constants.ts",
+      "bytes": 2447,
+      "sha256": "e742d84965e91143da44ea7566b9f712f601f5ded5962f1875d31be47d1d9ebe"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/export-types.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/export-types.ts",
+      "bytes": 455,
+      "sha256": "792ae6547b0a8efa6b8edce00a1fc04835b0f659fd787de2b0e97aa579550ac4"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/page.tsx",
+      "bytes": 6249,
+      "sha256": "8525fda12375fb593309bdfbbb862a96c28ef96149c2dc42c087d6e8974c02cb"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/stores/use-canvas-store.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/stores/use-canvas-store.ts",
+      "bytes": 15630,
+      "sha256": "630090ece2969b38ce922660a609c6fc4056bc6b21b6e67a672228d167940aeb"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/stores/use-canvas-ui-store.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/stores/use-canvas-ui-store.ts",
+      "bytes": 1416,
+      "sha256": "1d1e49fa13ced88cb4916f692ecf2e0c5f8abbdaaa2e6c3c7e2671e066acda1e"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/types.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/types.ts",
+      "bytes": 8492,
+      "sha256": "80c11f3d16373ca0330cdca38f7b7d0b7695afeaa72b979c69cb9519400e106e"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-auto-references.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-auto-references.ts",
+      "bytes": 1879,
+      "sha256": "25b5c2a624daa510e7e14c553b304da7833f8984d721f0d2df9f5161028e9850"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-camera.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-camera.ts",
+      "bytes": 16144,
+      "sha256": "02a70303fd3b6d39f5de42665bdd851d1881129275c09cda4321ece1e5d02151"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-export.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-export.ts",
+      "bytes": 2637,
+      "sha256": "f6bcb5a78458cee3baaf29a8ac539be6847421ee15007c5e671704e7ddcaffdf"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-group.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-group.ts",
+      "bytes": 2957,
+      "sha256": "06620cbc0a7eec068f4086337f1ec28c4a6e0f8dc8458eaa4de1422669daae14"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-image-data.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-image-data.ts",
+      "bytes": 7391,
+      "sha256": "58ad248c7ef5751f81e41422dcfadf4e5d0242240616073f0fc4b724d67a2456"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-node-size.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-node-size.ts",
+      "bytes": 834,
+      "sha256": "f2e925c455c5161d5b5b947666fe9925659e1d89d3eb9695a2dcb8e809d869c7"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-panorama.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-panorama.ts",
+      "bytes": 2908,
+      "sha256": "b6e9075f7ff9e426a9d14acfd0a9a5f1adf0c0a06031e57b3d98d0d20495afca"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-resource-references.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-resource-references.ts",
+      "bytes": 5795,
+      "sha256": "db0519eed040c6e2437c40d34210ff769353166d990dc84b47d1c13f2dcf04a0"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-video-frame.ts",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/utils/canvas-video-frame.ts",
+      "bytes": 2804,
+      "sha256": "4a3bdf267c990b528156aeecf500360a2a1b4be92dc880a863304be1d7cf3006"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/[id]/canvas-client-page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/[id]/canvas-client-page.tsx",
+      "bytes": 355965,
+      "sha256": "6771227947aeef9e161c7e8d4d3721c7629ebbdbe651860b1f8b8e834e70f749"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/canvas/[id]/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/canvas/[id]/page.tsx",
+      "bytes": 133,
+      "sha256": "49a35806c57ba3491361ee30f5f05847e6491526a040eb577cc656ce22bbf4a4"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/home-banner-carousel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/home-banner-carousel.tsx",
+      "bytes": 10779,
+      "sha256": "a87f2a5d9d7f1a54d6819b96bffed7afd9eedfd7fae1660b82ae60f5d7ba5d9b"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/image/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/image/page.tsx",
+      "bytes": 158344,
+      "sha256": "1159e23c687188866f2bca9de265e20b7b5e04daa337a167b120b4ec1347d7de"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/jimeng/components/canvas-target.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/jimeng/components/canvas-target.tsx",
+      "bytes": 4075,
+      "sha256": "b828bdde406859ffe0c37e57c1909eddb485f61a9d30f118da6228b197c3490b"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/jimeng/components/segment-edit-drawer.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/jimeng/components/segment-edit-drawer.tsx",
+      "bytes": 3525,
+      "sha256": "09b0413c462b44e62e4628a43559d14ab4bc29159d1c753a5a2e62e5a92fe9b2"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/jimeng/components/segment-review.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/jimeng/components/segment-review.tsx",
+      "bytes": 24341,
+      "sha256": "7772b18e07c36fdad47ea9e231687c635fadb5d584ae8dde8f86c6ad3724ff5e"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/jimeng/components/segment-row.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/jimeng/components/segment-row.tsx",
+      "bytes": 7454,
+      "sha256": "1dde3254ef90d829ecc2bb68cf693179365f77d8c63dcee0007044c8edee23f5"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/jimeng/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/jimeng/page.tsx",
+      "bytes": 23077,
+      "sha256": "ab4df819a252554c7c6385e7d62beddecd11ef033193327922a757691a3b6260"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/jimeng/review.module.css",
+      "path": "infinite-canvas/web/src/app/(user)/jimeng/review.module.css",
+      "bytes": 774,
+      "sha256": "5c81ada7980a1f80d71d46593d723a79dc67969924ba382b254d7cce23462b1e"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/jimeng/use-jimeng-engine.ts",
+      "path": "infinite-canvas/web/src/app/(user)/jimeng/use-jimeng-engine.ts",
+      "bytes": 4723,
+      "sha256": "f5183eedf8e478fd6db847222dd95da7222affe4a0d3e7cb6981af5447a1de2e"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/layout.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/layout.tsx",
+      "bytes": 5001,
+      "sha256": "63ac525e3bdd4b5fafb9e6e9cf01d45b3afe2f863666d5fafd9520f20c80cc01"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/login/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/login/page.tsx",
+      "bytes": 7037,
+      "sha256": "438ae1c933d1555df2aebdc4263c6bb231d8e3ee03b4cdc0fb59907d6bee7b01"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/page.tsx",
+      "bytes": 13912,
+      "sha256": "7cd18303a6e67c6e256281d3125017ff7856706e2d8672a1e8af56f06d599823"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/projects/library/components/library-card.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/projects/library/components/library-card.tsx",
+      "bytes": 4231,
+      "sha256": "e64537601ee959d1b6fe189a12aa2735250db4ffcb81ad14216c23528e0b42d7"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/projects/library/components/project-studio.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/projects/library/components/project-studio.tsx",
+      "bytes": 29132,
+      "sha256": "8f631c78d88a493c93ffb99226dfafa99988060a686b0a0c431ede7002311e8c"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/projects/library/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/projects/library/page.tsx",
+      "bytes": 221,
+      "sha256": "f486c3bb9472d13edf5083856610a075793621d82abc9de099cefbaa347ec623"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/projects/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/projects/page.tsx",
+      "bytes": 20204,
+      "sha256": "1322f351525e8c4b2dc7e2bdb8ba8e6d24aa9a267f83537f3d33433ef7cb3827"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/prompts/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/prompts/page.tsx",
+      "bytes": 13428,
+      "sha256": "e3fdf25298fd4ad2833a67d2d3ce09a260c7599c6e137c2ede3e5195f9448a5c"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/assets-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/assets-panel.tsx",
+      "bytes": 3418,
+      "sha256": "2a7fcd5140cf1a0fb37f4c111d2a5e106e21ab8996eadeb3a737593dc3f55857"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/batch-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/batch-panel.tsx",
+      "bytes": 2846,
+      "sha256": "d2f4573586def10e2d4ee16fb3757c87387397c34e89bdea9c95259ed92b8727"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/chapter-header.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/chapter-header.tsx",
+      "bytes": 866,
+      "sha256": "6b243f6bbda581206514894697367374177d39359fac18442b1a9ad26498fab6"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/cli-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/cli-panel.tsx",
+      "bytes": 1568,
+      "sha256": "deab02b5c1daab12109550bb9fb13475d73d21480bba64837a0af5fa09d7e014"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/jobs-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/jobs-panel.tsx",
+      "bytes": 3535,
+      "sha256": "a50d1da4add19bfb18f59ec6b54489e67319a5284c09c3262b1c8d64abc1aecc"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/plugins-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/plugins-panel.tsx",
+      "bytes": 6409,
+      "sha256": "5eea91f9c1dc3b730ffbdf3099d2d762629a16edb879a9844c5abd6180ed5160"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/project-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/project-panel.tsx",
+      "bytes": 3155,
+      "sha256": "065936ec8a7c74ac8a0127918d369436c0bcd279a0cd32d8d53c204e49a61eb1"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/provider-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/provider-panel.tsx",
+      "bytes": 7348,
+      "sha256": "a080409323b49f0fe75dbe0d97b04b1555b40663967ed6107b3c3e12de9646fe"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/shot-edit-drawer.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/shot-edit-drawer.tsx",
+      "bytes": 8760,
+      "sha256": "1565100e1efb64b597ebf424b68076f15a9a16f36d1a7029b2639d8d90e7c552"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/shot-media-grid.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/shot-media-grid.tsx",
+      "bytes": 3174,
+      "sha256": "2cc82d876483aa16d8fa3e9a73cbd8cc569339f8a67a39547db0ab6330f60ea6"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/shot-row.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/shot-row.tsx",
+      "bytes": 8689,
+      "sha256": "430073ae79b59f7be1d912ac67dcee1d837941fbbdd47985620d0968af3c9603"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/shot-top-bar.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/shot-top-bar.tsx",
+      "bytes": 2341,
+      "sha256": "8d2ce3a49af5f593dc9289d34a215dd2d316fa0192e10d2177b981d1b5a7f25e"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/components/side-rail.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/components/side-rail.tsx",
+      "bytes": 1849,
+      "sha256": "4b66de3d72d6c8d8ac471be3ea17f7f2ba1b56045d798755a438cb38be7eeb4f"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/page.tsx",
+      "bytes": 6897,
+      "sha256": "1e98c417f1eecf247c06ca4ad13679f47304f0213e1a7cdcd46e066c884d4f6d"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/typetale/stores/use-typetale-store.ts",
+      "path": "infinite-canvas/web/src/app/(user)/typetale/stores/use-typetale-store.ts",
+      "bytes": 29381,
+      "sha256": "ea31150971b7751f584b4dce59b528150b9596d533235fbd056ec2eb39812d9a"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/asset-navigation.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/asset-navigation.ts",
+      "bytes": 451,
+      "sha256": "acd694a7b0f4482121ee88b2a8a2bbf9bff2d64f5e296b678b1ce38d059c7caf"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/codex-agent-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/codex-agent-panel.tsx",
+      "bytes": 55096,
+      "sha256": "fa43e9b6bfa55204f218b40eca8f3cabc95ad7f9adce7e29ff3f583f94e877dd"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/composer-group-navigation.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/composer-group-navigation.tsx",
+      "bytes": 2401,
+      "sha256": "065b27813e74c63c0419fc312774fea38e71aed8a4e1d68878b72d34cfb41bd4"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/dreamina-video-channel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/dreamina-video-channel.tsx",
+      "bytes": 3888,
+      "sha256": "654ea6f0f8b99c559d3b9b02436a49327a210ac02c433ead7c7e738884a7bedf"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/element-archive.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/element-archive.tsx",
+      "bytes": 15844,
+      "sha256": "b206a96ec2dba9963ecdf4e8d02ad114ad63dd1cb4c57ec53d88fa7517958be6"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/element-asset-card.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/element-asset-card.tsx",
+      "bytes": 6726,
+      "sha256": "a91578b4c49bd3d9633c7f81d50f41484e0b4f40c853348b6605080ed6db1213"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/element-audio-strip.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/element-audio-strip.tsx",
+      "bytes": 9421,
+      "sha256": "2c9afc900d3fe8e33173bb50f39d4aff71f7b1a782b18ae62c4c7460efeb2a13"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/element-favorite-button.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/element-favorite-button.tsx",
+      "bytes": 865,
+      "sha256": "615c91d94a1c262699fd792abbc019ee085d91e0b8aaf23f9dab317049c44137"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/element-inspector-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/element-inspector-panel.tsx",
+      "bytes": 16463,
+      "sha256": "c4fd621df73c3a21d6aeddd4ee9920b0c8ef53c9d9234dcf2ea31b44f132e707"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/element-library.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/element-library.tsx",
+      "bytes": 4942,
+      "sha256": "a7c7968f1f4cef2859ddadcae138f4f8b453ef05afe1d5ead8c97ec7c047ba3a"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/image-replacement-target.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/image-replacement-target.tsx",
+      "bytes": 3110,
+      "sha256": "beaab908e3cee2bbc4beb9ab83a3a6acce0807a2045a9609260ebcd7c9cd7081"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/kling-v26-workbench-panel.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/kling-v26-workbench-panel.tsx",
+      "bytes": 34283,
+      "sha256": "ce46ffd9a2c4e2bf9bf31af0b4b3d0c5b1b809e3ce233bb1ad1d5d6e2e3a3941"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/local-asset-menu.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/local-asset-menu.tsx",
+      "bytes": 5571,
+      "sha256": "a3b1741349e330a4004dbf22ee9c7ed24af25da57eea374a8d393d7aa320b9cd"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/media-selection.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/media-selection.tsx",
+      "bytes": 892,
+      "sha256": "05a43cba9c328d64987797d7b35749731c8f31cb6f1b97b55f7333f208ef0ab9"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/pippit-canvas-settings.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/pippit-canvas-settings.tsx",
+      "bytes": 6549,
+      "sha256": "9ad95a4a2f5f8843853ad2c0bb663b580b542bedcc7c33d1dd2b594891ac7ce2"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/project-prompt-settings.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/project-prompt-settings.tsx",
+      "bytes": 5935,
+      "sha256": "46379829dc4de9ff543264a8a6e47329536b73a4240950c5978726d636b12da4"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/prompt-missing-assets.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/prompt-missing-assets.tsx",
+      "bytes": 3380,
+      "sha256": "197d617842744810a2295ba843d5a10639ede99ebecc59010c077731ee610081"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/prompt-reference-input.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/prompt-reference-input.tsx",
+      "bytes": 18566,
+      "sha256": "f448d46fada8b8882289bf40c98c01d59f7a4b083970927115622a912dd5dffa"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/use-video-reorder.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/use-video-reorder.ts",
+      "bytes": 4803,
+      "sha256": "58ceafa6d45274514e3238dfde2cf8b51a20af51bde3bb92294e0bc6ace6fdc0"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/video-elements.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/video-elements.tsx",
+      "bytes": 49447,
+      "sha256": "e7c5f37d403ee8b2393eff40fcb730db21321304a774d878c1c9f06b2fe9d9b2"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/video-frame-capture.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/video-frame-capture.tsx",
+      "bytes": 4065,
+      "sha256": "bac44d34abd30a421a0f283a55ac2d7fb9fd74dfb2e09b7ebcf0cb167bff6c2d"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/video-gallery.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/video-gallery.tsx",
+      "bytes": 17454,
+      "sha256": "2e064e305da9cbb7dd03034f54d7b6762d1959e617ab3808da44d57e17f3c641"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/video-prompt-replace.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/video-prompt-replace.tsx",
+      "bytes": 2561,
+      "sha256": "c7b3fd2f93cd9031be55c88234998ce61836e349a2dd57180ae6573daa88221c"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/video-reference-picker.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/video-reference-picker.tsx",
+      "bytes": 12573,
+      "sha256": "ecf7e4660510ba269757947647d556560276ee0c2f9aa2daa3550e4450df52c6"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/components/video-studio.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/components/video-studio.tsx",
+      "bytes": 56761,
+      "sha256": "128f9c8bd26bcf945d2002143264124aa754f3b128b318fae9032e9155aba91e"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/composer-reference-state.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/composer-reference-state.ts",
+      "bytes": 1080,
+      "sha256": "58d8123be2ffc79dd098a09e98a0c0a04545bee6e413576071d84d866f8c6a77"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/dialogue-highlight.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/dialogue-highlight.ts",
+      "bytes": 3187,
+      "sha256": "d05f320deeb93a02971ff46804e776969bf6df7fb9b7a067bf3bddb62039cef4"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/element-drag.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/element-drag.ts",
+      "bytes": 436,
+      "sha256": "ae066ee2412c133657d08716338debc65d8c9e674f60067c1d4d8784f724391e"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/element-edit-history.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/element-edit-history.ts",
+      "bytes": 603,
+      "sha256": "6ee075cc7b44645556e37aa1494ec2aa1d1e6cd6e79216e9bc92449ad82bca82"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/element-favorites.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/element-favorites.ts",
+      "bytes": 669,
+      "sha256": "4c4bd514940ead9d8a69a5ef98205c4d0ebcc32143bf573e5c7fa5d833c85265"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/element-model.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/element-model.ts",
+      "bytes": 19472,
+      "sha256": "97568b04e5f11cc302753acad3bcbd0b39a58f8beeee6f4803e384c549154a93"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/element-organize.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/element-organize.ts",
+      "bytes": 1225,
+      "sha256": "9953b03b351b54fad06ce6d7050e91fe3c412f2bce50b39cde642519b388c151"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/gallery-layout.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/gallery-layout.ts",
+      "bytes": 1644,
+      "sha256": "dc2045ac663f70c23a6505b767d37d64dd6d32bec011cf8c49fdbfd5a96f515a"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/hover-playback.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/hover-playback.ts",
+      "bytes": 434,
+      "sha256": "2ddd305992760a2b6da647cff551dcb758be5f3620eae2763762499694d54c3c"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/local-task-recovery.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/local-task-recovery.ts",
+      "bytes": 1155,
+      "sha256": "e4153a6341721443031d6cdcf701b9ba177f69418bf939d8a1b32e9c83f95f24"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/oii-global-reference.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/oii-global-reference.ts",
+      "bytes": 1473,
+      "sha256": "c996bb913cc759e59c62613980334a231da2129842a1523a6e089048dd02025e"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/page.tsx",
+      "bytes": 283052,
+      "sha256": "4716c1e28d4f3a473a877ec02bd4be4258f7b23aa94291d6bc5cf7ed858b194d"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/project-prompt.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/project-prompt.ts",
+      "bytes": 2423,
+      "sha256": "d31cd4031c72fcc144cdc9b0afeaaa108615c6c80d89ad9da268f879be1fd7a0"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/prompt-duration.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/prompt-duration.ts",
+      "bytes": 290,
+      "sha256": "6ef22efd22283c45e4b8591438ccf189a2276fd8eb0654046365c7a1b0e09a45"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/prompt-history.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/prompt-history.ts",
+      "bytes": 2173,
+      "sha256": "f3914cbcd90a522aa5ca1a0c394f4805b2b70124ff02130b362ccd1a1f2ff85d"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/prompt-locate.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/prompt-locate.ts",
+      "bytes": 1797,
+      "sha256": "f0cfd5a6357bf7b63da666275c2bac11a457035f3e4c30bc416e24945b9eff35"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/prompt-references.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/prompt-references.ts",
+      "bytes": 19045,
+      "sha256": "5097f29ad84be2d7024bd161544cefbe7589efd7884a2db15eb1b97a4a819bf9"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/prompt-replacement.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/prompt-replacement.ts",
+      "bytes": 1684,
+      "sha256": "4d8f8d92740087dddbe74b1ae1c41678291b0bec7239daaa97cedb1be06377d9"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/reference-card-target.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/reference-card-target.ts",
+      "bytes": 786,
+      "sha256": "55340565465635f8a8a8580d36a258e044c56e9a49d7d6077247a2b51ba881a0"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/running-tasks.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/running-tasks.ts",
+      "bytes": 1898,
+      "sha256": "0db9b7223e61c5d301f66ad12b6d4b1e8ac587f67fb622be4e90ddbbea522e1c"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/studio-model.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/studio-model.ts",
+      "bytes": 3275,
+      "sha256": "fbac39e48023908dc9575949d15c6fcb95bfb274b838f481c7bcf913647562d4"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/studio-results.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/studio-results.ts",
+      "bytes": 5655,
+      "sha256": "d3b98d9e58e1b1d5b077e5784fe82f47f21312f330f38919f616b78bc082c02c"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/use-element-grouping.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/use-element-grouping.ts",
+      "bytes": 877,
+      "sha256": "4b7363258c0f7ba963b22b875a425dd828b2e8ee1a77060fc254ca069f92c3dd"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/use-element-moves.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/video/use-element-moves.tsx",
+      "bytes": 3479,
+      "sha256": "960de72fb1ec8845d57c27b504f63a42ed4e5097dd8213730bc7ae6d5985daa7"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/video-colors.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/video-colors.ts",
+      "bytes": 638,
+      "sha256": "58c95e189f97d9490e8dc15c1b1c3da33e26fc2cb5c6d3ea962f122df2ffda79"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/video-completion.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/video-completion.ts",
+      "bytes": 970,
+      "sha256": "6299cabd2362dcc3f73e25b2f72ad67e03823a17a91baf976928b0151e821132"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/video-error.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/video-error.ts",
+      "bytes": 1099,
+      "sha256": "b0ee59d996b69c8799eca8764795fc86e75292ca6ec9e6151f3a29b8953ac655"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/video-frame.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/video-frame.ts",
+      "bytes": 2614,
+      "sha256": "4f150eb07d10e27920d9c7e700fc85a4f81ed47b196c0fbabf19be818355ecfc"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/video-group-parser.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/video-group-parser.ts",
+      "bytes": 3080,
+      "sha256": "bb5bbc59a24bd9916e6ed53a231b5c7885bb57a6551d97d46b6c31ce572410f4"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/video/video-poster.ts",
+      "path": "infinite-canvas/web/src/app/(user)/video/video-poster.ts",
+      "bytes": 3612,
+      "sha256": "bbd898ac3035f8258b37a7fdc28369b34d92cc2d5a62c6e98d466ca54a4b77da"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/(user)/workflows/page.tsx",
+      "path": "infinite-canvas/web/src/app/(user)/workflows/page.tsx",
+      "bytes": 205,
+      "sha256": "4f46e24d1ed0d3cd5e32ba1d78ab4e11d6e2817380d4e0f7ce0e4233636af025"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/api/codex-agent/route.ts",
+      "path": "infinite-canvas/web/src/app/api/codex-agent/route.ts",
+      "bytes": 18578,
+      "sha256": "7d1b6e59069c4fa22eb92552b3e60739b86b5f9d7efd8d7fd278b44032229dc8"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/api/codex-agent/settings/route.ts",
+      "path": "infinite-canvas/web/src/app/api/codex-agent/settings/route.ts",
+      "bytes": 624,
+      "sha256": "f68de02aba11c33895b50cde89857ddd07343be2e3174a2c441569794f453baa"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/api/codex-agent/test/route.ts",
+      "path": "infinite-canvas/web/src/app/api/codex-agent/test/route.ts",
+      "bytes": 890,
+      "sha256": "cc4fee149f8b9cbc17240d70e621f9f69b8504269e74ca685803db7c03b43029"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/api/[...path]/route.ts",
+      "path": "infinite-canvas/web/src/app/api/[...path]/route.ts",
+      "bytes": 2184,
+      "sha256": "de4cac7e30720219217338e4942d1e0d9c3d402905eaf26fa0fc1fa1db1c41b7"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/favicon.ico",
+      "path": "infinite-canvas/web/src/app/favicon.ico",
+      "bytes": 1964,
+      "sha256": "6dd82b0db88884516419f60584474fa445dfe8cfe16851eddf6d05b973af5ef8"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/globals.css",
+      "path": "infinite-canvas/web/src/app/globals.css",
+      "bytes": 22156,
+      "sha256": "3417536060aa81effb0a4ba2a6afd552b6d3e243da0073bd96d4215e04128eff"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/layout.tsx",
+      "path": "infinite-canvas/web/src/app/layout.tsx",
+      "bytes": 1676,
+      "sha256": "844120ae1dcabc013bf6b7329538b4ddb62defd0d7bf9c0bb328e7ffefc12f5a"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/not-found.tsx",
+      "path": "infinite-canvas/web/src/app/not-found.tsx",
+      "bytes": 2142,
+      "sha256": "4a137020c36806854e2654fba0dd8d3a9a20ab92e64332edf3b661b49e514e3f"
+    },
+    {
+      "source": "infinite-canvas/web/src/app/workbench-v2.css",
+      "path": "infinite-canvas/web/src/app/workbench-v2.css",
+      "bytes": 33305,
+      "sha256": "345a2c96924d8ec5ef0ea2cb5c02a67d7c9d38fc715f06b6c303a17f91df54d1"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/agent-skill-cover.tsx",
+      "path": "infinite-canvas/web/src/components/agent-skill-cover.tsx",
+      "bytes": 3694,
+      "sha256": "1e2eba9329cbdb1652c71e8ea3e3e41e9fc4562eeb4024a944671e77146cb547"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/assets/asset-form-modal.tsx",
+      "path": "infinite-canvas/web/src/components/assets/asset-form-modal.tsx",
+      "bytes": 16648,
+      "sha256": "4acfa5a12bb2bd7ba5b31915605999a281fc7567619ef7b5a748fb43801d4ccf"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/audio-settings-panel.tsx",
+      "path": "infinite-canvas/web/src/components/audio-settings-panel.tsx",
+      "bytes": 12501,
+      "sha256": "9e01a542f303b7389508ec12989999fb4f2b5aac9261951a7cc20f1a34739396"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/channel-model-selector-modal.tsx",
+      "path": "infinite-canvas/web/src/components/channel-model-selector-modal.tsx",
+      "bytes": 8174,
+      "sha256": "098eb24a1ed2677e5c39dd67b1eda950f03781ff0de69d45c94f20a3b53f1810"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/grok-tts-voice-select.tsx",
+      "path": "infinite-canvas/web/src/components/grok-tts-voice-select.tsx",
+      "bytes": 2702,
+      "sha256": "6baa7dcc3b9ce839b7340249dea3299a62331026dee3aea05fe06d140b384b21"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/image-generation-pending.tsx",
+      "path": "infinite-canvas/web/src/components/image-generation-pending.tsx",
+      "bytes": 2266,
+      "sha256": "ca995399fc1c885d9427f5b33a7be07a245f26de0fd30fbf4442a2997fd2e906"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/image-settings-panel.tsx",
+      "path": "infinite-canvas/web/src/components/image-settings-panel.tsx",
+      "bytes": 14784,
+      "sha256": "44946318ae4e0bec0e95e901f3e749ec37adb722a522761edf5ddfde61f77dee"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/app-config-modal.tsx",
+      "path": "infinite-canvas/web/src/components/layout/app-config-modal.tsx",
+      "bytes": 58369,
+      "sha256": "5a9c1b9e72620547a8067f1592b6226379c96ef2d2db0c41d1eb46351da3dbf1"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/app-navigation.tsx",
+      "path": "infinite-canvas/web/src/components/layout/app-navigation.tsx",
+      "bytes": 1927,
+      "sha256": "f7a4e41c441bd5f2d181ed2f7d0b7acebd05832a364b812feac550d9fef9c15e"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/app-providers.tsx",
+      "path": "infinite-canvas/web/src/components/layout/app-providers.tsx",
+      "bytes": 1603,
+      "sha256": "8502dd26fbfa15accc80ad1861948286df698b331e45bb84ace96fc1fb3ba4e4"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/app-top-nav.tsx",
+      "path": "infinite-canvas/web/src/components/layout/app-top-nav.tsx",
+      "bytes": 8667,
+      "sha256": "425347530b5806b0d3f68fb5617614c5e7a85292f543b6f61a93b0fd58882e6b"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/client-root-init.tsx",
+      "path": "infinite-canvas/web/src/components/layout/client-root-init.tsx",
+      "bytes": 7293,
+      "sha256": "300eea034fc974023978a8d29a912baaad8b8329e92ede5f8c36c7abe6acaaa5"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/dreamina-account-manager.tsx",
+      "path": "infinite-canvas/web/src/components/layout/dreamina-account-manager.tsx",
+      "bytes": 4215,
+      "sha256": "f5253452703d09d041a9b15257a2213dd7837e8db3ae84b55ea782aee4da4697"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/dreamina-binding-suggestions.ts",
+      "path": "infinite-canvas/web/src/components/layout/dreamina-binding-suggestions.ts",
+      "bytes": 1884,
+      "sha256": "25ec1b7d051843bef072940c4a759b0b99f8a4d576960640a24ba97337fa8cf9"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/dreamina-canvas-manager.tsx",
+      "path": "infinite-canvas/web/src/components/layout/dreamina-canvas-manager.tsx",
+      "bytes": 10022,
+      "sha256": "4ebced5965100e1abb7ec2440f6cff757009ae6e8b53cb23d70365f2e0dbfbe5"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/dreamina-channel-controls.tsx",
+      "path": "infinite-canvas/web/src/components/layout/dreamina-channel-controls.tsx",
+      "bytes": 15705,
+      "sha256": "fcf7782af1ee10f25d9f205efb588eff082026cf8b2b3c29087c7b4bc29d8f25"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/dreamina-draft-manager.tsx",
+      "path": "infinite-canvas/web/src/components/layout/dreamina-draft-manager.tsx",
+      "bytes": 6023,
+      "sha256": "edd21fe2ba71f1a5a3998eb85f407fc2da97fcf2bec85dd6c1ae020426cfea82"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/dreamina-legacy-agent-controls.tsx",
+      "path": "infinite-canvas/web/src/components/layout/dreamina-legacy-agent-controls.tsx",
+      "bytes": 3590,
+      "sha256": "e9ddfc885cd3739b9ad005001c5dd131b2f2848f84f7360475d30157797110aa"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/generation-provider-switch.tsx",
+      "path": "infinite-canvas/web/src/components/layout/generation-provider-switch.tsx",
+      "bytes": 889,
+      "sha256": "5a8eb9a5700e19b54223139291a818f8307012d0c4efc1265d35cb7015b18c3a"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/github-link.tsx",
+      "path": "infinite-canvas/web/src/components/layout/github-link.tsx",
+      "bytes": 781,
+      "sha256": "cbc5290baeb1c694ee209048387ae0798c8f27b93e4e1385ac2e97f9b5affa16"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/mobile-nav-drawer.tsx",
+      "path": "infinite-canvas/web/src/components/layout/mobile-nav-drawer.tsx",
+      "bytes": 1561,
+      "sha256": "0a9f42005b9416da234682e6797a28387c504bc4b3dc82f38ba8c426c0ac8f96"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/oiioii-channel-controls.tsx",
+      "path": "infinite-canvas/web/src/components/layout/oiioii-channel-controls.tsx",
+      "bytes": 6339,
+      "sha256": "5c778166e838dc88865399c56626f56d0dab3ad221088258a7f2cb62bf99e99c"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/personal-workbench-host.tsx",
+      "path": "infinite-canvas/web/src/components/layout/personal-workbench-host.tsx",
+      "bytes": 4540,
+      "sha256": "b6a9363f1478459df7169bde92b8c8d22d6a90ba312ddcbb81a052d6d4e27103"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/personal-workbench-runtime.ts",
+      "path": "infinite-canvas/web/src/components/layout/personal-workbench-runtime.ts",
+      "bytes": 8796,
+      "sha256": "706f2a3d4977c544f5a285381cbbcc5180fc869246c83950e06fdbfdadea1f00"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/pippit-channel-controls.tsx",
+      "path": "infinite-canvas/web/src/components/layout/pippit-channel-controls.tsx",
+      "bytes": 2209,
+      "sha256": "b906e8f7d979cfbaac4fcdeff8ce1aa96c7eb75ed8690cc0cb278740ee8ef884"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/pippit-video-channel-details.tsx",
+      "path": "infinite-canvas/web/src/components/layout/pippit-video-channel-details.tsx",
+      "bytes": 3814,
+      "sha256": "1d67828c5693cd7cf45d45f83b48a820e6c1adc6556eb0c57b35594550f1afca"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/user-status-actions.tsx",
+      "path": "infinite-canvas/web/src/components/layout/user-status-actions.tsx",
+      "bytes": 8176,
+      "sha256": "80e3e4db7fee5e1120ea96e25c44a433c01d661ffd356edfc13a15716ed1a3a7"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/layout/version-release-modal.tsx",
+      "path": "infinite-canvas/web/src/components/layout/version-release-modal.tsx",
+      "bytes": 5732,
+      "sha256": "075791c3ea0270409213a872dcc1e1308a57a4b85aae5d4150a0ef274bd3a208"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/markdown-file-import.tsx",
+      "path": "infinite-canvas/web/src/components/markdown-file-import.tsx",
+      "bytes": 1150,
+      "sha256": "5aa33ce557e062b3ed11b995f452f0a1bdb20ab057c5474d968621f9d206eab7"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/model-picker.tsx",
+      "path": "infinite-canvas/web/src/components/model-picker.tsx",
+      "bytes": 14179,
+      "sha256": "8769ca3060215c7cb73d241b0935d74cc46021c38881caec49267f4e9982263b"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/oiioii-video-parameters.tsx",
+      "path": "infinite-canvas/web/src/components/oiioii-video-parameters.tsx",
+      "bytes": 2401,
+      "sha256": "8ef9e1cf92d637ab557ea80e38ff0cae2173da8baaaf4eee1e2cabe320826759"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/pippit-credit-indicator.tsx",
+      "path": "infinite-canvas/web/src/components/pippit-credit-indicator.tsx",
+      "bytes": 1645,
+      "sha256": "4fc00aedfd6d500af56ab45896bfd89adc63538465057bf2a732c3841d45a181"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/pippit-settings-panel.tsx",
+      "path": "infinite-canvas/web/src/components/pippit-settings-panel.tsx",
+      "bytes": 5438,
+      "sha256": "8fa7e5f289216af6f0e012a90af89914d69698e53b9c50181108e959a76ad6e1"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/pippit-video-quick-controls.tsx",
+      "path": "infinite-canvas/web/src/components/pippit-video-quick-controls.tsx",
+      "bytes": 20746,
+      "sha256": "669803651f7fbf34817f6cdff5eaac7ef8301a9c324a9895cc15da7de117e03e"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/prompts/prompt-card.tsx",
+      "path": "infinite-canvas/web/src/components/prompts/prompt-card.tsx",
+      "bytes": 2367,
+      "sha256": "627ee41aaca817f45b146960e48bf877761974716031e8609d2f4669e9d329bb"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/prompts/prompt-detail-dialog.tsx",
+      "path": "infinite-canvas/web/src/components/prompts/prompt-detail-dialog.tsx",
+      "bytes": 2937,
+      "sha256": "237e2e741d69668ac0f50028ce54e902a87491075b6a5de61a9a86bc8f4e5aee"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/prompts/prompt-library-model.ts",
+      "path": "infinite-canvas/web/src/components/prompts/prompt-library-model.ts",
+      "bytes": 776,
+      "sha256": "a7736b756a3d9813aa3b17a2f7c43db131cc0002f7ee82f0c10660d9a8e158cd"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/prompts/prompt-select-dialog.tsx",
+      "path": "infinite-canvas/web/src/components/prompts/prompt-select-dialog.tsx",
+      "bytes": 5431,
+      "sha256": "a201aa96dc44abd5034481cc076553115a5a5532784085d6d3f98381a7324abf"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/prompts/use-prompt-list.ts",
+      "path": "infinite-canvas/web/src/components/prompts/use-prompt-list.ts",
+      "bytes": 2267,
+      "sha256": "876de7b33b2c71f5c6488a109f287db183879cffd2ee02b65781d6f8e0eefb64"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/storyboard/batch-group.tsx",
+      "path": "infinite-canvas/web/src/components/storyboard/batch-group.tsx",
+      "bytes": 327,
+      "sha256": "3dd6296e055ee5d07c924505e4df26692c038affa6f868614cdc920ac70479e9"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/storyboard/chapter-header.tsx",
+      "path": "infinite-canvas/web/src/components/storyboard/chapter-header.tsx",
+      "bytes": 1560,
+      "sha256": "b5dc8b396c0ce76a3b4cd47f4be19ee205a32e0094c70d0a38cc7c2dffedcd60"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/storyboard/legacy-slot.tsx",
+      "path": "infinite-canvas/web/src/components/storyboard/legacy-slot.tsx",
+      "bytes": 1814,
+      "sha256": "087fd91bb1c0af5287e160fddaa8cc847fa8ed19082aca32950e042a5a002eb7"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/storyboard/lines-editor.tsx",
+      "path": "infinite-canvas/web/src/components/storyboard/lines-editor.tsx",
+      "bytes": 1915,
+      "sha256": "4c5a148f644fa6883d8c864e03945896553d8e3f818165f796f70a9c7d6054df"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/storyboard/media-grid.tsx",
+      "path": "infinite-canvas/web/src/components/storyboard/media-grid.tsx",
+      "bytes": 2449,
+      "sha256": "803685d2e61e739c18c815871f41b1d9944b0e7228f063a9f7f1f8fd9e6a923a"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/storyboard/project-view-tabs.tsx",
+      "path": "infinite-canvas/web/src/components/storyboard/project-view-tabs.tsx",
+      "bytes": 1474,
+      "sha256": "f5605fa4640b38b047d6e486c055ff3e8f5747d4acefd58008b79b1a7e5cfb67"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/storyboard/shot-jump.tsx",
+      "path": "infinite-canvas/web/src/components/storyboard/shot-jump.tsx",
+      "bytes": 2513,
+      "sha256": "574dd098a8a66bbc025b5a29ddea18597b468fb2a9ce1e2e4b364a3839a6bd3c"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/storyboard/shot-row-frame.tsx",
+      "path": "infinite-canvas/web/src/components/storyboard/shot-row-frame.tsx",
+      "bytes": 1378,
+      "sha256": "5094a95c21633cf7484c09d2cf0baf252ea9030266733c729fb09e67dc4291cb"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/storyboard/side-rail.tsx",
+      "path": "infinite-canvas/web/src/components/storyboard/side-rail.tsx",
+      "bytes": 3154,
+      "sha256": "1693b1e45e45d99b3e99c137ceb332030a5376d1a170f83e49c55cfe7b6cce61"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/storyboard/storyboard-top-bar.tsx",
+      "path": "infinite-canvas/web/src/components/storyboard/storyboard-top-bar.tsx",
+      "bytes": 2937,
+      "sha256": "c8ece2b97d9ca36a3c4336ef8806355c7db1ddbf6bc097e9e5ee78c3fbb43ebb"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/ui/animated-theme-toggler.tsx",
+      "path": "infinite-canvas/web/src/components/ui/animated-theme-toggler.tsx",
+      "bytes": 8763,
+      "sha256": "96b1c0779a25fd7f0448e0c9dd0fe70060b0b23c76b9560e2950d16a225058a4"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/ui/dia-text-reveal.tsx",
+      "path": "infinite-canvas/web/src/components/ui/dia-text-reveal.tsx",
+      "bytes": 7780,
+      "sha256": "34294667c0b38e016adedaea6144f404a6857fd283679c99b4e5a76a2f3c7f4d"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/ui/select.tsx",
+      "path": "infinite-canvas/web/src/components/ui/select.tsx",
+      "bytes": 7006,
+      "sha256": "3e726f36790579f12af02618c66ac041a82ac8c28e50e04619acbdd24e2238c4"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/video-settings-panel.tsx",
+      "path": "infinite-canvas/web/src/components/video-settings-panel.tsx",
+      "bytes": 31280,
+      "sha256": "90856b61c3c4c2bce79d47eb82d08bcc72d0aacf3396256ecf976b48b9e36c66"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/workflow/workflow-channel-pane.module.css",
+      "path": "infinite-canvas/web/src/components/workflow/workflow-channel-pane.module.css",
+      "bytes": 7356,
+      "sha256": "6b528a485c095e02334258262a2d712cfd40f03b5ecf4b9a3983d9746163b4fe"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/workflow/workflow-channel-pane.tsx",
+      "path": "infinite-canvas/web/src/components/workflow/workflow-channel-pane.tsx",
+      "bytes": 19963,
+      "sha256": "4360cbe575e403f760302d4c804c32265e45f530397041320e7b79f15f312338"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/workflow/workflow-field-mapping-editor.tsx",
+      "path": "infinite-canvas/web/src/components/workflow/workflow-field-mapping-editor.tsx",
+      "bytes": 18899,
+      "sha256": "18fae63a6495a9efb1aeb250bd099f635716d99e583c11f54bbdaf0888ee32b0"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/workflow/workflow-graph-editor.tsx",
+      "path": "infinite-canvas/web/src/components/workflow/workflow-graph-editor.tsx",
+      "bytes": 22901,
+      "sha256": "bac61d1a69c1445064b2cf5f1ec4762870daa414d3f04491f2c31997ecffc875"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/workflow/workflow-test-workbench.tsx",
+      "path": "infinite-canvas/web/src/components/workflow/workflow-test-workbench.tsx",
+      "bytes": 27253,
+      "sha256": "492ab4c33c564a6e1561c9d9c779ca99660e072988dfa1f64f59698e47107228"
+    },
+    {
+      "source": "infinite-canvas/web/src/components/workflows/creative-workflow-workspace.tsx",
+      "path": "infinite-canvas/web/src/components/workflows/creative-workflow-workspace.tsx",
+      "bytes": 120816,
+      "sha256": "0cf2f514db2d8e4474003629ca98b33a07b6834abe2c6ce831ea4c7cc28ca53c"
+    },
+    {
+      "source": "infinite-canvas/web/src/constant/credits.tsx",
+      "path": "infinite-canvas/web/src/constant/credits.tsx",
+      "bytes": 1164,
+      "sha256": "1b10545fe1155fae561d72cf33e7cdd689ba5e968b90a6e7e95211520a6546b8"
+    },
+    {
+      "source": "infinite-canvas/web/src/constant/env.ts",
+      "path": "infinite-canvas/web/src/constant/env.ts",
+      "bytes": 76,
+      "sha256": "99a9e7fc06858bf7485e49943d0c3d3a7ea7c3ac30f65471fd99a6f8d585e7f1"
+    },
+    {
+      "source": "infinite-canvas/web/src/constant/navigation-tools.ts",
+      "path": "infinite-canvas/web/src/constant/navigation-tools.ts",
+      "bytes": 845,
+      "sha256": "db68fcd85d1baab98a867d51e3d8230da193e8217093f633300a80a4fa0a0e8c"
+    },
+    {
+      "source": "infinite-canvas/web/src/hooks/use-autodl-workflow.ts",
+      "path": "infinite-canvas/web/src/hooks/use-autodl-workflow.ts",
+      "bytes": 1582,
+      "sha256": "b36a508999205eb6c17dadb69617f39e0482d2231eaa50e7fbc9122b9c75414d"
+    },
+    {
+      "source": "infinite-canvas/web/src/hooks/use-copy-text.ts",
+      "path": "infinite-canvas/web/src/hooks/use-copy-text.ts",
+      "bytes": 293,
+      "sha256": "830ca733c2b30d755a704b619c58a7ec14be89022c2f4c65a190071ba9e04e16"
+    },
+    {
+      "source": "infinite-canvas/web/src/hooks/use-version-check.ts",
+      "path": "infinite-canvas/web/src/hooks/use-version-check.ts",
+      "bytes": 3723,
+      "sha256": "041596bf24be6b81dd05b2daa96c20a25b4e21939949b62c4ecd6bd46cbb6be2"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/agent-settings.ts",
+      "path": "infinite-canvas/web/src/lib/agent-settings.ts",
+      "bytes": 4264,
+      "sha256": "f0b047c02d9a8197e5c085f44ca95bbe462891cb16934f3cd34c2b0b8c5987be"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/app-theme.ts",
+      "path": "infinite-canvas/web/src/lib/app-theme.ts",
+      "bytes": 7026,
+      "sha256": "263042268be8cdbee8afccc5314e9fe6d7cc35957e8f09a92220b4f2dc2ad33c"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/audio-generation.ts",
+      "path": "infinite-canvas/web/src/lib/audio-generation.ts",
+      "bytes": 3429,
+      "sha256": "b62041bf9f05a69de3792a24c7d26c5f37b3b93829c09a931d6e3200fc47b635"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/audio-wav.ts",
+      "path": "infinite-canvas/web/src/lib/audio-wav.ts",
+      "bytes": 1961,
+      "sha256": "55ef2a3822d493a8b9dbb53039ac5e35766eb9ed9a67df6f1f10a5dd8f8e03f7"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/autodl.ts",
+      "path": "infinite-canvas/web/src/lib/autodl.ts",
+      "bytes": 2037,
+      "sha256": "f614b538ab60fef20c57a4cb15574df8b1e03d176c7753fbbf587c120c47ec30"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/canvas-theme.ts",
+      "path": "infinite-canvas/web/src/lib/canvas-theme.ts",
+      "bytes": 2547,
+      "sha256": "3abf3a269a9e54c416bc2adccbf791a416535caff16956955eb40bf487ca316a"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/comfy-workflow-json.ts",
+      "path": "infinite-canvas/web/src/lib/comfy-workflow-json.ts",
+      "bytes": 3154,
+      "sha256": "9e48cffe70095c276f85714517e29f369c3e56ee7995982e8e028b371a18bb60"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/gemini-tts.ts",
+      "path": "infinite-canvas/web/src/lib/gemini-tts.ts",
+      "bytes": 1620,
+      "sha256": "5f7058df9cbe52e7f613b552b79b944e485504be75f9abfa427194aea7996fe4"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/gemini-video.ts",
+      "path": "infinite-canvas/web/src/lib/gemini-video.ts",
+      "bytes": 1089,
+      "sha256": "c66fb461b3798020be584f231c3fd7c22ac375af10f53fb0b3ed197a8cdc9858"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/gemini.ts",
+      "path": "infinite-canvas/web/src/lib/gemini.ts",
+      "bytes": 2849,
+      "sha256": "55d782d58a136b6258360bfc164b80940662465da5986fe8f81dba94197e88a7"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/grok-tts.ts",
+      "path": "infinite-canvas/web/src/lib/grok-tts.ts",
+      "bytes": 2394,
+      "sha256": "64cb5609ddde54296404c55710742db53c37ff08c901970af87b54c709dd4788"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/idb-store.ts",
+      "path": "infinite-canvas/web/src/lib/idb-store.ts",
+      "bytes": 1208,
+      "sha256": "d76a6ccdc5f1db640812271c00dbebc506ca3110269e41147a35f5f66bfc0dc2"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/image-reference-prompt.ts",
+      "path": "infinite-canvas/web/src/lib/image-reference-prompt.ts",
+      "bytes": 526,
+      "sha256": "4a066e5c332ac7da3518a9ebe0f83b2ee4fc40fba12698e168d2e40e54401cfb"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/image-utils.ts",
+      "path": "infinite-canvas/web/src/lib/image-utils.ts",
+      "bytes": 3558,
+      "sha256": "fa65fd8d7cc6bc3c6f02b580be6dd3cc453938906abe955557f3a6f7c0490c26"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/kie-models.ts",
+      "path": "infinite-canvas/web/src/lib/kie-models.ts",
+      "bytes": 254,
+      "sha256": "600372bad72cc45fc94bc8ea032a9003a40ab5c0f5c203b8ce998bb9be17673c"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/localforage-storage.ts",
+      "path": "infinite-canvas/web/src/lib/localforage-storage.ts",
+      "bytes": 943,
+      "sha256": "d6ace0a82f0db15e496053856ca8a0747dc10b87e2b03932a820153a80fa39ec"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/mimo-tts.ts",
+      "path": "infinite-canvas/web/src/lib/mimo-tts.ts",
+      "bytes": 2249,
+      "sha256": "0bc46f48a741d2d5948b045fc5a25205e8d27b5a1ee3a838455333b96b2fbf46"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/minimax-video.ts",
+      "path": "infinite-canvas/web/src/lib/minimax-video.ts",
+      "bytes": 1156,
+      "sha256": "05127360acd3eb17b99504a8a2cb0adcf1849be09720c779343bdc2cf4fd7d1a"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/model-channel.test.ts",
+      "path": "infinite-canvas/web/src/lib/model-channel.test.ts",
+      "bytes": 2517,
+      "sha256": "de1732ba0b095b7050dc7999a840bc80d70b62c242e5e1b751084fee918167e0"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/model-channel.ts",
+      "path": "infinite-canvas/web/src/lib/model-channel.ts",
+      "bytes": 2765,
+      "sha256": "d1f793b960fbc9e30490147adab048a83fa96404bb70a30687157edf0d11f7ca"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/release.ts",
+      "path": "infinite-canvas/web/src/lib/release.ts",
+      "bytes": 915,
+      "sha256": "f0678391e86f88142fbd2ede61cef6ca19786e1595b86140dff5dda404c5198c"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/seedance-audio.ts",
+      "path": "infinite-canvas/web/src/lib/seedance-audio.ts",
+      "bytes": 980,
+      "sha256": "c9097b4192ae1c929982d5658d48bdd29b63fa677a1ecbde09a413d3ca6bb4db"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/seedance-video.ts",
+      "path": "infinite-canvas/web/src/lib/seedance-video.ts",
+      "bytes": 7906,
+      "sha256": "46906bc1edaed3407ab91088f6648ba1f193676fb4273946bfb8ec1819512e8d"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/typetale-core.ts",
+      "path": "infinite-canvas/web/src/lib/typetale-core.ts",
+      "bytes": 2220,
+      "sha256": "3c87b928bac74109dd5b6840e3db3a6c143e46344aa53fcd3646127b74389740"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/utils.ts",
+      "path": "infinite-canvas/web/src/lib/utils.ts",
+      "bytes": 177,
+      "sha256": "d2d4859038918b428f847c50c9b374d0d4f344e578be3e561e074f46de25d601"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/video-model-capabilities.ts",
+      "path": "infinite-canvas/web/src/lib/video-model-capabilities.ts",
+      "bytes": 4311,
+      "sha256": "f1157db0d92c24aa6dc199375c47db4596114e8bbc4f1525dcaa80622c8dcfbe"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/workflow-channel.ts",
+      "path": "infinite-canvas/web/src/lib/workflow-channel.ts",
+      "bytes": 18913,
+      "sha256": "54f1de098e36ee9c9300f1422a086acbd56308e43aa704d33104cb57d089e6fd"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/workflow-field-options.ts",
+      "path": "infinite-canvas/web/src/lib/workflow-field-options.ts",
+      "bytes": 4472,
+      "sha256": "99d30830b3078e261addfc6157dc5a20efaab281f738fa03b93af8593e4a2336"
+    },
+    {
+      "source": "infinite-canvas/web/src/lib/zip.ts",
+      "path": "infinite-canvas/web/src/lib/zip.ts",
+      "bytes": 722,
+      "sha256": "ccf22651682b60133da315cbeb1acb7aafe88380ae01736947f03c58e2534993"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/anonymous-storage.ts",
+      "path": "infinite-canvas/web/src/services/anonymous-storage.ts",
+      "bytes": 1983,
+      "sha256": "b65bb0948eab9e975e13d1918339366ad7d02a125437a3f885bbb0dad4c5129d"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/admin.ts",
+      "path": "infinite-canvas/web/src/services/api/admin.ts",
+      "bytes": 11036,
+      "sha256": "2123625e7075251f63295eb0246b86f5786de1f93718206519e8fc6241807b3b"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/agent-skills.ts",
+      "path": "infinite-canvas/web/src/services/api/agent-skills.ts",
+      "bytes": 1412,
+      "sha256": "bdd17b25d7ba23045ccb64c9a82fee0bfdb848926bb27d2fe4ef9cadaa1e7aa5"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/assets.ts",
+      "path": "infinite-canvas/web/src/services/api/assets.ts",
+      "bytes": 853,
+      "sha256": "d0876e71c241ddda48a1b8cdcf68750ec61cad8085db6d95538716a17f83043a"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/audio.ts",
+      "path": "infinite-canvas/web/src/services/api/audio.ts",
+      "bytes": 20472,
+      "sha256": "a01bb1ce154ec7a6145db60344854c72eabb37ec27f82b5f3ebbfa2a44f5809f"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/auth.ts",
+      "path": "infinite-canvas/web/src/services/api/auth.ts",
+      "bytes": 922,
+      "sha256": "771ecb419fb999a26e3cd64a4da045caff2ba1b765b4911077b883c8545f102f"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/autodl.ts",
+      "path": "infinite-canvas/web/src/services/api/autodl.ts",
+      "bytes": 691,
+      "sha256": "b1f6d958bd9ef780cb2dfaaa1e01532be5485036038d166a41c006e69af94be3"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/canvas-agent.ts",
+      "path": "infinite-canvas/web/src/services/api/canvas-agent.ts",
+      "bytes": 33388,
+      "sha256": "cde3269ab164d069162c2053afb86adabed9b20320afb98343d0e7acdd829d68"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/canvas-tasks.ts",
+      "path": "infinite-canvas/web/src/services/api/canvas-tasks.ts",
+      "bytes": 1677,
+      "sha256": "a6c72c51c724b7bb767aae106847d07768de472c1bc3df2e4db47804d828ed82"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/cli-video-mode.ts",
+      "path": "infinite-canvas/web/src/services/api/cli-video-mode.ts",
+      "bytes": 506,
+      "sha256": "cb73afa789caaa6d668d7edd209002fefe55bbf3a42e85a1e5590c04e310ae4a"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/codex-agent.ts",
+      "path": "infinite-canvas/web/src/services/api/codex-agent.ts",
+      "bytes": 6038,
+      "sha256": "01aaa3e0eb5f0967fd9bd635e4727c7ffc478c7341e2f62843b9f514c9ae7047"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/comfy-bridge.ts",
+      "path": "infinite-canvas/web/src/services/api/comfy-bridge.ts",
+      "bytes": 1719,
+      "sha256": "1c2f7dd04eb30da22ed581d1d371aa21bcedae3eab596e5fcc80bc3df2ac6c11"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/direct-ai.ts",
+      "path": "infinite-canvas/web/src/services/api/direct-ai.ts",
+      "bytes": 19081,
+      "sha256": "d76253c97c32f9dbb8feaf806efa9a5cec03115b2148fd9f826d2484983f45b5"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/dreamina.ts",
+      "path": "infinite-canvas/web/src/services/api/dreamina.ts",
+      "bytes": 10226,
+      "sha256": "04c20136e948cdfdd1ecb91b0221898e88655ce5cce9eeec1cd7feaae3174ee9"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/generation-logs.ts",
+      "path": "infinite-canvas/web/src/services/api/generation-logs.ts",
+      "bytes": 1260,
+      "sha256": "c58fc99c07619f0bd403cbeec4e4b2da3c4ffd33649f8f31a22b80380a49ff7f"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/image.ts",
+      "path": "infinite-canvas/web/src/services/api/image.ts",
+      "bytes": 75412,
+      "sha256": "e724b51eef1b0d10d9aab2b5a3aa6bf0ca3f005cc8008af400d868bbbd6cfbc4"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/local-assets.ts",
+      "path": "infinite-canvas/web/src/services/api/local-assets.ts",
+      "bytes": 15984,
+      "sha256": "5b7858d4c0012af699b08209396d313aae1cf90364e7699bef018508eba69b72"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/oiioii.ts",
+      "path": "infinite-canvas/web/src/services/api/oiioii.ts",
+      "bytes": 5804,
+      "sha256": "df268ec64085a095f608fb9c9019b1b97dc131a3504cff8c2a31ae2ef7501fb5"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/pippit-canvas.ts",
+      "path": "infinite-canvas/web/src/services/api/pippit-canvas.ts",
+      "bytes": 1328,
+      "sha256": "b33e782e75c0708e46ba21824c340b0a845415de3fc9324c24ff49127651458a"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/pippit.ts",
+      "path": "infinite-canvas/web/src/services/api/pippit.ts",
+      "bytes": 6709,
+      "sha256": "2530a10965abe8de60210dbcd9669cff5b51b68d80d6fc926e7f48afd80a4bc1"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/project-library.ts",
+      "path": "infinite-canvas/web/src/services/api/project-library.ts",
+      "bytes": 1258,
+      "sha256": "ce2874da7c4127da5360632d2dabeecc1af21a69e81aa4bd5814eaf90cd67af3"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/prompts.ts",
+      "path": "infinite-canvas/web/src/services/api/prompts.ts",
+      "bytes": 1973,
+      "sha256": "2b18774ac16ea7d45afb9beb0c9194e7a36f058579453a044c592ff82b3afff9"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/protocols/apimart.ts",
+      "path": "infinite-canvas/web/src/services/api/protocols/apimart.ts",
+      "bytes": 2066,
+      "sha256": "3cab580a35549c9121d5b4549b663f74a9fec146e9dafca925ad3b263c45e118"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/protocols/ark.ts",
+      "path": "infinite-canvas/web/src/services/api/protocols/ark.ts",
+      "bytes": 1498,
+      "sha256": "0df25abbdc39d70140a6cd3d01acf203e7f245d53d74d8f6bb22db70226d1085"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/protocols/autodl.ts",
+      "path": "infinite-canvas/web/src/services/api/protocols/autodl.ts",
+      "bytes": 2771,
+      "sha256": "ad0811b5d829b1ebba0276161d78b2b1ad59a9b21da8c993fba6a86bc8c554b3"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/protocols/direct-registry.test.ts",
+      "path": "infinite-canvas/web/src/services/api/protocols/direct-registry.test.ts",
+      "bytes": 11310,
+      "sha256": "76151ad8316d9041751eaf66453dc14ca6d48e45078301c05a0b837cc4511db4"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/protocols/direct-registry.ts",
+      "path": "infinite-canvas/web/src/services/api/protocols/direct-registry.ts",
+      "bytes": 543,
+      "sha256": "16dbb8ad04034318f8aa47af694e178108a5c31ec2dda92d0d8d8a24cc99740d"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/protocols/kie.ts",
+      "path": "infinite-canvas/web/src/services/api/protocols/kie.ts",
+      "bytes": 1779,
+      "sha256": "8ed238f652dabcbe37c6c1405bfc099adc6877809a76399c6bc5497ed2a1ab39"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/protocols/kling-models.test.ts",
+      "path": "infinite-canvas/web/src/services/api/protocols/kling-models.test.ts",
+      "bytes": 4832,
+      "sha256": "3290ba8d4bdb6e8b1197ef262472f0aa8c03eac4e7fa8cae16aec99711121d93"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/protocols/kling-models.ts",
+      "path": "infinite-canvas/web/src/services/api/protocols/kling-models.ts",
+      "bytes": 4471,
+      "sha256": "2fc6654c3dd21897a8502c09c70c3cdd87bcde857e90c71425a98afe472422cf"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/protocols/shared.ts",
+      "path": "infinite-canvas/web/src/services/api/protocols/shared.ts",
+      "bytes": 3250,
+      "sha256": "f358d668c70caa92b14624a979ed8d3aba5ba6f02468ee6ccbe27f3bb86ab4c5"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/protocols/types.ts",
+      "path": "infinite-canvas/web/src/services/api/protocols/types.ts",
+      "bytes": 847,
+      "sha256": "21bd6959047ffefdd9d52f5c42f1c0f8cab4c45e639409f5f5728e0d9ea4ff18"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/request.ts",
+      "path": "infinite-canvas/web/src/services/api/request.ts",
+      "bytes": 2839,
+      "sha256": "36a059b8cb2d02a0f959e1327501738e24f990235c7d61b4650df3cb72d9d566"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/runninghub.ts",
+      "path": "infinite-canvas/web/src/services/api/runninghub.ts",
+      "bytes": 781,
+      "sha256": "882d490195ac411dcd4175e508926c26bfb674c39c76ddefa313880458abc78e"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/storage.ts",
+      "path": "infinite-canvas/web/src/services/api/storage.ts",
+      "bytes": 1027,
+      "sha256": "14aa4ceca4dbde634ba25c27de5d836dde59e16331eaf0393e7fecd1a8699c59"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/user-config.ts",
+      "path": "infinite-canvas/web/src/services/api/user-config.ts",
+      "bytes": 4108,
+      "sha256": "bad02c80ddc019914d8c4981a99ceae3b839d4b2cf6e3d15e67bc15b250f4f5f"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/video-studio-files.ts",
+      "path": "infinite-canvas/web/src/services/api/video-studio-files.ts",
+      "bytes": 6648,
+      "sha256": "1e68c2fa8cb0762120f6bf17ff2b45a4314aa7d0894f48235103f61d93ea97bd"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/video.ts",
+      "path": "infinite-canvas/web/src/services/api/video.ts",
+      "bytes": 67026,
+      "sha256": "453e495ebd7f2163649ca1a9d4ec116f3ed0ab9653f8ed531511eb744dad547a"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/workbench.ts",
+      "path": "infinite-canvas/web/src/services/api/workbench.ts",
+      "bytes": 6408,
+      "sha256": "6b9314817d71643654da23e7906fc15cf6d0b50821b64ddcfb1cf2a4033e0e58"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/api/workflow-generation.ts",
+      "path": "infinite-canvas/web/src/services/api/workflow-generation.ts",
+      "bytes": 5547,
+      "sha256": "9e4acce7221e7b5a3d65766f5a72b485a71fbb5186e4962d69561b4ea72737b1"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/file-storage.ts",
+      "path": "infinite-canvas/web/src/services/file-storage.ts",
+      "bytes": 13797,
+      "sha256": "0cbd8014fffbb27edda6bf32022121bdb671d7cc3b0be3baa8045bb549a16778"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/image-storage.ts",
+      "path": "infinite-canvas/web/src/services/image-storage.ts",
+      "bytes": 26210,
+      "sha256": "dad4b6a38076f442d48e8a5adffc3b6e9f26f2de6eb973c79932a21ebf0f7ad5"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/storage-migration.ts",
+      "path": "infinite-canvas/web/src/services/storage-migration.ts",
+      "bytes": 10619,
+      "sha256": "b169a3a9d36c7da85b40652fc036a70891e66ca649b1eaaae9cdd0b50774ef47"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/webdav-direct-storage.ts",
+      "path": "infinite-canvas/web/src/services/webdav-direct-storage.ts",
+      "bytes": 12840,
+      "sha256": "0919a048fa0851d2c19ac191cb31e821143782e7f8eb808c9e72bb75b7f873d1"
+    },
+    {
+      "source": "infinite-canvas/web/src/services/workflow-channel-storage.ts",
+      "path": "infinite-canvas/web/src/services/workflow-channel-storage.ts",
+      "bytes": 2023,
+      "sha256": "4c1d1dc9bcc5027d929026904ba0f1afac9210658b0b1913c8f9c2ae9fe9b42c"
+    },
+    {
+      "source": "infinite-canvas/web/src/stores/use-agent-skill-store.ts",
+      "path": "infinite-canvas/web/src/stores/use-agent-skill-store.ts",
+      "bytes": 5074,
+      "sha256": "c2293cbbe8d2320eab9fedb8b9561b12387b06b8a7656cf7e8050be510b9a3b5"
+    },
+    {
+      "source": "infinite-canvas/web/src/stores/use-asset-store.ts",
+      "path": "infinite-canvas/web/src/stores/use-asset-store.ts",
+      "bytes": 18096,
+      "sha256": "b72655e560e244fa82775b499d1e857ee30bbbb4d7495f66d587a3052f49b1fa"
+    },
+    {
+      "source": "infinite-canvas/web/src/stores/use-config-store.ts",
+      "path": "infinite-canvas/web/src/stores/use-config-store.ts",
+      "bytes": 40056,
+      "sha256": "574aa812ff6df2b04f3310a948aa9cb411c8d6643e32746e71c61ada13062439"
+    },
+    {
+      "source": "infinite-canvas/web/src/stores/use-prompt-library-store.ts",
+      "path": "infinite-canvas/web/src/stores/use-prompt-library-store.ts",
+      "bytes": 1683,
+      "sha256": "fe5a71d5e4903c0c1057d4b82dd5fca8af51026686cd2b6812bfb54e5e07697d"
+    },
+    {
+      "source": "infinite-canvas/web/src/stores/use-theme-store.ts",
+      "path": "infinite-canvas/web/src/stores/use-theme-store.ts",
+      "bytes": 827,
+      "sha256": "6a208fb022f7f820c2ec09feba5a8c7809388f5593e4f7ad2cafb9693fb7a875"
+    },
+    {
+      "source": "infinite-canvas/web/src/stores/use-user-store.ts",
+      "path": "infinite-canvas/web/src/stores/use-user-store.ts",
+      "bytes": 2915,
+      "sha256": "9be785ed4bfc31ec89a32579b7f82f3d06be2dd6f10b848965e4cfa9d343a486"
+    },
+    {
+      "source": "infinite-canvas/web/src/stores/use-video-studio-store.ts",
+      "path": "infinite-canvas/web/src/stores/use-video-studio-store.ts",
+      "bytes": 10243,
+      "sha256": "a88abac0d1a18505e75ccaa45928781b353d1f85efd4cabc049bc6b868d62637"
+    },
+    {
+      "source": "infinite-canvas/web/src/stores/use-workbench-layout-store.ts",
+      "path": "infinite-canvas/web/src/stores/use-workbench-layout-store.ts",
+      "bytes": 1229,
+      "sha256": "1e836e9b70b500ea8671f705b62980e900099ff854c8af7389eff9e52420658b"
+    },
+    {
+      "source": "infinite-canvas/web/src/stores/use-workspace-tabs-store.ts",
+      "path": "infinite-canvas/web/src/stores/use-workspace-tabs-store.ts",
+      "bytes": 2392,
+      "sha256": "b04049d317dfcf474bc04f82a679b2de6229b7d66093c0074d6d9c5ec4f3bec8"
+    },
+    {
+      "source": "infinite-canvas/web/src/types/image.ts",
+      "path": "infinite-canvas/web/src/types/image.ts",
+      "bytes": 180,
+      "sha256": "ed62cc43a0642756da3f312716a63874d9a9fbe4ec645a7cb39716eef8c45b07"
+    },
+    {
+      "source": "infinite-canvas/web/src/types/media.ts",
+      "path": "infinite-canvas/web/src/types/media.ts",
+      "bytes": 432,
+      "sha256": "f6d3c42fbd88ff598522910f74e17b160b83bf8f241b5930a2c72c80d67c48ce"
+    },
+    {
+      "source": "infinite-canvas/web/public/director/assets/index-BaMsYsAL.css",
+      "path": "infinite-canvas/web/public/director/assets/index-BaMsYsAL.css",
+      "bytes": 71404,
+      "sha256": "1317a5567183fdb9cfa20677c55113a8a8f0d56e394ab73412863727a7b94930"
+    },
+    {
+      "source": "infinite-canvas/web/public/director/assets/index-oQuo7db8.js",
+      "path": "infinite-canvas/web/public/director/assets/index-oQuo7db8.js",
+      "bytes": 1451575,
+      "sha256": "79414869574b6c037559a0c23ad3573aba154455f280b0f7b63f4e3f5a6c3d57"
+    },
+    {
+      "source": "infinite-canvas/web/public/director/index.html",
+      "path": "infinite-canvas/web/public/director/index.html",
+      "bytes": 573,
+      "sha256": "3416d16265db9109eb88e887d62666f050586d862c03b2a45262d94d1d3b804d"
+    },
+    {
+      "source": "infinite-canvas/web/public/director/models/ue-mannequin-retopology.glb",
+      "path": "infinite-canvas/web/public/director/models/ue-mannequin-retopology.glb",
+      "bytes": 750464,
+      "sha256": "5622c6150467fb96ff70d30eb3393286131c8523feaa3b78f80515d499cb1a14"
+    },
+    {
+      "source": "infinite-canvas/web/public/director/models/ue-mannequin-retopology.license.txt",
+      "path": "infinite-canvas/web/public/director/models/ue-mannequin-retopology.license.txt",
+      "bytes": 447,
+      "sha256": "7442c841dec4ba92c4ec9966a58d621fb24b20e79fd2533159bada24575ff532"
+    },
+    {
+      "source": "infinite-canvas/web/public/icons/claude.svg",
+      "path": "infinite-canvas/web/public/icons/claude.svg",
+      "bytes": 1696,
+      "sha256": "a3101f3047a119aa11825ad9369510f0c472428c8c52d420e31bc62db44a8364"
+    },
+    {
+      "source": "infinite-canvas/web/public/icons/deepseek.svg",
+      "path": "infinite-canvas/web/public/icons/deepseek.svg",
+      "bytes": 2164,
+      "sha256": "deba5f98a5c1796e20fcac3149bcd7eb8a32f0bdd04d048819400b1f28bd1439"
+    },
+    {
+      "source": "infinite-canvas/web/public/icons/gemini.svg",
+      "path": "infinite-canvas/web/public/icons/gemini.svg",
+      "bytes": 2836,
+      "sha256": "8ab0a9bafec11f7e69bcb9fc4ffd8f1bc927d1ddcbbb6ff36dee5ae8b5a9d602"
+    },
+    {
+      "source": "infinite-canvas/web/public/icons/glm.svg",
+      "path": "infinite-canvas/web/public/icons/glm.svg",
+      "bytes": 3597,
+      "sha256": "8174e65ff71647d5c705c920c953a82bd723d9e3e42887bdd4ffc9dfe51207a0"
+    },
+    {
+      "source": "infinite-canvas/web/public/icons/grok.svg",
+      "path": "infinite-canvas/web/public/icons/grok.svg",
+      "bytes": 756,
+      "sha256": "9175fc90c22655160231976c849f25a03b888d7cc0e04c5f1b987b659bb07c95"
+    },
+    {
+      "source": "infinite-canvas/web/public/icons/linuxdo.svg",
+      "path": "infinite-canvas/web/public/icons/linuxdo.svg",
+      "bytes": 1492,
+      "sha256": "dc7fe55ca4dc1062611111df4208da9d44655c36f85ad52727facd4bba2b4d60"
+    },
+    {
+      "source": "infinite-canvas/web/public/icons/openai.svg",
+      "path": "infinite-canvas/web/public/icons/openai.svg",
+      "bytes": 1687,
+      "sha256": "a595df6b423920c67a7f8f73c063e4bfb72d415948097b6cac063a2366bb5186"
+    },
+    {
+      "source": "infinite-canvas/web/public/logo.svg",
+      "path": "infinite-canvas/web/public/logo.svg",
+      "bytes": 1252,
+      "sha256": "3bfefefcec8535f64860de285b922d176bb1275ed0de597d350de29b9bf9dc76"
+    },
+    {
+      "source": "infinite-canvas/web/public/video-gallery-notices.txt",
+      "path": "infinite-canvas/web/public/video-gallery-notices.txt",
+      "bytes": 3311,
+      "sha256": "a174f172121ec757987c920da36d58703e3f917f7b051cf2f5e7c6e160afd6a4"
+    },
+    {
+      "source": "infinite-canvas/web/public/webdav-media-sw.js",
+      "path": "infinite-canvas/web/public/webdav-media-sw.js",
+      "bytes": 2269,
+      "sha256": "8881e7ffe143dd33ba1a63f036f0833b18631e274619562d96f957149d8947f9"
+    },
+    {
+      "source": "infinite-canvas/web/public/xiaoxiao/asset-workspace.js",
+      "path": "infinite-canvas/web/public/xiaoxiao/asset-workspace.js",
+      "bytes": 80661,
+      "sha256": "84467c3cd0047f315897435be556f2df0a5c575649a2ccc9ce79f5c281b72c89"
+    },
+    {
+      "source": "infinite-canvas/web/public/xiaoxiao/browser-bridge.js",
+      "path": "infinite-canvas/web/public/xiaoxiao/browser-bridge.js",
+      "bytes": 5784,
+      "sha256": "495b4406e07e6ec778e489f2639565b07bacec1c745eed7b70128797131b83b3"
+    },
+    {
+      "source": "infinite-canvas/web/public/xiaoxiao/cdp-controls.js",
+      "path": "infinite-canvas/web/public/xiaoxiao/cdp-controls.js",
+      "bytes": 8438,
+      "sha256": "a03dbc7fdba663b08e8c00c201ee299bbcc59e74cbf280162bb3cba7eeaacec7"
+    },
+    {
+      "source": "infinite-canvas/web/public/xiaoxiao/modules.css",
+      "path": "infinite-canvas/web/public/xiaoxiao/modules.css",
+      "bytes": 63712,
+      "sha256": "ea0698d5e74e2e548d9244290cecd9daa4c70f023b4cc395bc907357f5951fd9"
+    },
+    {
+      "source": "infinite-canvas/web/public/xiaoxiao/panels.html",
+      "path": "infinite-canvas/web/public/xiaoxiao/panels.html",
+      "bytes": 6774,
+      "sha256": "17653686ee3f610ad344c960e954921cd7ea56547eb42ebd2c7371a3d00f079e"
+    },
+    {
+      "source": "infinite-canvas/web/public/xiaoxiao/typetale-core.js",
+      "path": "infinite-canvas/web/public/xiaoxiao/typetale-core.js",
+      "bytes": 32253,
+      "sha256": "7e54cb56bb9de19ef60dd135847f2354b1e1c9ef7c9dfcc218cb67d80b3268d3"
+    },
+    {
+      "source": "infinite-canvas/web/public/xiaoxiao/typetale-model-family.js",
+      "path": "infinite-canvas/web/public/xiaoxiao/typetale-model-family.js",
+      "bytes": 19110,
+      "sha256": "1ebe313766c806d820567750af1cae3ec592489cd5d54214e1b9b569802de734"
+    },
+    {
+      "source": "infinite-canvas/web/public/xiaoxiao/typetale-workbench.js",
+      "path": "infinite-canvas/web/public/xiaoxiao/typetale-workbench.js",
+      "bytes": 51628,
+      "sha256": "77c1c04b00e35ef9e5f389b0f02a0aa7c6175d21c664ed4d4a6badfe2a9d33f6"
+    },
+    {
+      "source": "infinite-canvas/web/public/xiaoxiao/workbench.js",
+      "path": "infinite-canvas/web/public/xiaoxiao/workbench.js",
+      "bytes": 71216,
+      "sha256": "67bb350b74c5993aa1307ea441262cf3c9871f08210845dfb2ad064569d7b882"
+    },
+    {
+      "source": "infinite-canvas/web/package.json",
+      "path": "infinite-canvas/web/package.json",
+      "bytes": 2023,
+      "sha256": "798273918f5e5fe4090153e0701049a26652be3833f7ece08455c0138c2ea060"
+    },
+    {
+      "source": "infinite-canvas/web/package-lock.json",
+      "path": "infinite-canvas/web/package-lock.json",
+      "bytes": 326517,
+      "sha256": "783a5cc1d2f15fda539e2e17da3d10e33a6f6a6b668d33731b53c317b22fcd0a"
+    },
+    {
+      "source": "infinite-canvas/web/bun.lock",
+      "path": "infinite-canvas/web/bun.lock",
+      "bytes": 199017,
+      "sha256": "a3159c33b8744e4d65fdf4fe99fd4f4ce55b6c31d879c5693f880fe57323e647"
+    },
+    {
+      "source": "infinite-canvas/web/next-env.d.ts",
+      "path": "infinite-canvas/web/next-env.d.ts",
+      "bytes": 253,
+      "sha256": "4e4da12aa061aac172fb1bcb48e9b6e4b293080d2f494327925fdba8f39632ac"
+    },
+    {
+      "source": "infinite-canvas/web/next.config.ts",
+      "path": "infinite-canvas/web/next.config.ts",
+      "bytes": 1019,
+      "sha256": "330ff536a91d64f34b5b605bf7b78a5fdd8e610908a892c309d9345eccfc93e8"
+    },
+    {
+      "source": "infinite-canvas/web/postcss.config.mjs",
+      "path": "infinite-canvas/web/postcss.config.mjs",
+      "bytes": 109,
+      "sha256": "cedb787026b36a04534018cdee367d047cc9e627fc321642f5f8c2f25ed02e5f"
+    },
+    {
+      "source": "infinite-canvas/web/tsconfig.json",
+      "path": "infinite-canvas/web/tsconfig.json",
+      "bytes": 785,
+      "sha256": "cb8ba47c9b8427bea30250cd64ae55126f37db06925cb3d0d889ff557990d05a"
+    },
+    {
+      "source": "infinite-canvas/web/components.json",
+      "path": "infinite-canvas/web/components.json",
+      "bytes": 673,
+      "sha256": "7a2f90b2e1ab7d2770b851bff527fc74818ea5663fd2e32539ac02cbb1fb7a6f"
+    },
+    {
+      "source": "infinite-canvas/web/.editorconfig",
+      "path": "infinite-canvas/web/.editorconfig",
+      "bytes": 179,
+      "sha256": "f98657dc22a40df3386befed0a2295c2224cdb7ae0345a66fffca276e0b7e8cb"
+    },
+    {
+      "source": "infinite-canvas/web/.prettierrc.json",
+      "path": "infinite-canvas/web/.prettierrc.json",
+      "bytes": 366,
+      "sha256": "04c947b96a9b9cd11f2aa1be1e09b6edcee0f42240a4325b0594c5500edbd39a"
+    },
+    {
+      "source": "infinite-canvas/web/.prettierignore",
+      "path": "infinite-canvas/web/.prettierignore",
+      "bytes": 112,
+      "sha256": "f29b2f2b4867f244607af3f3c6ae03c615549554fb3556017ca08f394d34223c"
+    },
+    {
+      "source": "infinite-canvas/VERSION",
+      "path": "infinite-canvas/VERSION",
+      "bytes": 8,
+      "sha256": "567645067f1bda2dc5908f1c384e89dcc2d91c713eb7eb1ed83968461a5f3a8f"
+    },
+    {
+      "source": "infinite-canvas/CHANGELOG.md",
+      "path": "infinite-canvas/CHANGELOG.md",
+      "bytes": 25419,
+      "sha256": "40619a8a371369e0345d682aba35d284e5540b1ca586b982f29693b44fed866f"
+    },
+    {
+      "source": "infinite-canvas/LICENSE",
+      "path": "infinite-canvas/LICENSE",
+      "bytes": 35184,
+      "sha256": "6f1e622c82a380075843bb084a7ec3b1f1d12a4a02526d75e78b0924a860aa75"
+    },
+    {
+      "source": "工作台功能保留规则.md",
+      "path": "reference/工作台功能保留规则.md",
+      "bytes": 27000,
+      "sha256": "c6c268445ec17b089604adf6a58a9a8fa2e6b4997a2dccb42a4780ce7e73009f"
+    },
+    {
+      "source": "AGENTS.md",
+      "path": "reference/本机项目维护规则.md",
+      "bytes": 4503,
+      "sha256": "a958b13097ab7c4cb32bf8cf188260fc71cee375936ec73b1d317d3805d8af2f"
+    }
+  ],
+  "excluded": [
+    "node_modules",
+    ".next",
+    "tsconfig.tsbuildinfo",
+    ".git",
+    ".env files",
+    "Electron and Go runtime",
+    "personal workbench data",
+    "account credentials and sessions",
+    "project media",
+    "history and backups",
+    "ComfyBridge executables"
+  ],
+  "generatedDocuments": [
+    "先读我.md",
+    "给云端AI的任务说明.md",
+    "代码入口与整合约定.md",
+    "AGENTS.md"
+  ]
+}
