@@ -1,0 +1,16 @@
+"use client";
+import {useDeferredValue,useMemo} from "react";
+import {useAssetStore,type Asset} from "@/stores/use-asset-store";
+import {useVideoStudioStore} from "@/stores/use-video-studio-store";
+import {projectReferenceAssets,matchPromptAssets,missingPromptReferences} from "../prompt-references";
+import {ImageReplacementTarget} from "./image-replacement-target";
+import {locatePromptRange} from "../prompt-locate";
+export function PromptMissingAssets({prompt,bindings,boundNames,onOpenBind,onBindAsset}:{prompt:string;bindings:Record<string,string>;boundNames:string[];onOpenBind:(name:string,kind:string)=>void;onBindAsset:(asset:Asset,name:string,kind:string)=>Promise<boolean>}){
+ const assets=useAssetStore(s=>s.assets),projects=useVideoStudioStore(s=>s.projects),activeProjectId=useVideoStudioStore(s=>s.activeProjectId),project=projects.find(p=>p.id===activeProjectId);
+ const rawProjectAssets=useMemo(()=>{const ids=new Set(project?.elementIds);return assets.filter(a=>ids.has(a.id));},[assets,project?.elementIds]);
+ const projectAssets=useMemo(()=>projectReferenceAssets(rawProjectAssets,project?.elementRules),[rawProjectAssets,project?.elementRules]),matchedPrompt=useDeferredValue(prompt);
+ const report=useMemo(()=>matchPromptAssets(matchedPrompt,projectAssets,bindings),[matchedPrompt,projectAssets,bindings]);
+ const issues=missingPromptReferences(report,boundNames);
+ const locate=(start:number,end:number)=>{const editor=document.querySelector<HTMLElement>('[data-video-studio] [data-video-composer] [data-prompt-reference-editor]');if(editor)locatePromptRange(editor,start,end);};
+ return issues.length?<div data-match-issues data-prompt-missing-assets className="contents">{issues.map(issue=><ImageReplacementTarget key={issue.kind+":"+issue.name} kind={issue.kind} onAsset={async id=>{const asset=useAssetStore.getState().assets.find(a=>a.id===id);if(asset&&project?.elementIds.includes(id)&&!project.elementRules?.[id]?.disabled&&(issue.kind==='any'||asset.kind===issue.kind))await onBindAsset(asset,issue.name,issue.kind);}}><article tabIndex={0} onClick={e=>{const selection=window.getSelection();if(selection&&!selection.isCollapsed&&(e.currentTarget.contains(selection.anchorNode)||e.currentTarget.contains(selection.focusNode)))return;if(!(e.target as HTMLElement).closest("button"))onOpenBind(issue.name,issue.kind);}} onKeyDown={e=>{if(e.target===e.currentTarget&&e.key==="Enter")onOpenBind(issue.name,issue.kind);}} title={issue.name+" · "+issue.reason} className="flex h-20 w-20 shrink-0 cursor-pointer flex-col items-center justify-between overflow-hidden rounded-xl border border-dashed border-primary/40 bg-accent/20 p-1"><span data-missing-kind={issue.kind} aria-label={issue.kind==="audio"?"缺少音频素材":issue.kind==="video"?"缺少视频素材":"缺少图片素材"} className="text-xl leading-5 text-primary/60">{issue.kind==="audio"?"♫ ?":issue.kind==="video"?"▷ ?":"?"}</span><p className="w-full truncate text-center text-[10px]">{issue.name}</p><div className="flex w-full justify-around text-[10px]"><button type="button" aria-label={"绑定 "+issue.name} onClick={()=>onOpenBind(issue.name,issue.kind)}>绑定</button><button type="button" aria-label={"定位 "+issue.name} onClick={()=>{if(matchedPrompt===prompt)locate(issue.start,issue.end);}}>定位</button></div></article></ImageReplacementTarget>)}</div>:null;
+}

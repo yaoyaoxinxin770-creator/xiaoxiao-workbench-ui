@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const { groupCharacterFiles } = require('../desktop-app/project-assets.js');
+const root = fs.mkdtempSync(path.join(os.tmpdir(), 'jimeng-characters-'));
+fs.mkdirSync(path.join(root, '人物'), { recursive: true });
+for (const name of ['阮乔-宽松睡衣.jpeg', '阮乔-常服.jpeg', '霍砚-西装.jpeg']) fs.writeFileSync(path.join(root, '人物', name), 'x');
+const groups = groupCharacterFiles(root, '人物', ['阮乔', '霍砚'], null);
+assert.equal(groups['阮乔'].length, 2);
+assert.equal(groups['霍砚'].length, 1);
+assert.equal(new Set(groups['阮乔'].map(x => x.versionLabel)).size, 2);
+assert.ok(groups['阮乔'].some(x => x.versionLabel === '常服'));
+assert.ok(groups['阮乔'].some(x => x.versionLabel === '宽松睡衣'));
+console.log('[OK] character grouping');

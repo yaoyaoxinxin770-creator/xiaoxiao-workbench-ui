@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const source=fs.readFileSync(new URL('./asset-workspace.js',import.meta.url),'utf8');
+const fn=source.slice(source.indexOf('  function rankAudioCandidates'),source.indexOf('  function automaticAudio'));
+const rank=vm.runInNewContext(fn+';rankAudioCandidates');
+const assets=['何诞','何诞（人形）','何诞-音色','何诞宁','宋柏峰'].map(displayName=>({displayName,role:displayName,mediaType:'audio'}));
+assert.equal(rank('何诞（人形）',assets)[0].displayName,'何诞（人形）');
+assert.equal(rank('何诞（人形）',assets.filter(a=>a.displayName!=='何诞（人形）'))[0].displayName,'何诞');
+assert.equal(rank('何诞（人形）',assets.filter(a=>a.displayName==='何诞-音色'))[0].displayName,'何诞-音色');
+assert.equal(rank('何诞（人形）',assets.filter(a=>a.displayName==='何诞宁')).length,0);
+assert.equal(rank('张叔',assets).length,0);
+assert.equal(rank('何诞(人形)',assets)[0].displayName,'何诞（人形）');
+assert.equal(rank('何诞', [{displayName:'何诞.wav',mediaType:'audio'}])[0].displayName,'何诞.wav');
+assert.ok(source.includes('const automatic=automaticAudio(role);'));
+assert.ok(source.includes('asset=automaticAudio(role);'));
+console.log('Audio matching: exact, base role, suffix, collision, missing role and shared preview/execution matching PASS');

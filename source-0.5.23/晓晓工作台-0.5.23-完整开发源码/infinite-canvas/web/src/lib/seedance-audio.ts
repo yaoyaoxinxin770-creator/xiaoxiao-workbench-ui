@@ -1,0 +1,4 @@
+// Workbench audio selection budget, separate from each channel's other media limits.
+export function seedanceAudioBudget(model:string){const key=model.toLowerCase().replace(/[^a-z0-9]/g,'');return key.includes('seedance25')?30000:key.includes('seedance20')?15000:null;}
+export function withSeedanceAudioBudget<T extends {audios:number}>(model:string,limits:T){const budget=seedanceAudioBudget(model);return budget===null||limits.audios===0?limits:{...limits,audios:Infinity,audioMinDurationMs:0,audioMaxDurationMs:budget,totalAudioDurationMs:budget};}
+export function seedanceAudioError(model:string,items:{durationMs?:number}[]){const budget=seedanceAudioBudget(model);if(budget===null||!items.length)return '';if(items.some(a=>!Number.isFinite(a.durationMs)||!a.durationMs||a.durationMs<0))return '参考音频时长无法确认，请先重新定位音频';return items.reduce((n,a)=>n+a.durationMs!,0)>budget?'本组参考音频总时长不能超过 '+budget/1000+' 秒':'';}

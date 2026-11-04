@@ -1,0 +1,15 @@
+{
+  "version": "1.0.1",
+  "exeSha256": "71af36ecabbbc88f86956d0e8527f39ea0eb4f273aa9dc14bacb74f7e6633e68",
+  "programHashes": {
+    "video-share-main.cjs": "8b8f7e82121080b01452bb65852ca97cdc4b2ce8f70f80f9dfb2a5bd45cb97d1",
+    "video-share-preload.cjs": "732e27aa2150097cf2d08a210df5c7c3964a0cc94c187ffeae1342db6ba1788e",
+    "infinite-canvas-service.js": "2444c68de95152ba8d0ff345bd19d8aa95dbe6fb43dd822bd51f699f14ac0abb",
+    "pippit-service.js": "e3f2606288b887bd7606fa8617c9978c65fbde4f01b108884da3c29109f8141f",
+    "dreamina-service.js": "cdbc00e0e79a97f5e491c633950ae4dd035ee82b70421dfdde9363bf5bfa751e",
+    "local-asset-links.js": "05cd58b2c1d71a6fb5847e2f98c381bcee692b1d333b36b9276ef6a8aa86ab1a",
+    "project-library.js": "e0899bdc22109a22f668a5957e4c40155eb6086971e27b6aab91dff991a60c1e",
+    "asset-store.js": "bb2282fd3a2f8d1df5051feabcc825ef3a262e776f29a38c4e718e4605a08828",
+    "project-assets.js": "c321f1d559f95f6835caa55acbfd53e07d1c8ae1274834cf58c91ce7ec28e5ac"
+  }
+}

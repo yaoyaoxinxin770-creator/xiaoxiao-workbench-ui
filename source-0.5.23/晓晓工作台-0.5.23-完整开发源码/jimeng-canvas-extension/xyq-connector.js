@@ -1,0 +1,2 @@
+document.querySelector('#version').textContent='v'+chrome.runtime.getManifest().version;
+async function render(){await chrome.runtime.sendMessage({type:'XYQ_CANVAS_WAKE'}).catch(()=>{});const value=(await chrome.storage.local.get('xyq-canvas-status'))['xyq-canvas-status'];document.querySelector('#status').textContent=value?.connected&&Date.now()-value.at<65000?(value.tabs?'工作台已连接 · '+value.tabs+' 个小云雀画布':'工作台已连接 · 请打开目标画布'):'等待工作台启动，将自动重连';}void render();setInterval(()=>void render(),3000);

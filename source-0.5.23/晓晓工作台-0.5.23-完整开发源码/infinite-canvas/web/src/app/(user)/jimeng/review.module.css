@@ -1,0 +1,16 @@
+:global(html:not(.dark)) .workspace {
+    --background: #f4f5f7;
+    --card: #ffffff;
+    --review-material: #fff1f5;
+    --review-material-border: #f2c8d6;
+    --review-image: #ffe4ed;
+    --border: #e4e7ec;
+    --foreground: #30343b;
+    --muted-foreground: #6c7380;
+}
+.workspace { background: var(--background); color: var(--foreground); }
+
+/* Borrowed nodes retain legacy body styles; these slots must not reserve a page height. */
+.promptSlot { min-height: 0 !important; background: transparent !important; }
+.mentionSlot { position: fixed !important; min-height: 0 !important; width: 0; height: 0; background: transparent !important; }
+.promptSlot :global([data-review-reference][data-review-active="true"]) { outline: 2px solid var(--primary); outline-offset: 2px; }

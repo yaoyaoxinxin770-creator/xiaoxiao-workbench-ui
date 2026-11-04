@@ -1,0 +1,1 @@
+{"name":"jimeng-cli-tool","productName":"熊猫AI","version":"1.0.31","description":"分镜视频批量助手 —— 支持即梦 CLI、即梦无限画布与小云雀 CLI","author":"","license":"ISC","main":"main.js","dependencies":{"playwright-core":"1.60.0"}}

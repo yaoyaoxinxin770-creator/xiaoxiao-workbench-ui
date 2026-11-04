@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {createRequire} from 'node:module';
+const web=path.resolve(import.meta.dirname,'../infinite-canvas/web'),require=createRequire(path.join(web,'package.json')),ts=require('typescript'),exports={};new Function('exports',ts.transpileModule(fs.readFileSync(path.join(web,'src/app/(user)/video/prompt-references.ts'),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText)(exports);
+const {matchPromptAssets,missingPromptReferences}=exports,{referencesInPrompt,planGroup}=createRequire(import.meta.url)('./dreamina-canvas-drafts');
+const names=['陆霖辞家 客厅 灯光开启','陆霖辞家 厨房','陆霖辞家 洗漱区','陆霖辞家 浴室','陆霖辞家 卧室','陆霖辞家 卧室 新床品','陆霖辞家 朝南卧室'];
+const assets=names.map((title,i)=>({id:'scene-'+i,title,kind:'image',category:'场景'})),nodes=assets.map(a=>({nodeId:'node_'+a.id,type:'image',title:a.title,resources:[{type:'image',status:'success'}]}));
+const prompt='总时长：4秒\n【场景与连续状态】\n场景：夜/内，陆霖辞家（3楼，场景参考图以下方黑字命名：'+names.map(n=>'【'+n+'】').join(' ')+'）。客厅约6.5×5米。\n【出场人物】\n【声音锁定】\n语速锁定：保持自然\n@缺失声音｜声线：低沉\n【镜头01】4秒\n【不应匹配的镜头描述】';
+const report=matchPromptAssets(prompt,assets);assert.deepEqual(report.matches.map(a=>a.title),names);assert.deepEqual(report.ambiguous,[]);assert.deepEqual(report.missing,['缺失声音']);assert.ok(!report.issues.some(i=>i.name.includes('夜/内')||i.name==='语速锁定'));
+assert.equal(missingPromptReferences(report,[]).filter(i=>i.kind==='image').length,7,'已识别但尚未加入的空卡也可被选择填补');assert.equal(missingPromptReferences(report,assets.map(a=>'image:'+a.title)).filter(i=>i.kind==='image').length,0);
+for(const b of report.bindings)assert.equal(prompt.slice(b.start,b.end),b.name,'每张图定位到括号内名称');
+const tokens=referencesInPrompt(prompt,names);assert.deepEqual(tokens.filter(t=>t.kind==='image').map(t=>t.name),names);assert.ok(!tokens.some(t=>t.name==='语速锁定'));
+const plan=planGroup({id:'g',number:'01',prompt},nodes,assets);assert.deepEqual(plan.references.map(r=>r.name),names);for(let i=0;i<names.length;i++)assert.ok(plan.prompt.includes('【'+names[i]+'{{node:node_scene-'+i+'}}】'));
+assert.equal(plan.prompt.replace(/\{\{node:[^}]+\}\}/g,''),prompt,'保持原文，仅补充真实引用');
+assert.equal(matchPromptAssets('【场景与连续状态】\n场景：夜/内，陆霖辞家，客厅及卧室。',assets).issues.length,0,'没有括号的描述不列出缺项');assert.equal(referencesInPrompt('【场景与连续状态】\n场景：夜/内，陆霖辞家。').length,0);
+const multiline='【场景与连续状态】\n场景图：\n'+names.map(n=>'【'+n+'】').join('\n')+'\n【光线】\n【非场景说明】';assert.deepEqual(matchPromptAssets(multiline,assets).matches.map(a=>a.title),names,'跨行和以括号开头的素材列表完整识别');assert.deepEqual(referencesInPrompt(multiline,names).map(t=>t.name),names);
+const missingPrompt='【场景与连续状态】\n场景：夜/内，（场景【未命名卧室】）',selected={'manual:image:未命名卧室':'scene-5','image:未命名卧室':'scene-5'};
+assert.equal(matchPromptAssets(missingPrompt,assets,selected).issues.length,0);assert.equal(matchPromptAssets(missingPrompt,assets,selected).bindings[0].asset.id,'scene-5');const bound=planGroup({prompt:missingPrompt,bindings:selected},nodes,assets);assert.ok(bound.prompt.includes('【未命名卧室{{node:node_scene-5}}】'),'手动补位保留原名并引用所选图');
+const priorities=assets.map(a=>({...a,referenceRule:{name:'未命名卧室',priority:3}}));assert.equal(matchPromptAssets(missingPrompt,priorities,selected).matches.length,1,'明确手动补位优先于自动优先级');assert.equal(planGroup({prompt:missingPrompt,bindings:selected},nodes,priorities).references.length,1);
+const aliasAssets=assets.map(a=>({...a,referenceRule:{name:'陆霖辞家',priority:2}}));assert.deepEqual(matchPromptAssets(prompt,aliasAssets).matches.map(a=>a.id),assets.map(a=>a.id),'设置匹配别名也不丢失原完整场景名称');assert.deepEqual(planGroup({prompt},nodes,aliasAssets).references.map(r=>r.nodeId),nodes.map(n=>n.nodeId));
+console.log('七张场景逐项括号识别/多行列表/描述与语速说明排除/正文位置/手动补位/真实引用：PASS');
+
+// Catalog-backed unbracketed scene names, including metadata inside the scene section.
+const knownScenes=[{id:'school',title:'S11 高中教学楼下',kind:'image',category:'人物'},{id:'icu',title:'S03 重症监护观察区',kind:'image',category:'场景'}];
+const prose='【场景与连续状态】\n【承接视频编号07】 [cite: 1]\n场景A｜镜头01—03：高中教学楼下台阶，日外。\n场景B｜镜头04：S03 重症监护观察区，夜内。\n【出场人物】';
+const got=matchPromptAssets(prose,knownScenes);assert.deepEqual(got.matches.map(a=>a.id),['school','icu']);assert.deepEqual(got.issues,[]);for(const b of got.bindings)assert.equal(prose.slice(b.start,b.end),b.name);
+const sceneNodes=knownScenes.map(a=>({nodeId:'node_'+a.id,type:'image',title:a.title,resources:[{type:'image',status:'success'}]}));
+const scenePlan=planGroup({prompt:prose},sceneNodes,knownScenes);assert.deepEqual(scenePlan.issues,[]);assert.deepEqual(scenePlan.references.map(r=>r.nodeId),['node_school','node_icu']);assert.ok(scenePlan.prompt.includes('高中教学楼下{{node:node_school}}台阶'));assert.ok(scenePlan.prompt.includes('S03 重症监护观察区{{node:node_icu}}'));assert.equal(scenePlan.prompt.replace(/\{\{node:[^}]+\}\}/g,''),prose);
+const spaces=[{id:'sp',kind:'image',category:'场景',title:'S01 陆霖辞家 客厅 灯光开启'}],joined='【场景与连续状态】\n场景：陆霖辞家客厅灯光开启。';
+assert.equal(matchPromptAssets(joined,spaces).matches[0].id,'sp');assert.equal(planGroup({prompt:joined},[{nodeId:'sp',type:'image',title:spaces[0].title,resources:[{type:'image',status:'success'}]}],spaces).references[0].nodeId,'sp');
+const overlap=[...spaces,{id:'short',kind:'image',category:'场景',title:'陆霖辞家 客厅'}];assert.deepEqual(matchPromptAssets(joined,overlap).matches.map(a=>a.id),['sp'],'长场景名优先，不再把客厅基础版一起引用');
+const dup=[...knownScenes,{...knownScenes[0],id:'school2'}];assert.deepEqual(matchPromptAssets(prose,dup).ambiguous,['高中教学楼下']);assert.ok(planGroup({prompt:prose},[...sceneNodes,{...sceneNodes[0],nodeId:'node_school2'}],dup).issues.some(i=>i.reasonCode==='ambiguous'));
+assert.equal(matchPromptAssets('【全局视觉】\n高中教学楼下',knownScenes).matches.length,0);assert.equal(matchPromptAssets('【场景与连续状态】\n高中教学楼下',[{...knownScenes[0],referenceRule:{disabled:true}}]).matches.length,0);
+assert.equal(matchPromptAssets('【场景与连续状态】\n场景：不存在的教学楼',knownScenes).issues.length,0,'未知正文场景不造缺失卡');
+const explicit='【场景与连续状态】\n参照【高中教学楼下 新版】';assert.equal(matchPromptAssets(explicit,knownScenes).bindings[0].name,'高中教学楼下 新版','括号显式名称不被目录短名截断');
+console.log('目录场景正文识别/承接行/代码分类校正/空格归一/最长重叠/同名歧义/禁用与范围隔离/前后台真实引用：PASS');

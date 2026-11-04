@@ -1,0 +1,6 @@
+{
+  "package": "@pippit-dev/cli",
+  "version": "1.0.48",
+  "source": "https://github.com/Pippit-dev/cli",
+  "runtimeSha256": "8e14b9a2c496491c2ee44da3ed950ac8301b67981dfaba3ab1e042cf8b937298"
+}

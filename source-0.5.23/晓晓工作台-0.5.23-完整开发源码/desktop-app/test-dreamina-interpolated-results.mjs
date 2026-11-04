@@ -1,0 +1,29 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';import os from 'node:os';import path from 'node:path';import {createHash} from 'node:crypto';import {createRequire} from 'node:module';
+const {DreaminaCanvasService,catalogFromModels}=createRequire(import.meta.url)('./dreamina-canvas-service');
+const root=await fs.mkdtemp(path.join(os.tmpdir(),'dreamina-interpolated-')),calls=[],nodes=new Map();
+const source='node_source0000',child='node_child00000',rid='fb22ea23-39fb-475a-9ce7-83c8b9d8a214',original='6d528dce-8640-4bd7-8905-22117b0d44d9';
+const bytes=Buffer.from('000000006674797069736f6d00000000','hex');let account='42',expectedResource=rid;
+const make=()=>{const s=new DreaminaCanvasService({executable:'official',dataDir:root,execute:()=>{throw Error('No external calls');}});s.account=async()=>account;s.command=async args=>{calls.push(args);const v=k=>args[args.indexOf('--'+k)+1];if(args[0]==='node'&&args[1]==='show')return {nodes:args.flatMap((x,i)=>x==='--node-id'?[{result:nodes.has(args[i+1])?'FOUND':'NOT_FOUND',node:structuredClone(nodes.get(args[i+1]))}]:[])};if(args[0]==='resource'&&args[1]==='get'){assert.equal(args[2],expectedResource,'不得回传补帧前的视频');return {resourceId:expectedResource,type:'video',status:'success'};}if(args[0]==='resource'&&args[1]==='download'){assert.equal(args[2],expectedResource);const file=v('output');await fs.writeFile(file,bytes);return {resourceId:expectedResource,path:file,size:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')};}assert.fail('结果同步不能生成、报价、确认或查询另一提交：'+args.join(' '));};return s;};
+const s=make(),task={id:'dreamina-canvas:test',account:'42',projectId:'b3476c8b-bed5-438c-9d57-260182685ebf',nodeId:source,submitId:'local-unsubmitted',status:'awaiting_confirmation',model:'seedance_2.5_draft'};
+try{
+ await s.save(s.taskDir(task.id),task);nodes.set(source,{nodeId:source,type:'video',resources:[],downstreamNodeIds:[]});
+ assert.equal((await s.query(task.id,{returnMode:'interpolated'})).status,'awaiting_confirmation');
+ nodes.get(source).resources=[{resourceId:original,type:'video',status:'success',submitId:'manual-browser-submit'}];
+ assert.equal((await s.query(task.id)).status,'awaiting_interpolation');assert.equal(calls.filter(c=>c[0]==='resource').length,0);
+ nodes.get(source).downstreamNodeIds=['node_wrong0000','node_creative00',child];
+ nodes.set('node_wrong0000',{nodeId:'node_wrong0000',type:'video',title:'原视频_补帧',upstreamNodeIds:['another-group'],resources:[{resourceId:original,type:'video',status:'success',createdAt:30}]});
+ nodes.set('node_creative00',{nodeId:'node_creative00',type:'video',title:'同名_补帧',upstreamNodeIds:[source],generation:{model:'seedance_2.5'},resources:[{resourceId:original,type:'video',status:'success',createdAt:40}]});
+ nodes.set(child,{nodeId:child,type:'video',title:'不同组名也只认来源_补帧',upstreamNodeIds:[source],resources:[{resourceId:rid,type:'video',status:'running',createdAt:20}],downstreamNodeIds:[]});
+ assert.equal((await s.query(task.id)).status,'awaiting_interpolation');assert.equal(calls.filter(c=>c[0]==='resource').length,0);
+ nodes.get(child).resources[0].status='failed';await assert.rejects(()=>s.query(task.id),/补帧失败/);
+ nodes.get(child).resources[0].status='success';nodes.get(source).downstreamNodeIds.push('node_tied00000');nodes.set('node_tied00000',{...structuredClone(nodes.get(child)),nodeId:'node_tied00000'});await assert.rejects(()=>s.query(task.id),/多份同时/);nodes.get(source).downstreamNodeIds.pop();
+ const done=await s.query(task.id);assert.equal(done.status,'completed');assert.equal(done.interpolatedNodeId,child);assert.ok(done.media[0].dataUrl);assert.deepEqual((await s.read(s.taskDir(task.id))).resourceIds,[rid]);
+ const count=calls.filter(c=>c[1]==='download').length;assert.equal((await make().query(task.id)).status,'completed');assert.equal(calls.filter(c=>c[1]==='download').length,count,'重启只复用补帧成品');
+ account='99';await assert.rejects(()=>s.query(task.id,{returnMode:'interpolated'}),/另一即梦账号/);account='42';
+ expectedResource=original;const raw={...task,id:'dreamina-canvas:no-interpolation',returnMode:'original',interpolationFps:0};await s.save(s.taskDir(raw.id),raw);s.interpolator={ensure:()=>assert.fail('不补帧不得进入网页')};const direct=await s.query(raw.id,{returnMode:'interpolated'});assert.equal(direct.status,'completed');assert.equal(direct.returnMode,'original');assert.equal(direct.interpolatedNodeId,undefined);assert.deepEqual((await s.read(s.taskDir(raw.id))).resourceIds,[original]);expectedResource=rid;
+ // 操作回执先成功、节点资源稍后可见时，同一轮直接接续补帧。
+ const late=make(),lateTask={...task,id:'dreamina-canvas:late-source',returnMode:'interpolated',status:'processing'};await late.save(late.taskDir(lateTask.id),lateTask);nodes.set(source,{nodeId:source,type:'video',title:'样片',resources:[],downstreamNodeIds:[]});let triggers=0;const previousCommand=late.command;late.command=async args=>{if(args[0]==='operation'){nodes.get(source).resources=[{resourceId:original,type:'video',status:'success'}];return {operationRef:lateTask.submitId,resources:[{state:'succeeded'}]};}return previousCommand(args);};late.interpolator={ensure:async(_service,t,src)=>{assert.equal(src.resourceId,original);triggers++;t.interpolation={state:'submitted'};}};assert.equal((await late.query(lateTask.id)).status,'awaiting_interpolation');assert.equal(triggers,1,'不等待下一次定时查询再接续补帧');
+ const draft=JSON.parse(await fs.readFile(new URL('./test-fixtures/dreamina-sample-models.json',import.meta.url),'utf8'));const cat=catalogFromModels(draft.items);assert.ok(cat.models.includes('seedance_2.5_draft'));assert.deepEqual(cat.specs['seedance_2.5_draft'].resolution.options,['480p']);assert.equal(cat.specs['seedance_2.5_draft'].duration.min,4);
+ console.log('样片目录与仅补帧成品回传：网页手动提交/未补帧不下载/来源关联/同名防串组/普通续作排除/处理中与失败/歧义阻止/重启复用/账号隔离：PASS');
+}finally{assert.ok(path.resolve(root).startsWith(path.resolve(os.tmpdir())+path.sep));await fs.rm(root,{recursive:true,force:true});}

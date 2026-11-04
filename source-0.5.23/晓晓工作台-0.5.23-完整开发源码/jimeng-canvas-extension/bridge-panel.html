@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>即梦工作台连接器</title>
+  <link rel="stylesheet" href="bridge-panel.css">
+  <style>.repair{width:100%;margin-top:9px;border-color:#ff8ea0;background:#6b3040;color:#ffe8ed;font-weight:800}.guide{margin:10px 0 0;padding:12px 12px 12px 32px;border:1px solid #304159;border-radius:10px;background:#162236;color:#aebad0;font-size:11px;line-height:1.8}</style>
+</head>
+<body>
+  <header>
+    <div class="mark">即</div>
+    <div><small>WORKBENCH BRIDGE</small><h1>工作台连接器</h1><p id="version"></p></div>
+  </header>
+  <main>
+    <section id="overall" class="overall checking" aria-live="polite">
+      <i></i><div><b id="overallTitle">正在检查连接</b><span id="overallDetail">核对桌面工作台、浏览器插件和即梦 Agent 对话</span></div>
+    </section>
+
+    <section class="steps" aria-label="连接状态">
+      <div id="desktopStep" class="step"><i>1</i><div><b>桌面工作台</b><span>等待检查</span></div></div>
+      <div id="executorStep" class="step"><i>2</i><div><b>浏览器插件</b><span>等待检查</span></div></div>
+      <div id="canvasStep" class="step"><i>3</i><div><b>即梦 Agent 对话</b><span>等待检查</span></div></div>
+    </section>
+
+    <button id="connect" class="primary">连接工作台</button>
+    <button id="repairExtension" class="repair" hidden>修复插件版本并重载</button>
+    <div class="secondary-actions">
+      <button id="focusCanvas">定位即梦画布</button>
+      <button id="openWorkbench">打开工作台</button>
+    </div>
+    <p class="note">“连接工作台”会定位当前即梦画布、加载本版本执行器，并打开右侧 Agent 对话。执行器失效时会刷新这一张画布页面。</p>
+    <ol class="guide"><li>保持桌面工作台打开</li><li>在浏览器打开一个即梦画布</li><li>点击“连接工作台”，三项变绿后再执行任务</li></ol>
+    <pre id="diagnostic" hidden></pre>
+
+    <details>
+      <summary>旧版插件工具</summary>
+      <p>提示词和素材继续在桌面工作台编辑。下面两个页面仅保留兼容旧项目。</p>
+      <div class="legacy"><a href="sidepanel.html">分组队列</a><a href="calibration.html">整稿校准</a></div>
+    </details>
+  </main>
+  <script src="bridge-panel.js"></script>
+</body>
+</html>

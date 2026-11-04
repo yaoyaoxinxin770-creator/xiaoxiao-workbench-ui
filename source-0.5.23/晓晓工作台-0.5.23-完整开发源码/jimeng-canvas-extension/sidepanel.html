@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>即梦画布投放</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <header>
+    <h1>即梦对话投放工作台</h1>
+    <p>v0.19.0 · 旧版兼容工具</p>
+    <nav class="mode-tabs">
+      <a class="active" href="sidepanel.html">分组队列模式</a>
+      <a href="calibration.html">整稿 @ 校准模式</a>
+    </nav>
+  </header>
+
+  <main>
+    <label for="work-mode">工作位置</label>
+    <select id="work-mode">
+      <option value="conversation" selected>右侧对话（推荐）</option>
+      <option value="canvas">中央画布</option>
+    </select>
+    <p class="hint">默认在即梦右侧“对话”输入框操作；中央画布仅作为兼容选项。</p>
+    <label for="prefix">固定前缀</label>
+    <textarea id="prefix" rows="4">使用Seedance 2.0生成16:9横屏视频，以下提示词的全部内容你都要一比一全部复制粘贴使用，提示词内容：</textarea>
+
+    <label for="prompt">单条 / 批量提示词（粘贴后点击识别）</label>
+    <textarea id="prompt" rows="10" placeholder="粘贴单条提示词，或包含多个 ```plaintext 代码块的完整回复；粘贴时不会自动分析"></textarea>
+    <div id="batch-preview" class="batch-preview">尚未识别：粘贴提示词后点击下方按钮</div>
+
+    <label for="characters">@主体（手动补充，每行一个）</label>
+    <textarea id="characters" rows="3" placeholder="这里只填写自动识别之外的主体；可留空"></textarea>
+    <p class="hint">资产检查中勾选的人物会在投放时生成真实 @ 芯片；这里只补充未写进【出场人物】的主体。</p>
+
+    <div class="file-row">
+      <label class="file-button attachment-picker">选择图片/音频
+        <input id="files" type="file" multiple accept="image/*,audio/*">
+      </label>
+    </div>
+    <div id="file-summary" class="hint">未选择附件</div>
+    <p class="hint">这里是通用附件，会用于每条任务；场景图请使用下面的“选择场景文件夹”，避免整包上传。</p>
+
+    <button id="add" class="secondary">开始识别并加入分组队列</button>
+
+    <section class="scene-folder-section">
+      <div class="scene-folder-title">
+        <strong>场景图片智能匹配</strong>
+        <span>先识别提示词入队，再选择文件夹并点击匹配</span>
+      </div>
+      <label class="file-button scene-folder-picker">选择场景文件夹
+        <input id="scene-folder" type="file" webkitdirectory multiple accept="image/*">
+      </label>
+      <div id="scene-folder-summary" class="hint">尚未选择场景文件夹</div>
+      <button id="match-scenes" class="scene-match-button">识别场景并匹配图片</button>
+      <div id="scene-match-preview" class="scene-match-preview">尚未执行场景匹配</div>
+    </section>
+
+    <section class="asset-section">
+      <div class="asset-title">
+        <strong>队列资产检查</strong>
+        <span>人物勾选决定主体 @；场景图片按文件夹匹配</span>
+      </div>
+      <div id="asset-summary" class="asset-summary"></div>
+    </section>
+
+    <section class="queue-section">
+      <div class="queue-title">
+        <strong>待投放队列</strong>
+        <button id="clear" class="text-button">清空</button>
+      </div>
+      <div id="queue" class="queue"></div>
+    </section>
+
+    <div class="run-row">
+      <label for="send-interval">发送间隔（秒）</label>
+      <input id="send-interval" type="number" min="30" max="1800" step="10" value="30">
+      <button id="start" class="primary">顺序复制标签并发送</button>
+      <button id="pause" class="pause-button" disabled>暂停当前重试及后续发送</button>
+    </div>
+    <p class="warning">请先在当前标签打开即梦并进入右侧“对话”，选择 Agent 模式。工作台采用“送达优先”：正式点击后若输入框未清空，会继续执行“暂停白方块→正式发送”，直到确认受理。点击暂停会停止当前送达重试并阻止后续任务；页面回执严重延迟时可能产生重复生成。</p>
+
+    <details class="log-panel">
+      <summary>运行日志（默认隐藏，出错时展开）</summary>
+      <div class="log-actions">
+        <button id="copy-log" class="text-button">复制日志</button>
+        <button id="clear-log" class="text-button">清空日志</button>
+      </div>
+      <pre id="log-output">暂无日志</pre>
+    </details>
+  </main>
+
+  <script src="analyzer.js"></script>
+  <script src="file-transfer.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

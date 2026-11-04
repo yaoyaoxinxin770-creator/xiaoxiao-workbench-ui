@@ -1,0 +1,3 @@
+export const VIDEO_COLORS=[{id:'teal',name:'青绿',hex:'#06b6c9'},{id:'blue',name:'蓝色',hex:'#6b72f8'},{id:'purple',name:'紫色',hex:'#b56af5'},{id:'orange',name:'橙色',hex:'#ff9732'},{id:'yellow',name:'黄色',hex:'#e2be00'}];
+export function videoColorLabel(id:string,labels?:Record<string,string>){return labels?.[id]||VIDEO_COLORS.find(c=>c.id===id)?.name||'未标色';}
+export function videoColorFor(id:string,groups:{logIds:string[];color?:string}[],placements:Record<string,{color?:string}>){const group=groups.find(g=>g.logIds.includes(id));return placements[id]?.color!==undefined?placements[id].color!:group?.color||'';}

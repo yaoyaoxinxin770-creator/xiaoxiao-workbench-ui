@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url),{inspectAgentTurn,inspectAgentPreview}=require('./dreamina-legacy-agent-page');
+const button={getAttribute:()=>null},video={className:'',src:'https://v9-artist.vlabvod.com/result.mp4',duration:4,getAttribute:()=> 'https://v9-artist.vlabvod.com/result.mp4'};
+let text='排队加速中',disabled=true,videos=[],prompt='完整提示词',turns=[];
+button.getAttribute=name=>disabled&&name==='aria-disabled'?'true':null;
+const group={get textContent(){return text;},querySelectorAll:s=>s==='video[src]'?videos:[button]};
+const turn=(id,userText)=>({id:'item_chat_'+id,dataset:{id},querySelector:s=>s.includes('user-message')?{querySelectorAll:()=>[{textContent:userText}]}:group});
+globalThis.document={querySelectorAll:s=>s.startsWith('[class*="video-node-wrapper-')?videos:turns};
+turns=[turn('old','完整提示词'),turn('new','完整提示词')];
+assert.equal(inspectAgentTurn({prompt,baselineIds:['old']}).turnId,'new');assert.equal(inspectAgentTurn({prompt}).status,'unknown','重复提示词不能串取历史视频');
+assert.equal(inspectAgentTurn({turnId:'missing',prompt}).status,'unknown');
+assert.equal(inspectAgentTurn({turnId:'new',prompt}).status,'processing');
+text='';assert.equal(inspectAgentTurn({turnId:'new',prompt}).status,'processing','按钮禁用不能标为完成');
+disabled=false;videos=[{...video,className:'loading-animation-c55s8u',getAttribute:()=> '//cdn/static/media/record-loading-animation.mp4'}];
+assert.equal(inspectAgentTurn({turnId:'new',prompt}).url,undefined,'加载动画不能当成成片');assert.equal(inspectAgentPreview(),null);
+videos=[video];const ready=inspectAgentTurn({turnId:'new',prompt});assert.equal(ready.status,'ready');assert.equal(ready.duration,4);assert.equal(ready.url,video.src);assert.equal(inspectAgentPreview().url,video.src);
+text='生成失败';assert.equal(inspectAgentTurn({turnId:'new',prompt}).status,'failed');
+delete globalThis.document;console.log('旧画布 Agent 页面识别：精确对话归属、历史重复拒绝、排队/失败、预览禁用、排除加载动画、真实成片均通过。');

@@ -1,0 +1,33 @@
+{
+  "version": "1.0.2",
+  "exeSha256": "f0d7f038ea1eaf1a31018bde9251b15895cbcbf750aefaad025b26a6d7332970",
+  "programHashes": {
+    "video-share-v2-main.cjs": "bda54d698d7e1774c97563fcfaace8775b42b35d8c0a73bde2eb280e97ece8ed",
+    "video-share-preload.cjs": "7cc5346552a8c222a599905785344ab82564b5b35f6b36d99e95b087ee26ec9b",
+    "video-share-storage.cjs": "f931e52f78a2a0a6df0f4171ef89156cc5f8037c699fcde40fe3ec2ed3262a62",
+    "workbench-storage.js": "8c13f8861967284ad913c036b43307f1c94df00e71bf8fd89f3fd311c95fefcd",
+    "workbench-window.js": "e88df67eff30abacb17d4220f703ab66913a6b36067089567986cdcbdd32676f",
+    "startup-preload.js": "09a334c918670c5d8ec53bf4d6886256dbdb5c9efb5cc88e3636ba63a7e5f3bc",
+    "startup.html": "24112a4dd3c16e9d7ba4e8894c924bddf885e6e3d487bef3a313fa15793cf9ac",
+    "startup.js": "77f710b7d5868e64d2965eb339085007c6caebfd6ae68ee349bb799bc96aa099",
+    "managed-runtime.js": "7a7a6169b2256d1f282f59a555834b37b9a2a75c6c739ff18078b5b9d0ac3916",
+    "runtime-supervisor.cjs": "18e19784911a25f3e02dc89252a0c9804778a63fda642d15e9c9385d56f5ecc2",
+    "infinite-canvas-service.js": "497356f4f5d4580cb91711985429c53c5cf6eb888f87bb2035479172feefdc7c",
+    "pippit-service.js": "a15f4f620fdd16a819cca034e5a9ff9f4de64814c918f798659a5dedd0fc3bd0",
+    "dreamina-service.js": "ddaf21fee1491c4575e32dffbd5a63cfdca966a57da09dad8e3374a840c99b71",
+    "dreamina-canvas-service.js": "6b1b31c1ca46a6584c1141a87c5c36db56fe3dead22438d8c47ef4711426c747",
+    "dreamina-reference-cache.js": "97ce34f3b5214541f2a3404c4427cae7a191e5911be83ca5429e7a56048f6385",
+    "pippit-canvas-service.js": "484ec211d49456da3bdc671e78598860c718e36a055e30a7ba08e22ac7c6c7fb",
+    "pippit-canvas-generation.js": "7382bd5c3a12ff3583a77b3a563a632d9a9797624e48242e8dcad0e57f432557",
+    "pippit-canvas-broker.js": "47e2ddbb5e70d43dd25825a283cd440a0d36b9d2f26dcdabb66fe793df0c2612",
+    "video-studio-files.js": "fb920e3ee60cdcd55a2c5746491b2c4d2fa20e28214585e9ffad63e9f4cedbce",
+    "local-asset-links.js": "05cd58b2c1d71a6fb5847e2f98c381bcee692b1d333b36b9276ef6a8aa86ab1a",
+    "project-library.js": "e0899bdc22109a22f668a5957e4c40155eb6086971e27b6aab91dff991a60c1e",
+    "asset-store.js": "bb2282fd3a2f8d1df5051feabcc825ef3a262e776f29a38c4e718e4605a08828",
+    "project-assets.js": "c321f1d559f95f6835caa55acbfd53e07d1c8ae1274834cf58c91ce7ec28e5ac"
+  },
+  "resourceHashes": {
+    "dreamina-runtime/dreamina.exe": "13a817e455179ab994495eedb875cf845348d05f526b21c2ef207e1fc47f6014",
+    "dreamina-runtime/ORIGIN.json": "faf92403166bef141a51fc2b11f5b6e3abbfec9d181881e2fff9858de8d89e10"
+  }
+}

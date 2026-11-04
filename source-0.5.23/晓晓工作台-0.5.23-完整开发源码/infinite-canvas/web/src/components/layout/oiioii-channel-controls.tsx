@@ -1,0 +1,28 @@
+"use client";
+import {useCallback,useEffect,useRef,useState} from 'react';
+import {App,Button,Input,Select,Switch} from 'antd';
+import {workbench} from '@/services/api/workbench';
+import {useAssetStore} from '@/stores/use-asset-store';
+import {useConfigStore} from '@/stores/use-config-store';
+import {oiiGlobalAsset} from '@/app/(user)/video/oii-global-reference';
+import {type LocalModelChannel} from '@/stores/use-config-store';
+export const OIIOII_CHANNEL:LocalModelChannel={id:'local-oiioii',protocol:'oiioii-cli',name:'Oii',baseUrl:'',apiKey:'',models:[]};
+type Status={logged_in:boolean;workspaceId:string;loginPending?:boolean;loginError?:string};
+export function OiioiiChannelControls({onModels}:{onModels:(catalog:Partial<LocalModelChannel>)=>void}){
+ const {message}=App.useApp(),[status,setStatus]=useState<Status|null>(null),[busy,setBusy]=useState(''),[error,setError]=useState(''),[spaces,setSpaces]=useState<{id:string;name:string}[]>([]),[name,setName]=useState('');
+ const config=useConfigStore(s=>s.config),updateConfig=useConfigStore(s=>s.updateConfig),assets=useAssetStore(s=>s.assets),global=config.oiioiiGlobalReference;let chosen:string|undefined,hint='';try{chosen=oiiGlobalAsset({...config,oiioiiGlobalReference:{...global,enabled:true}},assets)?.id;}catch(e){hint=e instanceof Error?e.message:'';}
+ const callback=useRef(onModels);callback.current=onModels;
+ const refresh=useCallback(async()=>{const s:Status=await workbench().oiioiiStatus();setStatus(s);return s;},[]);
+ const load=useCallback(async()=>{const results=await Promise.allSettled([workbench().oiioiiWorkspaces(),workbench().oiioiiModels()]);const [workspaces,models]=results;if(workspaces.status==='fulfilled')setSpaces((workspaces.value.workspaces||[]).map((s:{workspace_id:string;name:string|null})=>({id:s.workspace_id,name:s.name||s.workspace_id})));if(models.status==='fulfilled')callback.current(models.value);const errors=results.filter(r=>r.status==='rejected').map(r=>r.status==='rejected'?r.reason?.message:'');if(errors.length)throw Error(errors.join('；'));},[]);
+ const action=useCallback(async(key:string,fn:()=>Promise<void>)=>{setBusy(key);setError('');try{await fn();}catch(e){setError(e instanceof Error?e.message:'Oii 连接失败');}finally{setBusy('');}},[]);
+ useEffect(()=>{void action('initial',async()=>{const s=await refresh();if(s.logged_in)await load();});},[action,refresh,load]);
+ useEffect(()=>{if(!status?.loginPending)return;let running=false;const timer=setInterval(async()=>{if(running)return;running=true;try{const s=await refresh();if(s.logged_in&&!s.loginPending){await load();message.success('Oii 已连接，画布和模型已更新');}}catch(e){setError(e instanceof Error?e.message:'Oii 连接失败');}finally{running=false;}},2000);return()=>clearInterval(timer);},[status?.loginPending,refresh,load,message]);
+ return <section data-oiioii-settings className="space-y-4 rounded-lg border border-border p-4">
+ <div className="flex flex-wrap items-center gap-2"><strong>Oii 账号与画布</strong><span role="status" className="text-sm text-muted-foreground">{!status?'检查连接中…':status.loginPending?'等待官方页面确认授权…':status.logged_in?'CLI 已授权':'CLI 未授权'}</span><Button loading={busy==='login'} disabled={status?.loginPending} onClick={()=>void action('login',async()=>{await workbench().oiioiiLogin();await refresh();})}>{status?.logged_in?'重新授权':'连接 Oii 账号'}</Button><Button loading={busy==='refresh'||busy==='initial'} onClick={()=>void action('refresh',async()=>{const s=await refresh();if(s.logged_in)await load();else throw Error('请先点击“连接 Oii 账号”，并在官方页面点击“授权”。仅登录官网还不能读取画布。');})}>刷新连接</Button></div>
+ {status&&!status.logged_in&&<p data-oiioii-auth-hint className="rounded-lg bg-accent/50 p-3 text-sm">已登录官网后，还需要点击“连接 Oii 账号”，在弹出的 OiiOii CLI 页面核对账号并点击“授权”。完成后这里会自动读取画布和模型。</p>}
+ <div className="flex flex-wrap items-center gap-2"><Select aria-label="Oii 画布" className="min-w-52 flex-1" placeholder="授权后选择 Oii 画布" disabled={!status?.logged_in} value={status?.workspaceId||undefined} options={spaces.map(s=>({value:s.id,label:s.name}))} onChange={id=>void action('workspace',async()=>{setStatus(await workbench().oiioiiSelectWorkspace(id));})}/>{status?.workspaceId&&<a href={'https://oiioii.ai/space/'+encodeURIComponent(status.workspaceId)} target="_blank" rel="noopener noreferrer">打开画布</a>}</div>
+ <div className="flex gap-2"><Input aria-label="新建 Oii 画布名称" placeholder="新画布名称" value={name} onChange={e=>setName(e.target.value)}/><Button disabled={!status?.logged_in||!name.trim()} loading={busy==='create'} onClick={()=>void action('create',async()=>{await workbench().oiioiiCreateWorkspace(name);await refresh();await load();setName('');})}>新建画布</Button></div>
+ {(error||status?.loginError)&&<p role="alert" className="text-sm text-destructive">{error||status?.loginError}</p>}
+ <div data-oii-global-reference className="space-y-2 border-t border-border pt-3"><div className="flex items-center gap-2"><strong>每组固定参考视频</strong><Switch aria-label="Oii 每组固定参考" checked={global?.enabled!==false} onChange={enabled=>updateConfig('oiioiiGlobalReference',{...global,enabled})}/></div><Select aria-label="Oii 固定参考素材" className="w-full" showSearch optionFilterProp="label" placeholder="选择参考视频（默认：2秒打折）" value={chosen} options={assets.filter(a=>a.kind==='video').map(a=>({value:a.id,label:a.title+' · '+a.id.slice(-5)}))} onChange={assetId=>updateConfig('oiioiiGlobalReference',{enabled:global?.enabled!==false,assetId})}/><p className="text-xs text-muted-foreground">开启后仅在 Oii 提交时附加到每组参考视频，不插入提示词 @；其他渠道不受影响。{hint||(!chosen?'尚未找到“2秒打折”，请先添加视频或在这里选择。':'')}</p></div>
+ <p className="text-xs text-muted-foreground">授权和素材保存在本机 F 盘。开始创作会在所选 Oii 画布上传本组参考素材；“只建节点”仅保存草稿，确认生成或直接生成才会消耗 Oii 积分。</p></section>;
+}

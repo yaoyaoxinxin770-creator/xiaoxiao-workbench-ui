@@ -1,0 +1,69 @@
+{
+  "matches": [
+    {
+      "generation": {
+        "model": "seedance_2.5",
+        "mode": "m2v",
+        "materials": {
+          "totalCount": {
+            "min": 1,
+            "max": 50
+          },
+          "types": [
+            {
+              "mediaType": "image",
+              "count": {
+                "min": 0,
+                "max": 30
+              },
+              "limits": {
+                "maxFileSizeBytes": 52428800,
+                "minWidthPx": 300,
+                "maxWidthPx": 8192,
+                "minHeightPx": 300,
+                "maxHeightPx": 8192
+              }
+            },
+            {
+              "mediaType": "video",
+              "count": {
+                "min": 0,
+                "max": 10
+              },
+              "limits": {
+                "minDurationMs": 1800,
+                "maxDurationMs": 30200,
+                "maxFileSizeBytes": 209715200,
+                "minWidthPx": 300,
+                "maxWidthPx": 6000,
+                "minHeightPx": 300,
+                "maxHeightPx": 6000
+              }
+            },
+            {
+              "mediaType": "audio",
+              "count": {
+                "min": 0,
+                "max": 10
+              },
+              "limits": {
+                "minDurationMs": 1800,
+                "maxDurationMs": 30200,
+                "maxFileSizeBytes": 15728640
+              }
+            }
+          ],
+          "referenceRules": {
+            "requireAnyOfTypes": [
+              "image",
+              "video",
+              "audio"
+            ]
+          },
+          "maxTotalVideoDurationMs": 30200,
+          "maxTotalAudioDurationMs": 30200
+        }
+      }
+    }
+  ]
+}

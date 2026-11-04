@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {createRequire} from 'node:module';
+const web=path.resolve(import.meta.dirname,'../infinite-canvas/web'),require=createRequire(path.join(web,'package.json')),ts=require('typescript'),exports={};
+new Function('exports',ts.transpileModule(fs.readFileSync(path.join(web,'src/components/layout/dreamina-binding-suggestions.ts'),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText)(exports);
+const {suggestBindings,chooseBinding}=exports,title='陆霖辞家 客厅 灯光开启',asset={kind:'image',title},node=(nodeId,title,type='image')=>({nodeId,title,type,status:'success'}),nodes=[node('node_3y6zet55eg',title),node('node_adx8fm4tpd',title)];
+const duplicate=suggestBindings([asset],nodes,[]);assert.equal(duplicate.results[0].state,'ambiguous');assert.equal(duplicate.results[0].matches.length,2);assert.deepEqual(duplicate.bindings,[],'同名两图只报告候选，不代选');
+const selected=chooseBinding(duplicate.bindings,asset,'node_adx8fm4tpd'),again=suggestBindings([asset],nodes,selected);assert.equal(again.results[0].state,'bound');assert.deepEqual(again.bindings,selected,'再次建议保留用户选择');
+const input=[{kind:'image',name:title,nodeId:''}],filled=suggestBindings([asset],nodes.slice(0,1),input);assert.equal(filled.bindings.length,1);assert.equal(filled.bindings[0].nodeId,'node_3y6zet55eg');assert.equal(input[0].nodeId,'','不原地修改输入');
+const mixed=suggestBindings([asset,{kind:'audio',title},{kind:'image',title:'缺图'},{kind:'image',title:'B05 黄皮子小妖'}],[...nodes,node('voice',title,'audio'),node('beast','黄皮子小妖')],[]);assert.deepEqual(mixed.results.map(r=>r.state),['ambiguous','unique','missing','unique']);assert.deepEqual(mixed.bindings.map(b=>b.nodeId),['voice','beast']);
+assert.equal(suggestBindings([asset],nodes.slice(0,1).concat(nodes.slice(0,1)),[]).results[0].state,'unique','同一节点重复返回不制造歧义');
+assert.equal(suggestBindings([asset,{...asset,title:title+'.PNG'}],nodes,[]).results.length,1,'同名本地素材仅报告一次');
+const exact=suggestBindings([{kind:'image',title:'B05 黄皮子小妖'}],[node('exact','B05 黄皮子小妖'),node('other','黄皮子小妖')],[]);assert.equal(exact.bindings[0].nodeId,'exact','完整名称优先于编号别名');
+assert.equal(suggestBindings([{kind:'image',title:'S06 小苟宿舍'}],[node('wrong','C04 小苟')],[]).results[0].state,'missing');
+const {planGroup}=createRequire(import.meta.url)('./dreamina-canvas-drafts'),group={prompt:'【场景与连续状态】\n参照【'+title+'】'},canvasNodes=nodes.map(n=>({...n,resources:[{type:'image',status:'success'}]}));
+assert.equal(planGroup(group,canvasNodes,[]).issues[0].reasonCode,'ambiguous');
+const prepared=planGroup(group,canvasNodes,[],selected);assert.equal(prepared.issues.length,0);assert.deepEqual(prepared.references.map(r=>r.nodeId),['node_adx8fm4tpd']);assert.ok(prepared.prompt.includes('{{node:node_adx8fm4tpd}}'),'明确绑定传给正文规划后引用选定节点');
+console.log('同名候选报告、明确选择保留、类型隔离、唯一填入、缺失清单、编号匹配：PASS');

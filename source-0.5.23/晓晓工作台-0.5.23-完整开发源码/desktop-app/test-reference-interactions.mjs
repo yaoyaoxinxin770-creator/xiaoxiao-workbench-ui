@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+const web=path.resolve(import.meta.dirname,'../infinite-canvas/web'),require=createRequire(path.join(web,'package.json')),ts=require('typescript');
+function load(file,stubs={}){const exports={};new Function('require','exports',ts.transpileModule(fs.readFileSync(path.join(web,'src',file),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText)(n=>n in stubs?stubs[n]:n.startsWith("@/")?load(n.slice(2)+".ts",stubs):require(n),exports);return exports;}
+const model=load('app/(user)/video/element-model.ts',{'./studio-model':load('app/(user)/video/studio-model.ts')});
+const base={kind:'image',tags:[],createdAt:'2026-01-01',updatedAt:'2026-01-01',data:{dataUrl:'https://example.test/image.png'},metadata:{}};
+const original={...base,id:'hero',title:'陆霖辞-正面',category:'人物'},other={...base,id:'other',title:'C02 女主 基准',category:'人物'},groupKey=model.groupElements([original])[0].key;
+const assigned={...base,id:'assigned',title:'S02-随机文件名',category:'人物',metadata:{elementRoleGroup:groupKey,elementPerformer:'陆霖辞'}};
+const groups=model.groupElements([original,assigned,other]);assert.deepEqual(groups.find(g=>g.key===groupKey).items.map(a=>a.id),['hero','assigned']);assert.equal(model.elementCategory(assigned),'人物','明确角色归属优先于文件名场景编号');assert.equal(groups.find(g=>g.items.some(a=>a.id==='other')).name,'女主','其他角色不被改名');
+const copy={...original,id:'copy',metadata:assigned.metadata};assert.equal(model.dedupeProjectAssets([original,copy]).kept.length,2,'同来源的不同角色记录保留');
+let pool=[],updates=0,payload;const events=[];
+const store={getState:()=>({assets:pool,addAsset:input=>{const id="imported";pool.push({...input,id});return id;}}),setState:next=>{pool=next.assets;updates++;}};
+globalThis.window={dispatchEvent:e=>events.push(e.detail),desktopBridge:{localAssetSync:async()=>payload,localAssetRelinkFolder:async()=>payload}};
+const local=load('services/api/local-assets.ts',{'@/app/(user)/video/prompt-references':{assetsForReference:()=>[]},'@/app/(user)/video/element-model':model,'@/stores/use-asset-store':{useAssetStore:store},'@/stores/use-video-studio-store':{useVideoStudioStore:{getState:()=>({addElement:()=>{}})}},'@/services/image-storage':{},'@/services/file-storage':{}});
+const item={id:'local',path:'F:/fixtures/image.png',kind:'image',mimeType:'image/png',bytes:68,revision:'r1',url:'http://127.0.0.1:17842/workbench/local-media/local'};
+pool=[{...base,id:'image',localFile:{id:item.id,path:item.path},data:{dataUrl:item.url+'?v=r1'}}];payload={resolved:{local:item}};const before=pool[0];await local.syncLocalAssets();await local.syncLocalAssets();assert.equal(updates,0,'反复切回窗口不写回未变化素材');assert.equal(pool[0],before);assert.ok(events.every(e=>e.urlByLocalId.local===before.data.dataUrl),'引用卡和模糊背景地址保持稳定');
+payload={resolved:{local:{...item,revision:'r2'}}};await local.syncLocalAssets();assert.equal(updates,1);assert.equal(pool[0].data.dataUrl,item.url+'?v=r2','真实文件版本变化仍更新');
+payload={missing:{local:item.path}};await local.syncLocalAssets();assert.equal(pool[0].metadata.localFileMissing,true);payload={resolved:{local:{...item,revision:'r2'}}};await local.syncLocalAssets();const restored=pool[0],count=updates;assert.equal(restored.metadata.localFileMissing,false);assert.ok(restored.data.dataUrl.includes('&t='),'恢复文件时刷新旧失败图片');await local.syncLocalAssets();assert.equal(updates,count);assert.equal(pool[0],restored,'恢复后的缓存地址下次切回也稳定');
+await local.relinkLocalFolder();assert.equal(updates,count+1,'显式重新定位仍强制刷新');
+const fresh={...item,id:'fresh',title:'新图',url:item.url+'/fresh'};window.desktopBridge.localAssetChoose=async()=>[fresh];globalThis.Image=class{naturalWidth=1;naturalHeight=1;set src(value){this.onload();}};await local.importLocalElements('project');const imported=pool.find(a=>a.id==='imported');assert.equal(imported.data.dataUrl,fresh.url+'?v=r1','新导入立即使用版本地址，第一次切回窗口也不补刷');payload={resolved:{fresh}};const importCount=updates;await local.syncLocalAssets();assert.equal(updates,importCount);
+console.log('自动匹配交互依赖：明确角色归属、来源保护、未变文件不刷新、版本变化/缺失恢复/手动定位：PASS');

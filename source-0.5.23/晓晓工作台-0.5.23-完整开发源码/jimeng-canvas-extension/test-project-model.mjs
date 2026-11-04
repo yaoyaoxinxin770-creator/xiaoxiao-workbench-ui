@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const { defaultProject, normalizeProject, safeParseProject } = require('../desktop-app/project-model.js');
+const root = 'C:/projects/demo';
+const base = defaultProject(root, 'demo');
+assert.equal(base.name, 'demo');
+assert.equal(base.mode, null);
+const normalized = normalizeProject({ projectId: 'bad', health: { ok: true }, prompt: { rawText: 'huge' }, name: 'demo' }, root);
+assert.equal(normalized.projectId, undefined);
+assert.equal(normalized.health, undefined);
+assert.equal(normalized.prompt.rawText, undefined);
+assert.equal(normalized.rootPathHint, undefined);
+const parsed = safeParseProject('{"name":"ok"}', root);
+assert.equal(parsed.ok, true);
+assert.equal(parsed.project.name, 'ok');
+assert.equal(safeParseProject('{bad', root).ok, false);
+console.log('[OK] project model');

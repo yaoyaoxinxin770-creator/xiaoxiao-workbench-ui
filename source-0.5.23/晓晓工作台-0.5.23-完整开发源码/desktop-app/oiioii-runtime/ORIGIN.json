@@ -1,0 +1,7 @@
+{
+  "package": "@oiioii/cli",
+  "version": "0.1.11",
+  "installer": "https://static-oiioii-sg.hogiai.cn/cli/install.ps1",
+  "registry": "https://registry.npmjs.org",
+  "entrySha256": "30482b2d798969328a2b119126a42a17e3bed6c330994ab1605027100c30248c"
+}

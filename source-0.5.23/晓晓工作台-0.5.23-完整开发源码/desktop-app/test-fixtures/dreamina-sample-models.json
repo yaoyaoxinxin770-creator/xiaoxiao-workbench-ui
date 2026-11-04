@@ -1,0 +1,258 @@
+{
+  "items": [
+    {
+      "type": "video",
+      "model": "seedance_2.5_draft",
+      "aliases": [
+        "Seedance 2.5 样片版"
+      ],
+      "modes": [
+        {
+          "name": "first_last_frame",
+          "flags": [
+            {
+              "flag": "--prompt",
+              "required": false,
+              "minLength": 0,
+              "maxLength": 15000
+            },
+            {
+              "flag": "--ratio",
+              "required": true,
+              "values": [
+                "21:9",
+                "16:9",
+                "4:3",
+                "1:1",
+                "3:4",
+                "9:16"
+              ]
+            },
+            {
+              "flag": "--resolution",
+              "required": true,
+              "values": [
+                "480p"
+              ]
+            },
+            {
+              "flag": "--duration",
+              "required": true,
+              "min": 4,
+              "max": 30,
+              "step": 1
+            },
+            {
+              "flag": "--count",
+              "required": false,
+              "min": 1,
+              "max": 4
+            }
+          ],
+          "references": {
+            "min": 2,
+            "max": 2,
+            "types": [
+              {
+                "mediaType": "image",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          },
+          "vipRequired": false,
+          "vipResolutions": [
+            "480p",
+            "1080p"
+          ]
+        },
+        {
+          "name": "first_last_frame",
+          "flags": [
+            {
+              "flag": "--prompt",
+              "required": false,
+              "minLength": 0,
+              "maxLength": 15000
+            },
+            {
+              "flag": "--ratio",
+              "required": true,
+              "values": [
+                "21:9",
+                "16:9",
+                "4:3",
+                "1:1",
+                "3:4",
+                "9:16"
+              ]
+            },
+            {
+              "flag": "--resolution",
+              "required": true,
+              "values": [
+                "480p"
+              ]
+            },
+            {
+              "flag": "--duration",
+              "required": true,
+              "min": 4,
+              "max": 30,
+              "step": 1
+            },
+            {
+              "flag": "--count",
+              "required": false,
+              "min": 1,
+              "max": 4
+            }
+          ],
+          "references": {
+            "min": 1,
+            "max": 1,
+            "types": [
+              {
+                "mediaType": "image",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          },
+          "vipRequired": false,
+          "vipResolutions": [
+            "480p",
+            "1080p"
+          ]
+        },
+        {
+          "name": "m2v",
+          "flags": [
+            {
+              "flag": "--prompt",
+              "required": false,
+              "minLength": 0,
+              "maxLength": 15000
+            },
+            {
+              "flag": "--ratio",
+              "required": true,
+              "values": [
+                "21:9",
+                "16:9",
+                "4:3",
+                "1:1",
+                "3:4",
+                "9:16"
+              ]
+            },
+            {
+              "flag": "--resolution",
+              "required": true,
+              "values": [
+                "480p"
+              ]
+            },
+            {
+              "flag": "--duration",
+              "required": true,
+              "min": 4,
+              "max": 30,
+              "step": 1
+            },
+            {
+              "flag": "--count",
+              "required": false,
+              "min": 1,
+              "max": 4
+            }
+          ],
+          "references": {
+            "min": 1,
+            "max": 50,
+            "types": [
+              {
+                "mediaType": "image",
+                "min": 0,
+                "max": 30
+              },
+              {
+                "mediaType": "video",
+                "min": 0,
+                "max": 10
+              },
+              {
+                "mediaType": "audio",
+                "min": 0,
+                "max": 10
+              }
+            ],
+            "requireAnyOfTypes": [
+              "image",
+              "video",
+              "audio"
+            ]
+          },
+          "vipRequired": false,
+          "vipResolutions": [
+            "480p",
+            "1080p"
+          ]
+        },
+        {
+          "name": "t2v",
+          "flags": [
+            {
+              "flag": "--prompt",
+              "required": true,
+              "minLength": 1,
+              "maxLength": 15000
+            },
+            {
+              "flag": "--ratio",
+              "required": true,
+              "values": [
+                "21:9",
+                "16:9",
+                "4:3",
+                "1:1",
+                "3:4",
+                "9:16"
+              ]
+            },
+            {
+              "flag": "--resolution",
+              "required": true,
+              "values": [
+                "480p"
+              ]
+            },
+            {
+              "flag": "--duration",
+              "required": true,
+              "min": 4,
+              "max": 30,
+              "step": 1
+            },
+            {
+              "flag": "--count",
+              "required": false,
+              "min": 1,
+              "max": 4
+            }
+          ],
+          "references": {
+            "min": 0,
+            "max": 0,
+            "types": []
+          },
+          "vipRequired": false,
+          "vipResolutions": [
+            "480p",
+            "1080p"
+          ]
+        }
+      ]
+    }
+  ]
+}

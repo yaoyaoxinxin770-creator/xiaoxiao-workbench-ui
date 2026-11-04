@@ -1,0 +1,186 @@
+{
+  "name": "jimeng-workbench",
+  "version": "0.5.23",
+  "private": true,
+  "description": "晓晓的 AI 工作台",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win portable",
+    "test": "node run-tests.cjs"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "local.jimeng.workbench",
+    "productName": "晓晓的AI工作台",
+    "files": [
+      "main.js",
+      "preload.js",
+      "browser-bridge.js",
+      "browser-workbench-service.js",
+      "typetale-model-family.js",
+      "typetale-core.js",
+      "typetale-service.js",
+      "typetale-plugin-host/**",
+      "assets/**",
+      "project-model.js",
+      "project-assets.js",
+      "../jimeng-canvas-extension/workbench.html",
+      "../jimeng-canvas-extension/workbench.css",
+      "../jimeng-canvas-extension/asset-index.css",
+      "../jimeng-canvas-extension/workbench.js",
+      "../jimeng-canvas-extension/typetale-model-family.js",
+      "../jimeng-canvas-extension/typetale-core.js",
+      "../jimeng-canvas-extension/typetale-workbench.js",
+      "../jimeng-canvas-extension/typetale-workbench.css",
+      "../jimeng-canvas-extension/project-page.js",
+      "../jimeng-canvas-extension/project-page.css",
+      "../jimeng-canvas-extension/analyzer.js",
+      "asset-store.js",
+      "asset-ipc.js",
+      "asset-workspace.js",
+      "asset-workspace.css",
+      "asset-audio-picker.css",
+      "pink-theme.css",
+      "prompt-preview.css",
+      "connector-broker.js",
+      "cdp-bridge.js",
+      "cdp-executor.js",
+      "cdp-controls.js",
+      "../jimeng-canvas-extension/content.js",
+      "infinite-canvas-service.js",
+      "../jimeng-canvas-extension/infinite-canvas-workbench.js",
+      "../jimeng-canvas-extension/infinite-canvas-workbench.css",
+      "workbench-state-reader.html",
+      "pippit-service.js",
+      "project-library.js",
+      "local-asset-links.js",
+      "dreamina-service.js",
+      "dreamina-legacy-agent-service.js",
+      "dreamina-legacy-agent-page.js",
+      "video-studio-files.js",
+      "video-shortcuts.js",
+      "pippit-canvas-service.js",
+      "pippit-canvas-broker.js",
+      "pippit-canvas-generation.js",
+      "dreamina-canvas-service.js",
+      "workbench-storage.js",
+      "workbench-window.js",
+      "startup-preload.js",
+      "startup.html",
+      "startup.js",
+      "managed-runtime.js",
+      "runtime-supervisor.cjs",
+      "dreamina-reference-cache.js",
+      "dreamina-accounts.js",
+      "dreamina-canvas-targets.js",
+      "dreamina-canvas-drafts.js",
+      "oiioii-service.js",
+      "oiioii-runner.cjs",
+      "dreamina-canvas-results.js",
+      "dreamina-interpolation.js",
+      "dreamina-interpolation-page.js",
+      "pippit-official-session.js",
+      "pippit-official-page.js"
+    ],
+    "extraResources": [
+      {
+        "from": "../jimeng-canvas-extension",
+        "to": "jimeng-canvas-extension",
+        "filter": [
+          "**/*",
+          "!test-*.mjs"
+        ]
+      },
+      {
+        "from": ".",
+        "to": "desktop-app",
+        "filter": [
+          "browser-bridge.js",
+          "asset-workspace.js",
+          "asset-workspace.css",
+          "asset-audio-picker.css",
+          "pink-theme.css",
+          "prompt-preview.css",
+          "cdp-controls.js",
+          "assets/**",
+          "workbench-state-reader.html"
+        ]
+      },
+      {
+        "from": "infinite-canvas-runtime",
+        "to": "infinite-canvas-runtime",
+        "filter": [
+          "infinite-canvas-server.exe",
+          "LICENSE",
+          "ORIGIN.json",
+          "NOTICE.md"
+        ]
+      },
+      {
+        "from": "infinite-canvas-web",
+        "to": "infinite-canvas-web",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "pippit-runtime",
+        "to": "pippit-runtime",
+        "filter": [
+          "pippit-tool-cli.exe",
+          "LICENSE",
+          "ORIGIN.json"
+        ]
+      },
+      {
+        "from": "dreamina-runtime",
+        "to": "dreamina-runtime",
+        "filter": [
+          "dreamina.exe",
+          "ORIGIN.json"
+        ]
+      },
+      {
+        "from": "pippit-canvas-runtime",
+        "to": "pippit-canvas-runtime",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "dreamina-canvas-runtime",
+        "to": "dreamina-canvas-runtime",
+        "filter": [
+          "dreamina-canvas.exe",
+          "ORIGIN.json"
+        ]
+      },
+      {
+        "from": "oiioii-runtime",
+        "to": "oiioii-runtime",
+        "filter": [
+          "runtime/node/node.exe",
+          "runtime/node/LICENSE",
+          "npm/node_modules/**/*",
+          "ORIGIN.json",
+          "oiioii-runner.cjs"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "icon": "assets/typetale-workbench.ico",
+      "artifactName": "晓晓的AI工作台-${version}.${ext}"
+    }
+  },
+  "dependencies": {
+    "playwright-core": "1.60.0"
+  }
+}

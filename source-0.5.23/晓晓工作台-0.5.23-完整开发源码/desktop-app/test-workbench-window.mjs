@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+const {revealWindow}=createRequire(import.meta.url)('./workbench-window');
+const displays=[{workArea:{x:0,y:0,width:1920,height:1080}}];
+const screen={getAllDisplays:()=>displays,getPrimaryDisplay:()=>displays[0]};
+let minimized=true,bounds={x:-4000,y:2000,width:1500,height:920},visible=false,focused=false,skip=true;
+const win={isDestroyed:()=>false,isMinimized:()=>minimized,restore:()=>minimized=false,getBounds:()=>bounds,setBounds:v=>bounds=v,setSkipTaskbar:v=>skip=v,show:()=>visible=true,moveTop:()=>{},focus:()=>focused=true};
+assert.equal(revealWindow(win,screen),true);
+assert.equal(minimized,false);assert.equal(visible,true);assert.equal(focused,true);assert.equal(skip,false);assert.deepEqual(bounds,{x:210,y:80,width:1500,height:920});
+const previous={...bounds};revealWindow(win,screen);assert.deepEqual(bounds,previous,'可见窗口保留当前位置');
+displays.push({workArea:{x:-1920,y:0,width:1920,height:1080}});bounds={x:-1800,y:20,width:1500,height:920};revealWindow(win,screen);assert.equal(bounds.x,-1800,'负坐标的有效副屏不应被移走');
+assert.equal(revealWindow(null,screen),false);assert.equal(revealWindow({isDestroyed:()=>true},screen),false);
+console.log('窗口恢复通过：隐藏、最小化、任务栏、屏外位置及副屏');

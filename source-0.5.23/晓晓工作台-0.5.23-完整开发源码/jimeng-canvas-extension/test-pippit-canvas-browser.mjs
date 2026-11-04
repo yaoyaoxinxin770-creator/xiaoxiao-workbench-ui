@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';import {createRequire} from 'node:module';const require=createRequire(import.meta.url),{same,assertForm,form,point,returnToCanvas}=require('./pippit-canvas-browser.js');const target={projectId:'123',canvasId:'456'};
+assert.equal(same('https://xyq.jianying.com/project?projectId=123&canvasId=456',target),true);assert.equal(Boolean(same('https://xyq.jianying.com/project?projectId=123&canvasId=999',target)),false);assert.equal(Boolean(same('https://evil.test/project?projectId=123&canvasId=456',target)),false);
+const job={nodeId:'789',model:'Seedance_2.5_draft',ratio:'16:9',duration:5,prompt:'人物自然转身。',referenceIds:['image-node','audio-node']},state={nodeId:'789',prompt:job.prompt,referenceIds:job.referenceIds,draftCount:1,enabled:true,controls:{'select-video-model':'SD 2.5 Draft','open-video-ratio-settings':'16:9（横屏）','open-video-duration-settings':'5s','select-video-reference-mode':'全参考'}};
+assert.doesNotThrow(()=>assertForm(job,state));assert.throws(()=>assertForm(job,{...state,nodeId:'another-node'}),/本次视频/);assert.throws(()=>assertForm(job,{...state,prompt:'another prompt'}),/提示词/);assert.throws(()=>assertForm(job,{...state,referenceIds:['image-node']}),/素材/);assert.throws(()=>assertForm(job,{...state,draftCount:6}),/样片数量/);assert.throws(()=>assertForm(job,{...state,enabled:false}),/未就绪/);assert.throws(()=>assertForm(job,{...state,controls:{...state.controls,'open-video-duration-settings':'30s'}}),/未就绪/);assert.throws(()=>assertForm({...job,model:'unknown'},state),/支持/);
+console.log('官网发送守卫通过：严格项目/画布匹配、正确视频节点、提示词/图片音频引用齐全、模型/比例/时长/按钮就绪后才允许发送。');
+
+import fs from 'node:fs';const source=fs.readFileSync(new URL('./pippit-canvas-browser.js',import.meta.url),'utf8');assert.ok(!source.includes("url.searchParams.set('asset_view','list')"),'不导航重载到列表');const selection=source.indexOf('novel-detail-asset-select-material');assert.ok(source.indexOf('await returnToCanvas(job)',selection)>selection,'列表定位后只在必要时返回画布');assert.ok(source.includes('let state=await dom(job,form'),'复用同一已选节点');
+
+// 官网 textContent 会把数量 1 与画幅 16:9 连成 116，数量必须从独立控件读取。
+const originalDocument=globalThis.document,node={style:{zIndex:'10'}},rect={x:10,y:10,width:20,height:20};
+const quantity={getBoundingClientRect:()=>rect,contains:()=>true,getAttribute:()=> 'open-video-sample-count-settings',textContent:'样片数: 1'};
+const editor={cloneNode:()=>({querySelectorAll:()=>[],textContent:job.prompt}),querySelectorAll:()=>[]};
+const panel={textContent:'SD 2.5 Draft样片数: 116:9（横屏）',querySelectorAll:()=>[quantity],querySelector:selector=>selector.includes('prompt-editor')?editor:{}};
+globalThis.document={querySelector:selector=>selector.includes('.react-flow__node')?node:panel,querySelectorAll:()=>[node],elementFromPoint:()=>quantity};
+try{assert.equal(form({nodeId:'789',panel:'panel'}).draftCount,1);quantity.textContent='样片数: 6';assert.equal(form({nodeId:'789',panel:'panel'}).draftCount,6);}finally{globalThis.document=originalDocument;}
+
+// Native search inputs expose searchbox implicitly; no explicit role attribute exists.
+assert.ok(source.includes('input[type="search"][aria-label="搜索资产"]'));
+assert.ok(!source.includes('[role="searchbox"][aria-label="搜索资产"]'));
+
+// Partially visible titles remain usable; covered elements are never clicked.
+const oldChrome=globalThis.chrome,oldWidth=globalThis.innerWidth,oldHeight=globalThis.innerHeight;
+let canvas=true,clicks=0;const title={disabled:false,getAttribute:()=>'',textContent:'工作台视频',getBoundingClientRect:()=>({x:-30,y:20,width:120,height:30,right:90,bottom:50}),contains:hit=>hit===title};
+globalThis.innerWidth=100;globalThis.innerHeight=100;globalThis.document={querySelector:()=>({getAttribute:()=>canvas?'true':'false'}),querySelectorAll:()=>[title],elementFromPoint:()=>title};
+globalThis.chrome={tabs:{get:async()=>({url:'https://xyq.jianying.com/project?projectId=123&canvasId=456'})},debugger:{sendCommand:async(_target,method,args)=>{if(method==='Runtime.evaluate')return {result:{value:args.expression.includes('aria-checked')?canvas:{x:45,y:35}}};if(method==='Input.dispatchMouseEvent')clicks++;return {};}}};
+try{assert.deepEqual(point({selector:'title'}),{x:45,y:35});await returnToCanvas({tabId:5,target});assert.equal(clicks,0,'列表选择已自动回画布时不能再次点击');canvas=false;await returnToCanvas({tabId:5,target});assert.equal(clicks,3,'仍在列表时才点击画布一次');document.elementFromPoint=()=>null;assert.equal(point({selector:'title'}),null,'被覆盖的标题禁止点击');}finally{globalThis.document=originalDocument;globalThis.chrome=oldChrome;globalThis.innerWidth=oldWidth;globalThis.innerHeight=oldHeight;}
+console.log('自动回画布不重复切换、必要时切换一次、可见部分定位与遮挡保护：PASS');
+
+// MV3 workers may stop after idle; startup, page activity and alarms restore heartbeat.
+const {default:vm}=await import('node:vm');let online=false,heartbeats=0;const stored={},events={},intervals=[];
+const event=name=>({addListener:fn=>{events[name]=fn;}});
+function worker(){const context={module:{exports:{}},URL,AbortSignal,crypto:{randomUUID:()=> 'test-xyq-connector-12345'},setTimeout,setInterval:fn=>intervals.push(fn),fetch:async(_url,request)=>{heartbeats++;if(!online)throw Error('offline');const body=JSON.parse(request.body);assert.equal(body.tabs[0].id,5);return {ok:true,json:async()=>({token:'test-session'})};},chrome:{tabs:{query:async()=>[{id:5,url:'https://xyq.jianying.com/project?projectId=123&canvasId=456'}],onUpdated:event('updated'),onActivated:event('activated')},debugger:{},runtime:{id:'test-extension',onStartup:event('startup'),onInstalled:event('installed'),onMessage:event('message')},alarms:{create:async(name,config)=>{assert.equal(name,'xyq-canvas-heartbeat');assert.equal(config.periodInMinutes,0.5);},onAlarm:event('alarm')},storage:{local:{get:async keys=>Object.fromEntries(keys.map(k=>[k,stored[k]])),set:async value=>Object.assign(stored,value),remove:async key=>{delete stored[key];}}},action:{setBadgeText:async()=>{},setBadgeBackgroundColor:async()=>{}}}};vm.runInNewContext(source,context);return context.module.exports;}
+let workerApi=worker();await new Promise(r=>setTimeout(r,0));assert.equal(stored['xyq-canvas-status'].connected,false);online=true;await workerApi.tick();assert.equal(stored['xyq-canvas-status'].connected,true);assert.equal(stored['xyq-canvas-status'].tabs,1);const beforeRestart=heartbeats;workerApi=worker();await new Promise(r=>setTimeout(r,0));assert.ok(heartbeats>beforeRestart,'worker 重启自动恢复');await events.message({type:'XYQ_CANVAS_WAKE'},{id:'test-extension',tab:{url:'https://xyq.jianying.com/project?projectId=123&canvasId=456'}},()=>{});await new Promise(r=>setTimeout(r,0));const beforeAlarm=heartbeats;events.alarm({name:'xyq-canvas-heartbeat'});await new Promise(r=>setTimeout(r,0));assert.ok(heartbeats>beforeAlarm,'后台闹钟保持连接');assert.equal(events.message({type:'XYQ_CANVAS_WAKE'},{id:'foreign',tab:{url:'https://evil.test'}},()=>{}),undefined);
+console.log('打开页面、工作台恢复、worker 重启、后台闹钟自动连接；拒绝外部唤醒：PASS');

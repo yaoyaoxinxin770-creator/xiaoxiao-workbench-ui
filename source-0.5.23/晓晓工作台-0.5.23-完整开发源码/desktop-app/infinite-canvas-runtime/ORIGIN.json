@@ -1,0 +1,14 @@
+{
+  "project": "tigerowo/infinite-canvas",
+  "version": "0.8.0",
+  "license": "AGPL-3.0",
+  "release": "https://github.com/tigerowo/infinite-canvas/releases/tag/v0.8.0",
+  "artifact": "https://github.com/tigerowo/infinite-canvas/releases/download/v0.8.0/Infinite.Canvas_0.8.0_x64_zh-CN.msi",
+  "artifactSha256": "dbf4c91974cb786780bd732c79d8009aeb55da8a28685439da63e224f144a039",
+  "serverSha256": "05389913a8912ba400f7d1431c80e29c109062fae972154ce7252128ec7c7301",
+  "sourceCommit": "edd4452cb9b0d93dbb9c1ea5acdea1ee14015800",
+  "officialBuildSourceCommit": "bb9a6b675f943a641156010df03bedfd7930c11c",
+  "officialServerBinaryModified": false,
+  "workbenchFrontendModified": true,
+  "workbenchVersion": "0.3.0"
+}

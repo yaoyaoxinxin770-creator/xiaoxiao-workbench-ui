@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+const web=path.resolve(import.meta.dirname,'../infinite-canvas/web'),require=createRequire(path.join(web,'package.json')),ts=require('typescript');
+const source=fs.readFileSync(path.join(web,'src/lib/audio-wav.ts'),'utf8'),exports={};
+new Function('require','exports','module',ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText)(require,exports,{exports});
+
+const mono=exports.encodeWavPcm16([new Float32Array([0,0.5,-0.5,1,-1])],8000);
+const view=new DataView(mono);
+assert.equal(mono.byteLength,54);
+assert.equal(String.fromCharCode(view.getUint8(0),view.getUint8(1),view.getUint8(2),view.getUint8(3)),'RIFF');
+assert.equal(String.fromCharCode(view.getUint8(8),view.getUint8(9),view.getUint8(10),view.getUint8(11)),'WAVE');
+assert.equal(view.getUint16(22,true),1,'单声道');
+assert.equal(view.getUint32(24,true),8000,'采样率');
+assert.equal(view.getUint32(28,true),16000,'字节率');
+assert.equal(view.getUint16(32,true),2,'块对齐');
+assert.equal(view.getUint16(34,true),16,'位深');
+assert.equal(view.getUint32(40,true),10,'数据字节数');
+assert.equal(view.getInt16(44,true),0);
+assert.equal(view.getInt16(46,true),16383,'0.5 → 16383');
+assert.equal(view.getInt16(48,true),-16384,'-0.5 → -16384');
+assert.equal(view.getInt16(50,true),32767,'裁剪上限');
+assert.equal(view.getInt16(52,true),-32768,'裁剪下限');
+
+const stereo=exports.encodeWavPcm16([new Float32Array([1,-1]),new Float32Array([-1,1])],44100);
+const stereoView=new DataView(stereo);
+assert.equal(stereoView.getUint16(22,true),2,'双声道');
+assert.equal(stereoView.getUint32(40,true),8);
+assert.equal(stereoView.getInt16(44,true),32767,'L0');
+assert.equal(stereoView.getInt16(46,true),-32768,'R0');
+assert.equal(stereoView.getInt16(48,true),-32768,'L1');
+assert.equal(stereoView.getInt16(50,true),32767,'R1');
+console.log('WAV PCM16 编码：头部字段、采样量化、裁剪与声道交错全部通过');

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>整稿 @ 校准</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <header>
+    <h1>整稿 @ 校准</h1>
+    <p><strong id="calibration-version" class="runtime-version">读取版本中</strong> · 对话模式精准校准</p>
+    <nav class="mode-tabs">
+      <a href="sidepanel.html">分组队列模式</a>
+      <a class="active" href="calibration.html">整稿 @ 校准模式</a>
+    </nav>
+  </header>
+
+  <main>
+    <label for="calibration-work-mode">工作位置</label>
+    <select id="calibration-work-mode">
+      <option value="conversation" selected>右侧对话（推荐）</option>
+      <option value="canvas">中央画布</option>
+    </select>
+    <p class="hint">整稿模式默认在右侧“对话”中发送；只有选择中央画布时才使用旧画布编辑器。</p>
+    <label for="calibration-prefix">前置词模板（发送时按本批视频编号自动生成；模型名会从这里保留）</label>
+    <textarea id="calibration-prefix" rows="5">使用Seedance 2.0生成16:9横屏视频，以下每个视频的提示词的全部内容你都要一比一全部复制粘贴使用，根据视频编号分割视频提示词，1个编号代表生成一个视频，每个视频的人物场景主体都要精准锁定我@的主体，现在开始执行任务：
+</textarea>
+
+    <label for="calibration-prompt">完整提示词（整份粘贴，不拆分）</label>
+    <textarea id="calibration-prompt" rows="15" placeholder="支持两种格式：&#10;视频编号01（总时长：11.5s）｜场景：陆家花园主体草坪区｜人物：苏晚、陆泠霜&#10;或：视频编号29，场景写在【场景与连续状态】首句，人物逐行写在【出场人物】。"></textarea>
+    <p class="hint">标题格式会在标题中的场景和人物后插入 @；“视频编号”独立成行的格式会在【场景与连续状态】首句的场景后、【出场人物】每个人名后插入 @。</p>
+
+    <section class="scene-folder-section">
+      <div class="scene-folder-title">
+        <strong>场景图片文件夹</strong>
+        <span>图片名可与标题场景名相同或为其主要部分</span>
+      </div>
+      <div class="scene-library-actions">
+        <label class="file-button scene-folder-picker">选择场景文件夹
+          <input id="calibration-scene-folder" type="file" webkitdirectory multiple accept="image/*">
+        </label>
+        <label class="file-button scene-file-picker">选择场景候选图片（可多选，仅命中项上传）
+          <input id="calibration-scene-files" type="file" multiple accept="image/*">
+        </label>
+        <button id="calibration-clear-folder" class="clear-folder-button" disabled>清除全部场景图片</button>
+        <button id="calibration-clear-selected-scenes" class="clear-selected-scenes-button" disabled>清除勾选图片</button>
+      </div>
+      <div id="calibration-folder-summary" class="hint">尚未选择场景文件夹</div>
+      <div id="calibration-scene-file-summary" class="hint">尚未单独选择场景候选图片</div>
+      <div id="calibration-scene-manager" class="calibration-scene-manager">
+        <div class="scene-manager-empty">选择文件夹或图片后，可逐张预览、勾选清除并设置自定义名称。</div>
+      </div>
+    </section>
+
+    <div class="file-row">
+      <label class="file-button attachment-picker">选择额外附件（这里选择的图片/音频会全部上传）
+        <input id="calibration-files" type="file" multiple accept="image/*,audio/*">
+      </label>
+    </div>
+    <button id="calibration-clear-files" class="clear-folder-button" disabled>一键清除额外图片/音频</button>
+    <div id="calibration-file-summary" class="hint">没有额外附件</div>
+    <div id="calibration-extra-manager" class="calibration-extra-manager">
+      <div class="extra-manager-empty">额外人物图绑定角色；音频改名后自动绑定同名角色。</div>
+    </div>
+
+    <div class="calibration-actions">
+      <button id="calibrate" class="scene-match-button">校准 @ 位置并检查资产</button>
+      <button id="calibration-subject-scan" class="secondary">检测本批主体库（仅基础角色名）</button>
+    </div>
+    <div id="calibration-subject-summary" class="subject-scan-summary">尚未检测主体库；未检测时仍会在发送阶段自动跳过明确不存在的主体。</div>
+    <section class="asset-section">
+      <div class="asset-title">
+        <strong>队列资产检查</strong>
+        <span>人物默认主体库，可按视频切换额外图片；场景图片按文件夹匹配</span>
+      </div>
+      <div id="calibration-asset-summary" class="asset-summary">
+        <div class="asset-empty">尚未校准；校准后按实际发送批次列出所需人物和场景</div>
+      </div>
+    </section>
+    <div id="calibration-summary" class="calibration-summary">尚未校准</div>
+    <div id="calibration-status" class="calibration-status">待校准</div>
+
+    <button id="calibration-send" class="primary">在当前标签校准并整稿发送一次</button>
+    <button id="calibration-pause" class="pause-button" disabled>暂停当前重试</button>
+    <p class="warning">整稿不超长时只在当前标签发送一次；超长拆批时第 1 批使用当前标签，后续批次会在上一批按“每个视频至少 1 分钟”等待且检测到足量新增视频任务卡后才复制新标签。场景图缺少或上传失败时跳过对应图片 @；发送仍采用“圆圈暂停→三连发送→3秒确认”的送达策略。</p>
+
+    <details class="log-panel">
+      <summary>运行日志（默认隐藏，出错时展开）</summary>
+      <div class="log-actions">
+        <button id="calibration-copy-log" class="text-button">复制日志</button>
+        <button id="calibration-clear-log" class="text-button">清空日志</button>
+      </div>
+      <pre id="log-output">暂无日志</pre>
+    </details>
+  </main>
+
+  <script src="analyzer.js"></script>
+  <script src="file-transfer.js"></script>
+  <script src="calibration.js"></script>
+</body>
+</html>

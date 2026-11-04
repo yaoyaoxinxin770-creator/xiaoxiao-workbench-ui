@@ -1,0 +1,36 @@
+# Source handoff: keep user data, credentials, dependencies, and build output local.
+**/node_modules/
+**/.next/
+**/__pycache__/
+**/*.tsbuildinfo
+**/.env
+**/.env.*
+!**/.env.example
+工作台数据/
+/assets/
+history/
+recovery_backups/
+xyq_output/
+找回的视频/
+穿越重逢/
+Nana_H3_animation_auto/
+.codex/
+.devin/
+desktop-app/.audit-temp/
+desktop-app/dist*/
+desktop-app/infinite-canvas-web/
+desktop-app/NVIDIA Corporation/
+**/test-results/
+**/playwright-report/
+**/*.exe
+**/*.dll
+**/*.msi
+**/*.asar
+**/*.lnk
+**/*.log
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+infinite-canvas/web/public/InfiniteCanvas-ComfyBridge-*
+desktop-app/pippit-canvas-runtime/dist/xyq-canvas-command-runtime.cjs
+# Do not ignore output/** globally: the selected 0.5.23 handoff record is intentional.
