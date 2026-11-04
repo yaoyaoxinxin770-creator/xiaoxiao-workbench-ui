@@ -4,6 +4,7 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { AppProviders } from "@/components/layout/app-providers";
 import "antd/dist/reset.css";
 import "./globals.css";
+import "./workbench-v3.css";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function RootLayout({
                     id="theme-script"
                     strategy="beforeInteractive"
                     dangerouslySetInnerHTML={{
-                        __html: `try{var s=JSON.parse(localStorage.getItem("infinite-canvas:theme_store")||"{}");var t=s.version===1&&s.state&&s.state.theme==="dark"?"dark":"light";document.documentElement.classList.toggle("dark",t==="dark");document.documentElement.style.colorScheme=t;document.documentElement.dataset.skin=s.state&&s.state.skin==="neutral"?"neutral":"pink"}catch(e){}`,
+                        __html: `try{var s=JSON.parse(localStorage.getItem("infinite-canvas:theme_store")||"{}");var t=s.version===1&&s.state&&s.state.theme==="dark"?"dark":"light";document.documentElement.classList.toggle("dark",t==="dark");document.documentElement.style.colorScheme=t;document.documentElement.dataset.skin=s.state&&(s.state.skin==="neutral"||s.state.skin==="comic")?s.state.skin:"pink"}catch(e){}`,
                     }}
                 />
                 <AntdRegistry>

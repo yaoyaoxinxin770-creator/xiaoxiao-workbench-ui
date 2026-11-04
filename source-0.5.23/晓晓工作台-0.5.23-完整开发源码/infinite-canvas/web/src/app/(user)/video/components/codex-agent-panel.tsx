@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { App, Button, Checkbox, Tag, Tooltip } from "antd";
 import {
     Bot,
@@ -7,6 +7,7 @@ import {
     ChevronDown,
     ChevronUp,
     Copy,
+    Crosshair,
     LoaderCircle,
     Maximize2,
     Minimize2,
@@ -25,6 +26,8 @@ import {
 import { nanoid } from "nanoid";
 import type { Asset } from "@/stores/use-asset-store";
 import { useConfigStore } from "@/stores/use-config-store";
+import { AGENT_PANEL_MAX, AGENT_PANEL_MIN, useWorkbenchLayoutStore } from "@/stores/use-workbench-layout-store";
+import { diffPromptLines, diffStats } from "../agent-prompt-diff";
 import { Input, Modal, Radio, Select, Tabs } from "antd";
 
 export type AgentTargetInfo = {
@@ -57,6 +60,8 @@ type AgentMessage = {
     changes?: string[];
     revisedPrompt?: string;
     revisedParams?: { seconds?: string; size?: string; resolution?: string; model?: string };
+    /** 发送指令时的原提示词，仅用于显示修改对比。 */
+    originalPrompt?: string;
     applied?: boolean;
     error?: string;
 };
@@ -74,6 +79,10 @@ type Props = {
         autoStart?: boolean;
     }) => void;
     onClose: () => void;
+    /** 侧栏正在收起：立即停止本次思考（与卸载时相同），并播放收起动画。 */
+    closing?: boolean;
+    /** 在视频台中定位并高亮当前目标视频。 */
+    onLocateTarget?: () => void;
 };
 
 type QuickPromptItem = { id: string; label: string; text: string };
@@ -106,10 +115,17 @@ export function CodexAgentPanel({
     target,
     onApplyResult,
     onClose,
+    closing = false,
+    onLocateTarget,
 }: Props) {
     const { message } = App.useApp();
     const configChannels = useConfigStore(s => s.config.localChannels || []);
-    const [wide, setWide] = useState(false);
+    const panelWidth = useWorkbenchLayoutStore(s => s.agentPanelWidth);
+    const setPanelWidth = useWorkbenchLayoutStore(s => s.setAgentPanelWidth);
+    const wide = panelWidth >= 460;
+    const [resizing, setResizing] = useState(false);
+    const resizeRef = useRef<{ x: number; width: number; frame: number; next?: number } | null>(null);
+    const [resultViews, setResultViews] = useState<Record<string, "diff" | "full">>({});
     const [autoApply, setAutoApply] = useState(true);
     const autoApplyRef = useRef(autoApply);
     autoApplyRef.current = autoApply;
@@ -129,6 +145,12 @@ export function CodexAgentPanel({
         setBusy(false);
         setMessagesByProject(previous => ({ ...previous, [projectId]: (previous[projectId] || []).map(item => item.status === "running" ? { ...item, status: "done", summary: "切换目标，已停止本次思考。", stepsOpen: false } : item) }));
     }, [projectId, target.id]);
+    useEffect(() => {
+        if (!closing) return;
+        abortControllerRef.current?.abort();
+        abortControllerRef.current = null;
+        setBusy(false);
+    }, [closing]);
 
     // Quick prompts state
     const [quickPrompts, setQuickPrompts] = useState<QuickPromptItem[]>(() => {
@@ -233,6 +255,7 @@ export function CodexAgentPanel({
             status: "running",
             steps: initialSteps,
             stepsOpen: true,
+            originalPrompt: target.prompt,
         };
 
         updateMessages(prev => [...prev, userMsg, placeholderMsg]);
@@ -340,22 +363,36 @@ export function CodexAgentPanel({
         }
     };
 
+    const endResize = () => {
+        const drag = resizeRef.current;
+        if (!drag) return;
+        cancelAnimationFrame(drag.frame);
+        if (drag.next !== undefined) setPanelWidth(drag.next);
+        resizeRef.current = null;
+        setResizing(false);
+    };
+    const codexReady = modelSettings.provider === "custom" || codexStatus?.authenticated !== false;
+
     return (
         <aside
             data-codex-agent-panel
+            data-state={closing ? "closing" : "open"}
+            data-busy={busy || undefined}
+            data-resizing={resizing || undefined}
+            inert={closing || undefined}
             aria-label="Agent 创作助手侧栏"
-            style={{ width: wide ? 500 : 380 }}
-            className="flex h-full shrink-0 flex-col border-r border-border bg-card/95 transition-[width] duration-150"
+            style={{ width: panelWidth }}
+            className="wb-agent-panel relative flex h-full shrink-0 flex-col border-r border-border bg-card/95"
         >
             {/* Header matching Runow left panel */}
-            <header className="flex items-center justify-between gap-2 border-b border-border px-3 py-2.5">
-                <div className="flex min-w-0 items-center gap-2">
-                    <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+            <header className="wb-agent-head relative flex items-center justify-between gap-2 border-b border-border px-3 py-2.5">
+                <div className="flex min-w-0 items-center gap-2.5">
+                    <span className="wb-agent-logo flex size-8 shrink-0 items-center justify-center rounded-[10px] bg-primary/15 text-primary">
                         <Bot className="size-4" />
                     </span>
                     <div className="min-w-0">
-                        <div className="flex items-center gap-1.5">
-                            <strong className="truncate text-sm">Agent 创作助手</strong>
+                        <strong className="block truncate text-sm leading-5">Agent 创作助手</strong>
+                        <div className="flex min-w-0 items-center gap-1.5">
                             <button
                                 type="button"
                                 aria-label="配置 Agent 模型"
@@ -363,19 +400,20 @@ export function CodexAgentPanel({
                                     setTempSettings(modelSettings);
                                     setModelModalOpen(true);
                                 }}
-                                className="flex items-center gap-1 rounded-full border border-border bg-secondary/80 px-2 py-0.5 text-[10px] font-medium text-foreground hover:border-primary hover:text-primary"
+                                className="wb-agent-model flex max-w-[11rem] shrink-0 items-center gap-1 rounded-full border border-border bg-secondary/80 px-2 py-0.5 text-[10px] font-medium text-foreground hover:border-primary hover:text-primary"
                             >
-                                <span>
+                                <span className="truncate">
                                     {modelSettings.provider === "custom"
                                         ? `API · ${modelSettings.customApi?.model || "自定义"}`
                                         : `Codex · ${codexStatus?.models?.find(m => m.slug === modelSettings.codexModel)?.name || (modelSettings.codexModel || "自动")}`}
                                 </span>
-                                <Settings className="size-2.5 opacity-60" />
+                                <Settings className="size-2.5 shrink-0 opacity-60" />
                             </button>
+                            <span className="flex min-w-0 flex-1 items-center gap-1 truncate text-[11px] text-muted-foreground" title={projectName}>
+                                <span aria-hidden className="wb-led" data-tone={busy ? "busy" : codexReady ? "ok" : "warn"} />
+                                <span className="truncate">{busy ? "正在思考…" : modelSettings.provider === "custom" ? "自定义 API" : codexStatus?.authenticated !== false ? "本机 Codex 额度已就绪" : "请先登录本机 Codex"}</span>
+                            </span>
                         </div>
-                        <p className="truncate text-[11px] text-muted-foreground">
-                            {projectName} · {modelSettings.provider === "custom" ? "自定义 API" : codexStatus?.authenticated !== false ? "本机 Codex 额度已就绪" : "请先登录本机 Codex"}
-                        </p>
                     </div>
                 </div>
                 <div className="flex shrink-0 items-center gap-0.5">
@@ -396,7 +434,7 @@ export function CodexAgentPanel({
                             type="text"
                             aria-label={wide ? "恢复标准侧栏宽度" : "加宽侧栏，方便查看对话"}
                             icon={wide ? <Minimize2 className="size-3.5" /> : <Maximize2 className="size-3.5" />}
-                            onClick={() => setWide(v => !v)}
+                            onClick={() => setPanelWidth(wide ? 380 : 520)}
                         />
                     </Tooltip>
                     <Tooltip title="收起 Agent 侧边栏">
@@ -409,12 +447,13 @@ export function CodexAgentPanel({
                         />
                     </Tooltip>
                 </div>
+                <span aria-hidden className="wb-agent-scan" />
             </header>
 
             {/* Conversation body */}
-            <div ref={scrollRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto p-3">
+            <div ref={scrollRef} className="wb-agent-body min-h-0 flex-1 space-y-3 overflow-y-auto p-3">
                 {messages.length === 0 ? (
-                    <div className="rounded-2xl border border-dashed border-border bg-background/60 p-4 text-xs leading-5 text-muted-foreground">
+                    <div data-agent-msg="intro" className="rounded-2xl border border-dashed border-border bg-background/60 p-4 text-xs leading-5 text-muted-foreground">
                         <p className="mb-2 flex items-center gap-1.5 font-semibold text-foreground">
                             <Sparkles className="size-4 text-primary" />
                             怎么用 Agent 改有毛病的视频？
@@ -437,22 +476,22 @@ export function CodexAgentPanel({
                 ) : (
                     messages.map(msg =>
                         msg.role === "user" ? (
-                            <div key={msg.id} className="flex flex-col items-end gap-1">
+                            <div key={msg.id} data-agent-msg="user" className="flex flex-col items-end gap-1">
                                 {msg.targetTitle && (
                                     <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[11px] text-primary">
                                         <Video className="size-3" />
                                         {msg.targetTitle}
                                     </span>
                                 )}
-                                <div className="max-w-[90%] rounded-2xl rounded-tr-sm bg-primary px-3.5 py-2.5 text-xs leading-5 text-primary-foreground shadow-xs whitespace-pre-wrap break-words">
+                                <div className="wb-agent-bubble max-w-[90%] rounded-2xl rounded-tr-sm bg-primary px-3.5 py-2.5 text-xs leading-5 text-primary-foreground shadow-xs whitespace-pre-wrap break-words">
                                     {msg.text}
                                 </div>
                             </div>
                         ) : (
-                            <div key={msg.id} data-agent-reply className="space-y-2 rounded-2xl border border-border bg-background p-3 text-xs shadow-xs">
+                            <div key={msg.id} data-agent-reply data-agent-msg="assistant" data-status={msg.status} className="wb-agent-reply space-y-2 rounded-2xl border border-border bg-background p-3 text-xs shadow-xs">
                                 {/* Runow-style 思路与进度 collapsible card */}
                                 {msg.steps && msg.steps.length > 0 && (
-                                    <div className="rounded-xl border border-border/80 bg-secondary/40 p-2.5">
+                                    <div className="wb-agent-steps rounded-xl border border-border/80 bg-secondary/40 p-2.5">
                                         <button
                                             type="button"
                                             onClick={() =>
@@ -486,7 +525,7 @@ export function CodexAgentPanel({
                                         {msg.stepsOpen && (
                                             <div className="mt-2 space-y-1.5 border-t border-border/60 pt-2">
                                                 {msg.steps.map((step, idx) => (
-                                                    <div key={idx} className="flex items-center justify-between gap-2 text-[11px]">
+                                                    <div key={idx} data-step-status={step.status} className="wb-agent-step flex items-center justify-between gap-2 text-[11px]">
                                                         <span className="truncate text-foreground/90">{step.label}</span>
                                                         <span className=" flex shrink-0 items-center gap-1.5 text-muted-foreground">
                                                             <span className="rounded bg-background px-1.5 py-0.5 text-[10px]">{step.tag}</span>
@@ -504,6 +543,14 @@ export function CodexAgentPanel({
                                                 ))}
                                             </div>
                                         )}
+                                    </div>
+                                )}
+
+                                {msg.status === "running" && (
+                                    <div aria-hidden className="wb-agent-skeleton">
+                                        <i />
+                                        <i />
+                                        <i />
                                     </div>
                                 )}
 
@@ -531,10 +578,24 @@ export function CodexAgentPanel({
                                         </div>
                                     )}
 
-                                {msg.revisedPrompt && (
-                                    <div className="space-y-2 rounded-xl bg-secondary/60 p-2.5">
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-[11px] font-semibold text-muted-foreground">修改后视频提示词</span>
+                                {msg.revisedPrompt && (() => {
+                                    const canDiff = Boolean(msg.originalPrompt && msg.originalPrompt.trim() && msg.originalPrompt !== msg.revisedPrompt);
+                                    const view = canDiff ? resultViews[msg.id] || "diff" : "full";
+                                    return (
+                                    <div className="wb-agent-result space-y-2 rounded-xl bg-secondary/60 p-2.5" data-applied={msg.applied || undefined}>
+                                        <div className="flex items-center justify-between gap-2">
+                                            {canDiff ? (
+                                                <div role="tablist" aria-label="修改结果显示方式" className="wb-agent-seg flex rounded-lg bg-background/70 p-0.5 text-[11px]">
+                                                    <button type="button" role="tab" aria-selected={view === "diff"} onClick={() => setResultViews(prev => ({ ...prev, [msg.id]: "diff" }))} className="rounded-md px-2 py-0.5">
+                                                        修改对比
+                                                    </button>
+                                                    <button type="button" role="tab" aria-selected={view === "full"} onClick={() => setResultViews(prev => ({ ...prev, [msg.id]: "full" }))} className="rounded-md px-2 py-0.5">
+                                                        修改后全文
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <span className="text-[11px] font-semibold text-muted-foreground">修改后视频提示词</span>
+                                            )}
                                             <Button
                                                 size="small"
                                                 type="text"
@@ -547,9 +608,13 @@ export function CodexAgentPanel({
                                                 复制
                                             </Button>
                                         </div>
-                                        <p className="max-h-48 overflow-y-auto whitespace-pre-wrap break-words text-xs leading-5">
-                                            {msg.revisedPrompt}
-                                        </p>
+                                        {view === "diff" ? (
+                                            <AgentPromptDiff before={msg.originalPrompt || ""} after={msg.revisedPrompt} />
+                                        ) : (
+                                            <p className="max-h-48 overflow-y-auto whitespace-pre-wrap break-words text-xs leading-5">
+                                                {msg.revisedPrompt}
+                                            </p>
+                                        )}
                                         <div className="flex flex-wrap items-center gap-2 pt-1">
                                             <Button
                                                 size="small"
@@ -588,9 +653,16 @@ export function CodexAgentPanel({
                                             >
                                                 填入并开始创作
                                             </Button>
+                                            {msg.applied && (
+                                                <span className="wb-agent-applied inline-flex items-center gap-1 text-[11px] text-muted-foreground">
+                                                    <Check className="size-3" />
+                                                    已填入提示词框
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
-                                )}
+                                    );
+                                })()}
                             </div>
                         ),
                     )
@@ -598,15 +670,27 @@ export function CodexAgentPanel({
             </div>
 
             {/* Bottom input area matching Runow */}
-            <footer className="border-t border-border bg-background/90 p-3">
+            <footer className="wb-agent-foot border-t border-border bg-background/90 p-3">
                 {/* Target video indicator + quick chips */}
-                <div className="mb-2 flex items-center justify-between gap-2 rounded-lg bg-secondary/70 px-2.5 py-1.5 text-xs">
+                <div className="wb-agent-target mb-2 flex items-center justify-between gap-2 rounded-lg bg-secondary/70 px-2.5 py-1.5 text-xs">
                     <span className="flex min-w-0 items-center gap-1.5 truncate font-medium">
                         <Video className="size-3.5 shrink-0 text-primary" />
                         <span className="truncate">当前目标：{target.title || "当前提示词框"}</span>
                     </span>
-                    <span className="shrink-0 text-[11px] text-muted-foreground">
+                    <span className="flex shrink-0 items-center gap-1.5 text-[11px] text-muted-foreground">
                         {target.prompt ? `${target.prompt.length} 字` : "空提示词"}
+                        {onLocateTarget && target.id && (
+                            <button
+                                type="button"
+                                aria-label="在视频台定位当前目标"
+                                title="在右侧视频台中滚动到并高亮该视频"
+                                onClick={onLocateTarget}
+                                className="wb-agent-locate inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-foreground hover:bg-background hover:text-primary"
+                            >
+                                <Crosshair className="size-3" />
+                                定位
+                            </button>
+                        )}
                     </span>
                 </div>
 
@@ -619,7 +703,7 @@ export function CodexAgentPanel({
                                 disabled={busy}
                                 onClick={() => void sendInstruction(item.text)}
                                 title={item.text}
-                                className="rounded-full border border-border bg-card px-2.5 py-0.5 text-[11px] text-muted-foreground transition hover:border-primary hover:text-primary disabled:opacity-50"
+                                className="wb-agent-chip rounded-full border border-border bg-card px-2.5 py-0.5 text-[11px] text-muted-foreground transition hover:border-primary hover:text-primary disabled:opacity-50"
                             >
                                 {item.label}
                             </button>
@@ -640,7 +724,7 @@ export function CodexAgentPanel({
                     </Tooltip>
                 </div>
 
-                <div className="rounded-2xl border border-border bg-card p-2.5 shadow-xs focus-within:border-primary">
+                <div className="wb-agent-input rounded-2xl border border-border bg-card p-2.5 shadow-xs focus-within:border-primary">
                     <textarea
                         ref={inputRef}
                         aria-label="Agent 修改指令输入"
@@ -671,7 +755,7 @@ export function CodexAgentPanel({
                                     type="button"
                                     aria-label="暂停 Agent 思考"
                                     onClick={stopThinking}
-                                    className="relative flex size-7 shrink-0 items-center justify-center rounded-full bg-destructive text-white shadow-sm transition hover:bg-destructive/90"
+                                    className="wb-agent-stop relative flex size-7 shrink-0 items-center justify-center rounded-full bg-destructive text-white shadow-sm transition hover:bg-destructive/90"
                                 >
                                     <LoaderCircle className="absolute size-4 animate-spin opacity-80" />
                                     <Square className="size-2 fill-current" />
@@ -971,6 +1055,72 @@ export function CodexAgentPanel({
                     />
                 </div>
             </Modal>
+            <div
+                data-agent-resizer
+                role="separator"
+                aria-label="调整 Agent 侧栏宽度"
+                aria-orientation="vertical"
+                aria-valuemin={AGENT_PANEL_MIN}
+                aria-valuemax={AGENT_PANEL_MAX}
+                aria-valuenow={panelWidth}
+                tabIndex={0}
+                title="拖动调整 Agent 侧栏宽度；双击恢复标准宽度"
+                onDoubleClick={() => setPanelWidth(380)}
+                onKeyDown={event => {
+                    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+                    event.preventDefault();
+                    setPanelWidth(panelWidth + (event.key === "ArrowRight" ? 20 : -20));
+                }}
+                onPointerDown={event => {
+                    if (event.button !== 0) return;
+                    event.preventDefault();
+                    event.currentTarget.setPointerCapture(event.pointerId);
+                    resizeRef.current = { x: event.clientX, width: panelWidth, frame: 0 };
+                    setResizing(true);
+                }}
+                onPointerMove={event => {
+                    const drag = resizeRef.current;
+                    if (!drag) return;
+                    drag.next = drag.width + event.clientX - drag.x;
+                    cancelAnimationFrame(drag.frame);
+                    drag.frame = requestAnimationFrame(() => {
+                        if (drag.next !== undefined) setPanelWidth(drag.next);
+                    });
+                }}
+                onPointerUp={endResize}
+                onPointerCancel={endResize}
+                onLostPointerCapture={endResize}
+            />
         </aside>
+    );
+}
+
+function AgentPromptDiff({ before, after }: { before: string; after: string }) {
+    const blocks = useMemo(() => diffPromptLines(before, after), [before, after]);
+    if (!blocks) return <p className="max-h-48 overflow-y-auto whitespace-pre-wrap break-words text-xs leading-5">{after}</p>;
+    if (!blocks.length) return <p className="text-[11px] text-muted-foreground">与发送时的提示词相同，未做文字修改。</p>;
+    const stats = diffStats(blocks);
+    return (
+        <div data-agent-diff className="wb-agent-diff overflow-hidden rounded-lg border border-border bg-background/80">
+            <div className="flex items-center gap-2 border-b border-border px-2 py-1 text-[10px] text-muted-foreground">
+                <span className="wb-diff-stat" data-kind="add">+{stats.added} 行</span>
+                <span className="wb-diff-stat" data-kind="del">−{stats.removed} 行</span>
+                <span className="ml-auto">只显示修改处，未改动部分已折叠</span>
+            </div>
+            <div className="max-h-56 overflow-y-auto py-1 text-xs leading-5">
+                {blocks.map((block, index) =>
+                    block.kind === "skip" ? (
+                        <div key={index} className="wb-diff-skip px-2 text-[10px] text-muted-foreground">… {block.count} 行未改动</div>
+                    ) : (
+                        <div key={index} className="wb-diff-line flex gap-1.5 px-2" data-kind={block.kind}>
+                            <span aria-hidden className="wb-diff-sign w-3 shrink-0 select-none text-center">{block.kind === "add" ? "+" : block.kind === "del" ? "−" : ""}</span>
+                            <span className="min-w-0 flex-1 whitespace-pre-wrap break-words">
+                                {block.spans ? block.spans.map((span, i) => (span.changed ? <mark key={i}>{span.text}</mark> : <span key={i}>{span.text}</span>)) : block.text || " "}
+                            </span>
+                        </div>
+                    ),
+                )}
+            </div>
+        </div>
     );
 }

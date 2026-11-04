@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import type { ThemeConfig } from "antd";
 import { theme as antdTheme } from "antd";
+import type { SkinName } from "@/stores/use-theme-store";
 
 const neutral = {
     light: {
@@ -83,75 +84,112 @@ export const adminLayoutStyle = {
     menuItem: { height: 44, lineHeight: "44px", marginBlock: 4, borderRadius: 8 } satisfies CSSProperties,
 };
 
+// 云母白（neutral + light）采用“雾白工作室”配色：中性灰阶 + 靛蓝强调。
+// 影视暗房（neutral + dark）采用“胭脂墨黑”配色：胭脂粉 #FF7CA2 × 墨黑 #000000，主按钮为粉底黑字。
 const monochrome = {
     "light": {
-        "primary": "#202226",
-        "primaryHover": "#41454d",
+        "primary": "#5b5bd6",
+        "primaryHover": "#4c4cc4",
         "primaryText": "#ffffff",
-        "menuBg": "#eef0f3",
-        "menuText": "#202226",
-        "selectActiveBg": "#f6f7f8",
-        "selectSelectedBg": "#eef0f3",
-        "selectText": "#202226",
-        "tableSelectedBg": "rgba(32,34,38,.08)",
-        "tableSelectedHoverBg": "rgba(32,34,38,.12)"
+        "menuBg": "#eeeefc",
+        "menuText": "#3e3ea8",
+        "selectActiveBg": "#f4f4fb",
+        "selectSelectedBg": "#eeeefc",
+        "selectText": "#18181b",
+        "tableSelectedBg": "rgba(91,91,214,.08)",
+        "tableSelectedHoverBg": "rgba(91,91,214,.13)"
     },
     "dark": {
-        "primary": "#e1e3e8",
-        "primaryHover": "#ffffff",
-        "primaryText": "#111215",
-        "menuBg": "#32353b",
-        "menuText": "#f1f2f4",
-        "selectActiveBg": "#282b31",
-        "selectSelectedBg": "#32353b",
-        "selectText": "#f1f2f4",
-        "tableSelectedBg": "rgba(225,227,232,.10)",
-        "tableSelectedHoverBg": "rgba(225,227,232,.16)"
+        "primary": "#ff7ca2",
+        "primaryHover": "#ff96b6",
+        "primaryText": "#000000",
+        "menuBg": "#2a1520",
+        "menuText": "#ff9dba",
+        "selectActiveBg": "#18181b",
+        "selectSelectedBg": "#2a1520",
+        "selectText": "#f7f3f5",
+        "tableSelectedBg": "rgba(255,124,162,.12)",
+        "tableSelectedHoverBg": "rgba(255,124,162,.18)"
     }
 };
 const monochromeTokens = {
     "light": {
         "colorBgBase": "#ffffff",
-        "colorBgLayout": "#ffffff",
+        "colorBgLayout": "#f5f5f6",
         "colorBgContainer": "#ffffff",
         "colorBgElevated": "#ffffff",
-        "colorTextBase": "#202226",
-        "colorText": "#202226",
-        "colorTextSecondary": "#535861",
-        "colorTextTertiary": "#737983",
-        "colorBorder": "#d9dde3",
-        "colorBorderSecondary": "#e5e7eb",
-        "colorFillSecondary": "#f3f4f6",
-        "colorFillTertiary": "#f7f8f9",
-        "boxShadow": "0 24px 60px -24px rgba(0,0,0,.22)",
-        "boxShadowSecondary": "0 24px 60px -24px rgba(0,0,0,.22)"
+        "colorTextBase": "#18181b",
+        "colorText": "#18181b",
+        "colorTextSecondary": "#52525b",
+        "colorTextTertiary": "#71717a",
+        "colorBorder": "#e4e4e7",
+        "colorBorderSecondary": "#ededef",
+        "colorFillSecondary": "#f0f0f2",
+        "colorFillTertiary": "#f6f6f7",
+        "boxShadow": "0 22px 60px -22px rgba(24,24,27,.28), 0 0 0 1px rgba(24,24,27,.05)",
+        "boxShadowSecondary": "0 22px 60px -22px rgba(24,24,27,.28), 0 0 0 1px rgba(24,24,27,.05)"
     },
     "dark": {
-        "colorBgBase": "#111215",
-        "colorBgLayout": "#111215",
-        "colorBgContainer": "#1d1f23",
-        "colorBgElevated": "#24262b",
-        "colorTextBase": "#f1f2f4",
-        "colorText": "#f1f2f4",
-        "colorTextSecondary": "#c4c8cf",
-        "colorTextTertiary": "#969ca7",
-        "colorBorder": "#3a3e46",
-        "colorBorderSecondary": "#30343b",
-        "colorFillSecondary": "#292c32",
-        "colorFillTertiary": "#24262b",
-        "boxShadow": "0 28px 70px -28px rgba(0,0,0,.75)",
-        "boxShadowSecondary": "0 28px 70px -28px rgba(0,0,0,.75)"
+        "colorBgBase": "#000000",
+        "colorBgLayout": "#000000",
+        "colorBgContainer": "#0b0b0c",
+        "colorBgElevated": "#141416",
+        "colorTextBase": "#f7f3f5",
+        "colorText": "#f7f3f5",
+        "colorTextSecondary": "#c4bcc0",
+        "colorTextTertiary": "#8e868b",
+        "colorBorder": "rgba(255,255,255,.14)",
+        "colorBorderSecondary": "rgba(255,255,255,.09)",
+        "colorFillSecondary": "rgba(255,255,255,.07)",
+        "colorFillTertiary": "rgba(255,255,255,.045)",
+        "boxShadow": "0 28px 80px -24px rgba(0,0,0,.9), 0 0 0 1px rgba(255,124,162,.16)",
+        "boxShadowSecondary": "0 28px 80px -24px rgba(0,0,0,.9), 0 0 0 1px rgba(255,124,162,.16)"
     }
 };
+// 漫画分镜（comic）：米白纸张、墨线硬投影、番茄红主色与明黄高亮；只有浅色。
+const comicColors = {
+    "primary": "#e8452c",
+    "primaryHover": "#cf3a22",
+    "primaryText": "#ffffff",
+    "menuBg": "#ffe9a8",
+    "menuText": "#1b1a17",
+    "selectActiveBg": "#fff4d1",
+    "selectSelectedBg": "#ffe9a8",
+    "selectText": "#1b1a17",
+    "tableSelectedBg": "rgba(255,201,60,.18)",
+    "tableSelectedHoverBg": "rgba(255,201,60,.26)"
+};
+const comic = { light: comicColors, dark: comicColors };
+const comicTokens = {
+    "colorBgBase": "#fffdf7",
+    "colorBgLayout": "#fbf5e9",
+    "colorBgContainer": "#fffdf7",
+    "colorBgElevated": "#fffdf7",
+    "colorTextBase": "#1b1a17",
+    "colorText": "#1b1a17",
+    "colorTextSecondary": "#4a463d",
+    "colorTextTertiary": "#6e6858",
+    "colorBorder": "#cdbf9f",
+    "colorBorderSecondary": "#e2d6bb",
+    "colorFillSecondary": "#f3e9d4",
+    "colorFillTertiary": "#f8f0de",
+    "boxShadow": "4px 4px 0 #1b1a17",
+    "boxShadowSecondary": "4px 4px 0 #1b1a17"
+};
+const mistShape = { borderRadius: 7, borderRadiusLG: 10, borderRadiusSM: 6, borderRadiusXS: 4, controlHeight: 32 };
+const comicShape = { borderRadius: 6, borderRadiusLG: 8, borderRadiusSM: 4, borderRadiusXS: 3, controlHeight: 34 };
 
-export function getAntThemeConfig(dark: boolean, skin:"pink"|"neutral"="pink"): ThemeConfig {
-    const palette=skin==="neutral"?monochrome:neutral;
-    const color = dark ? palette.dark : palette.light;
-    const surface=skin==="neutral"?(dark?monochromeTokens.dark:monochromeTokens.light):(dark?darkToken:lightToken);
+export function getAntThemeConfig(dark: boolean, skin:SkinName="pink"): ThemeConfig {
+    const isComic=skin==="comic",isDark=dark&&!isComic;
+    const palette=skin==="neutral"?monochrome:isComic?comic:neutral;
+    const color = isDark ? palette.dark : palette.light;
+    const surface=skin==="neutral"?(isDark?monochromeTokens.dark:monochromeTokens.light):isComic?comicTokens:(isDark?darkToken:lightToken);
+    const shape=isComic?comicShape:skin==="neutral"&&!isDark?mistShape:{};
+    const buttonShadow=isComic?"2px 2px 0 #1b1a17":skin==="neutral"&&isDark?"0 0 18px -6px rgba(255,124,162,.6)":"none";
 
     return {
-        algorithm: dark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
-        cssVar: { key: "infinite-canvas-"+skin+(dark?"-dark":"-light") },
+        algorithm: isDark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
+        cssVar: { key: "infinite-canvas-"+skin+(isDark?"-dark":"-light") },
         token: {
             colorPrimary: color.primary,
             colorInfo: skin==="pink"&&!dark?"#2F62C8":color.primary,
@@ -160,12 +198,13 @@ export function getAntThemeConfig(dark: boolean, skin:"pink"|"neutral"="pink"): 
             colorLinkActive: color.primary,
             colorTextLightSolid: color.primaryText,
             ...sharedToken,
+            ...shape,
             ...surface,
         },
         components: {
             Button: {
-                primaryShadow: "none",
-                defaultShadow: "none",
+                primaryShadow: buttonShadow,
+                defaultShadow: isComic ? buttonShadow : "none",
             },
             Card: {
                 headerBg: "transparent",

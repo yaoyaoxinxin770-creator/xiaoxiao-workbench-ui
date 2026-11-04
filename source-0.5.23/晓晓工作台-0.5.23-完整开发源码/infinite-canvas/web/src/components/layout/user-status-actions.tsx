@@ -71,16 +71,17 @@ export function UserStatusActions({ showConfig = true, accountOnly = false, vari
             <Dropdown
                 trigger={["click"]}
                 menu={{
-                    selectedKeys: [theme === "dark" ? "dark" : skin === "neutral" ? "light" : "pink"],
+                    selectedKeys: [skin === "comic" ? "comic" : theme === "dark" ? "dark" : skin === "neutral" ? "light" : "pink"],
                     items: [
-                        { key: "pink", label: <span className="inline-flex items-center gap-2"><span className="size-2.5 rounded-full bg-[#C93663]" /><span>暖樱粉</span></span> },
-                        { key: "light", label: <span className="inline-flex items-center gap-2"><span className="size-2.5 rounded-full border border-slate-300 bg-[#F4F5F7]" /><span>云母白</span></span> },
-                        { key: "dark", label: <span className="inline-flex items-center gap-2"><span className="size-2.5 rounded-full bg-[#1D1F23]" /><span>影视暗房</span></span> },
+                        { key: "pink", label: <span className="inline-flex items-center gap-2" title="柔粉精修 · 默认"><span className="size-2.5 rounded-full bg-[#C93663]" /><span>暖樱粉</span></span> },
+                        { key: "light", label: <span className="inline-flex items-center gap-2" title="雾白工作室 · 中性灰 + 靛蓝"><span className="size-2.5 rounded-full border border-slate-300 bg-[linear-gradient(135deg,#F5F5F6_50%,#5B5BD6_50%)]" /><span>云母白</span></span> },
+                        { key: "dark", label: <span className="inline-flex items-center gap-2" title="胭脂墨黑 · 胭脂粉 × 墨黑撞色"><span className="size-2.5 rounded-full bg-[linear-gradient(135deg,#000000_50%,#FF7CA2_50%)] ring-1 ring-[#FF7CA2]/60" /><span>影视暗房</span></span> },
+                        { key: "comic", label: <span className="inline-flex items-center gap-2" title="漫画分镜 · 墨线 + 番茄红"><span className="size-2.5 rounded-full bg-[#E8452C] ring-1 ring-[#1B1A17]" /><span>漫画分镜</span></span> },
                     ],
-                    onClick: ({ key }) => setSkin(key === "pink" ? "pink" : "neutral", key === "dark" ? "dark" : "light"),
+                    onClick: ({ key }) => setSkin(key === "pink" ? "pink" : key === "comic" ? "comic" : "neutral", key === "dark" ? "dark" : "light"),
                 }}
             >
-                <button type="button" className={naturalIconClass} style={iconStyle} aria-label="切换工作台皮肤" title="切换工作台皮肤（暖樱粉 / 云母白 / 影视暗房）">
+                <button type="button" className={naturalIconClass} style={iconStyle} aria-label="切换工作台皮肤" title="切换工作台皮肤（暖樱粉 / 云母白 / 影视暗房 / 漫画分镜）">
                     <Palette className="size-4" />
                 </button>
             </Dropdown>

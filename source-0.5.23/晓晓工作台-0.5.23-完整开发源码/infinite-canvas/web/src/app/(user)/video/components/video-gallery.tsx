@@ -1,6 +1,6 @@
 "use client";
 import {VIDEO_COLORS,videoColorLabel} from "../video-colors";
-import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { Button, Dropdown, Tooltip } from "antd";
 import { Bot, Star, Pencil, LoaderCircle, Play, Video } from "lucide-react";
@@ -15,10 +15,12 @@ import { type ReviewState } from "../studio-model";
 import {manualGenerationLabel} from "../studio-results";
 import type { GenerationLog } from "../page";
 
-export function VideoGallery({ logs, columns, square, scrollRef, renderTile, headerHeight, onPreviewOrder, onCommitOrder }: {
+export function VideoGallery({ logs, columns, square, scrollRef, renderTile, headerHeight, onPreviewOrder, onCommitOrder, locate }: {
     logs: GenerationLog[]; columns: number; square: boolean;
     scrollRef: RefObject<HTMLDivElement | null>; renderTile: (log: GenerationLog) => ReactNode;
     headerHeight?: (log:GenerationLog)=>number; onPreviewOrder?:(ids:string[])=>void; onCommitOrder?:(ids:string[])=>void;
+    /** 平滑滚动到指定视频所在行（虚拟列表中尚未渲染的行也可定位）；nonce 变化即重新定位。 */
+    locate?: { id: string; nonce: number };
 }) {
     const ref = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(0);
@@ -28,6 +30,7 @@ export function VideoGallery({ logs, columns, square, scrollRef, renderTile, hea
     const virtual = useVirtualizer({ count: geometry.rows.length, getScrollElement: () => scrollRef.current,
         estimateSize: i => geometry.rows[i].height, overscan: 2, getItemKey: i => logs[geometry.rows[i].boxes[0].index].id });
     useEffect(() => { virtual.measure(); }, [geometry, virtual]);
+    useEffect(() => { if (!locate) return; const row = geometry.rows.findIndex(r => r.boxes.some(b => logs[b.index]?.id === locate.id)); if (row >= 0) virtual.scrollToIndex(row, { align: "center", behavior: "smooth" }); }, [locate?.nonce]);
     return <div ref={ref} data-video-gallery data-total-assets={logs.length} className="relative w-full" style={{ height: virtual.getTotalSize() }}>
         {virtual.getVirtualItems().map(row => <div key={row.key} className="absolute left-0 top-0 w-full" style={{ height: row.size, transform: `translateY(${row.start}px)` }}>
             {geometry.rows[row.index].boxes.map(box => <div key={logs[box.index].id} data-sort-key={logs[box.index].id} className="absolute overflow-hidden" style={{ left: box.left, top: 0, width: box.width, height: box.height }}>{renderTile(logs[box.index])}</div>)}
@@ -35,8 +38,10 @@ export function VideoGallery({ logs, columns, square, scrollRef, renderTile, hea
     </div>;
 }
 
-export function StudioTile({ log, selected, review, liked = false, compact = true, onSelect, onOpen, onDownload, onSaveShortcut, onOpenFolder, onLike, onWrap, onResume, onStop, onEdit, onSendToAgent, number, groupNumber, empty = false, onHide, color="",colorLabels,onColor,note,onNote, unread = false }: {
+export function StudioTile({ log, selected, review, liked = false, compact = true, onSelect, onOpen, onDownload, onSaveShortcut, onOpenFolder, onLike, onWrap, onResume, onStop, onEdit, onSendToAgent, number, groupNumber, empty = false, onHide, color="",colorLabels,onColor,note,onNote, unread = false, agentLinked = false, flash = false }: {
     log: GenerationLog; selected: boolean; review: ReviewState; liked?: boolean; compact?: boolean; unread?: boolean;
+    /** 该视频是 Agent 侧栏当前对象：卡片显示关联描边；flash 为定位时的短暂高亮。 */
+    agentLinked?: boolean; flash?: boolean;
     onSelect: (checked: boolean) => void; onOpen: () => void; onDownload: () => void; onSaveShortcut?:()=>void; onOpenFolder?:()=>void; onLike: () => void; onWrap?:()=>void; onResume?:()=>void; onStop?:()=>void; onEdit:()=>void; onSendToAgent?:()=>void; number?:string; groupNumber?:string; empty?:boolean; onHide?:()=>void;color?:string;note?:string;onNote?:()=>void;colorLabels?:Record<string,string>;onColor?:(value:string)=>void;
 }) {
     const ref = useRef<HTMLElement>(null), videoRef = useRef<HTMLVideoElement>(null), release = useRef<null | (() => void)>(null);
@@ -110,7 +115,7 @@ export function StudioTile({ log, selected, review, liked = false, compact = tru
     }, [preview, sourceUrl, candidateIndex, candidates.length]);
     const enableSound = () => { const video=videoRef.current,session=sequence.current;if(video){video.muted=false;setSoundBlocked(false);void video.play().then(()=>{if(videoRef.current===video&&sequence.current===session)setSoundBlocked(false);}).catch(()=>{if(videoRef.current===video&&sequence.current===session){video.muted=true;setSoundBlocked(true);}});} };
     const preparation=log.config?.videoChannelId==="local-dreamina-canvas"?log.task?.status:"";
-    return <Dropdown trigger={["contextMenu"]} menu={{items:[...(onSendToAgent?[{key:"agent",label:"发给 Agent 修改…"}]:[]),...(onResume?[{key:"resume",label:log.interruptedAt?"恢复原任务查询":log.status==="待核对"?"核对原画布任务":"继续原画布草稿"}]:[]),...(onStop?[{key:"stop",label:"中断本地等待…"}]:[]),...(onWrap?[{key:"wrap",label:"关联视频组"}]:[]),...(onColor?[{key:"colors",label:"标记颜色",children:[{key:"color:",label:"取消颜色"},...VIDEO_COLORS.map(c=>({key:"color:"+c.id,label:<span className="flex items-center gap-2"><span aria-hidden data-color-menu-dot={c.id} className="size-2.5 shrink-0 rounded-full" style={{background:c.hex}}/>{videoColorLabel(c.id,colorLabels)}</span>}))]}]:[]),...(onSaveShortcut?[{key:"shortcut",label:"保存视频快捷…"}]:[]),...(onOpenFolder?[{key:"open-folder",label:"打开视频文件夹位置"}]:[]),...(onHide?[{key:"delete-group",label:"删除视频组",danger:true}]:[])],onClick:({key})=>{if(key==="agent")onSendToAgent?.();else if(key==="shortcut")onSaveShortcut?.();else if(key==="open-folder")onOpenFolder?.();else if(key==="resume")onResume?.();else if(key==="stop")onStop?.();else if(key==="wrap")onWrap?.();else if(key==="delete-group")onHide?.();else if(key.startsWith("color:"))onColor?.(key.slice(6));}}}><article ref={ref} data-video-tile data-video-group={groupNumber} data-generation-attempt={empty?"pending":log.id} data-group-result={empty?undefined:log.id} data-preview-active={Boolean(preview)} className={`group relative overflow-hidden bg-card ${compact ? "size-full" : "aspect-video"}`} aria-label={`视频 ${log.title}`}
+    return <Dropdown trigger={["contextMenu"]} menu={{items:[...(onSendToAgent?[{key:"agent",label:"发给 Agent 修改…"}]:[]),...(onResume?[{key:"resume",label:log.interruptedAt?"恢复原任务查询":log.status==="待核对"?"核对原画布任务":"继续原画布草稿"}]:[]),...(onStop?[{key:"stop",label:"中断本地等待…"}]:[]),...(onWrap?[{key:"wrap",label:"关联视频组"}]:[]),...(onColor?[{key:"colors",label:"标记颜色",children:[{key:"color:",label:"取消颜色"},...VIDEO_COLORS.map(c=>({key:"color:"+c.id,label:<span className="flex items-center gap-2"><span aria-hidden data-color-menu-dot={c.id} className="size-2.5 shrink-0 rounded-full" style={{background:c.hex}}/>{videoColorLabel(c.id,colorLabels)}</span>}))]}]:[]),...(onSaveShortcut?[{key:"shortcut",label:"保存视频快捷…"}]:[]),...(onOpenFolder?[{key:"open-folder",label:"打开视频文件夹位置"}]:[]),...(onHide?[{key:"delete-group",label:"删除视频组",danger:true}]:[])],onClick:({key})=>{if(key==="agent")onSendToAgent?.();else if(key==="shortcut")onSaveShortcut?.();else if(key==="open-folder")onOpenFolder?.();else if(key==="resume")onResume?.();else if(key==="stop")onStop?.();else if(key==="wrap")onWrap?.();else if(key==="delete-group")onHide?.();else if(key.startsWith("color:"))onColor?.(key.slice(6));}}}><article ref={ref} data-video-tile data-video-group={groupNumber} data-generation-attempt={empty?"pending":log.id} data-group-result={empty?undefined:log.id} data-preview-active={Boolean(preview)} data-status={empty?"placeholder":log.status} data-agent-target={agentLinked||undefined} data-agent-flash={flash||undefined} style={!empty&&log.status==="生成中"?{"--wb-progress":Math.max(0,Math.min(100,Number(log.task?.progress)||0))/100} as CSSProperties:undefined} className={`group relative overflow-hidden bg-card ${compact ? "size-full" : "aspect-video"}`} aria-label={`视频 ${log.title}`}
         onMouseEnter={start} onMouseMove={e => { if (!preview && !blocked && ref.current?.contains(e.target as Node)) start(); }} onMouseLeave={() => { setBlocked(false); stop(); }} onFocusCapture={start} onBlurCapture={e => { if (!e.currentTarget.contains(e.relatedTarget)) { setBlocked(false); stop(); } }}>
         {poster && <img alt={log.title} src={poster} loading="lazy" className="size-full object-cover"/>}
         {preview > 0 && log.video && sourceUrl && <video key={preview + ":" + candidateIndex} ref={videoRef} aria-label={`悬停预览 ${log.title}`} src={sourceUrl} muted={soundBlocked} loop playsInline preload="auto" className="absolute inset-0 size-full object-cover" style={{ opacity: playing ? 1 : 0 }}/>} 

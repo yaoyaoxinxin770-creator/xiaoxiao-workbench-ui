@@ -2,11 +2,13 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export type ThemeName = "light" | "dark";
+// pink=暖樱粉（默认），neutral+light=云母白，neutral+dark=影视暗房（胭脂墨黑配色），comic=漫画分镜。
+export type SkinName = "pink" | "neutral" | "comic";
 
 type ThemeStore = {
     theme: ThemeName;
-    skin: "pink" | "neutral";
-    setSkin: (skin:"pink"|"neutral",theme:ThemeName)=>void;
+    skin: SkinName;
+    setSkin: (skin:SkinName,theme:ThemeName)=>void;
     setTheme: (theme: ThemeName) => void;
 };
 
