@@ -21,15 +21,20 @@
 
 为适应容器做的调整，两边完全相同，都不改源码和测试文件：root 运行需 `ELECTRON_DISABLE_SANDBOX=1`；容器未设语言环境时 Chromium 读不了中文文件名，需 `LANG=C.UTF-8`；`storage-home.json` 是 Windows 路径，需给绝对的 `WORKBENCH_HOME_DIR`；Agent 密钥保存只支持 Windows DPAPI，云端构建产物里短路平台判断并用只回显的 PowerShell 替身（不加密）。
 
-| | 原始 0.5.23 | 修改后 |
+| | 原始 0.5.23 | 修改后（最终代码） |
 | --- | --- | --- |
 | 发现 | 166 | 167（新增 `test-agent-prompt-diff.mjs`） |
-| 通过 | 146 | 146（其中新增 1 项） |
-| 失败 | 20 | 21 |
+| 通过 | 146 | 147（其中新增 1 项） |
+| 失败 | 20 | 20 |
 
-逐项对比：除新增测试外，只有 `test-studio-enhancements-ui.mjs` 结果不同（这一轮基线通过、修改后失败）。这项检查在点“保存设置”后立即刷新页面、再看设置是否保留，测试本身与异步保存存在竞争；单独重复运行时两边都会在同一步（“设置持久保留”等待超时）失败，统计见第三节。它涉及的保存路径（`project-prompt-settings.tsx`、视频台 store）本轮没有改动。
+逐项对比：除新增测试外，有两项结果互换，都属于“改完立即刷新再检查是否保留”或“按坐标真实点击”这类时序竞争型断言：
 
-### 两边以相同原因失败的 20 项
+- `test-dreamina-ui`：这一轮基线通过、修改后失败（“重启保留场景与两项补位”等待超时）。单独重复 3 次：基线 1 / 3 通过、修改后 3 / 3 通过，失败点相同。
+- `test-media-fixes-ui`：这一轮基线失败、修改后通过；两边的诊断副本都通过（见第三节）。
+
+最终代码之前还完整跑过一轮（工具栏指示灯改为柔光之前）：修改后通过 146 / 失败 21，差异项是 `test-studio-enhancements-ui`；这项在点“保存设置”后立即刷新页面再检查设置是否保留，原测试两边各重复 9 次都是通过 7 次（见第三节），最终代码这一轮也通过了。相关保存路径（`project-prompt-settings.tsx`、视频台 store）本轮没有改动。
+
+### 两边都失败的 19 项
 
 | 原因 | 数量 | 测试 |
 | --- | --- | --- |
@@ -38,7 +43,7 @@
 | 未随包提供的官方 CLI / 预编译运行库 | 5 | `test-dreamina-service`（`dreamina.exe`）、`test-dreamina-canvas-contract`（`dreamina-canvas.exe`）、`test-pippit-service`、`test-oiioii-service`、`test-pippit-canvas-reference-recovery`（小云雀预编译运行库，交接文档已说明） |
 | 包内未附带的历史输出目录或构建产物 | 3 | `test-dreamina-interpolated-ui`（`output/dreamina-sample-interpolation/job.json`）、`test-v2-refinement-ui`（写入 `output/修复实施-2026-10-25/` 时目录不存在）、`test-infinite-canvas-service`（ComfyUI 桥接附件 404，需 `build-native-workbench.cjs` 产物） |
 | Linux 容器没有系统通知服务 | 1 | `test-video-recovery-ui`（完成通知计数 0 ≠ 1） |
-| 云端时序：弹层 / 弹窗动画未结束就测量尺寸或按坐标真实点击 | 3 | `test-deepseek-agent-ui`、`test-studio-editing-ui`、`test-media-fixes-ui` |
+| 云端时序：弹层 / 弹窗动画未结束就测量尺寸或按坐标真实点击 | 2 | `test-deepseek-agent-ui`、`test-studio-editing-ui`（`test-media-fixes-ui` 同属此类，本轮只在基线上失败） |
 | 云端未确定原因 | 2 | `test-asset-ui`（旧版浏览器工作台页面的提及图片预览等待超时）、`test-local-asset-links`（“选人物子目录一键恢复全部关联缺失素材” 0 ≠ 2）。两项都不涉及本轮改动的前端，需本机复核 |
 
 没有修改测试入口、断言或跳过任何测试。
@@ -55,6 +60,7 @@
 | `test-v2-refinement-ui` | 预先建立 `output/修复实施-2026-10-25/`（检查本身不改） | PASS | PASS |
 | `test-video-recovery-ui` | 跳过“完成通知计数”一条（Linux 容器没有系统通知服务），后续断言原样 | PASS（第 1 次在“重启后顺序保留”等待超时，重跑通过） | PASS（含“选择圈直接覆盖原数字，数字不让位”、影视暗房弹窗底色 rgb(29, 31, 35)、白黑皮肤重载、300ms 长按换位与重载顺序） |
 | `test-studio-enhancements-ui`（原测试重复运行） | 不调整，重复运行 | 9 次通过 7 次（失败点：“选择插入位置”“设置持久保留”等待超时） | 9 次通过 7 次（失败点相同） |
+| `test-dreamina-ui`（原测试重复运行） | 不调整，重复运行（含完整入口中的运行） | 4 次通过 2 次（失败点：“重启保留场景与两项补位”等待超时） | 5 次通过 4 次（失败点相同） |
 
 ## 四、本轮对照本机检查发现并修正的问题
 
@@ -89,7 +95,7 @@
 
 ## 六、未执行 / 需本机完成
 
-- 在 Windows 本机完整运行 `node desktop-app/run-tests.cjs`，重点确认第二节“两边相同原因失败”的项目，以及 `test-deepseek-agent-ui`、`test-studio-enhancements-ui` 的原测试结果。
+- 在 Windows 本机完整运行 `node desktop-app/run-tests.cjs`，重点确认第二节“两边都失败”的项目，以及 `test-deepseek-agent-ui`、`test-studio-enhancements-ui`、`test-dreamina-ui`、`test-media-fixes-ui` 的原测试结果。
 - Agent 自定义 API 密钥的 DPAPI 加密保存（云端用了替身）。
 - `npm run build` 原脚本（会调用 Bun 构建桥接），本轮只运行了 `npx next build --webpack`。
 - Windows 打包、成品一致性、隔离启动、VBS 入口、托盘与系统通知。

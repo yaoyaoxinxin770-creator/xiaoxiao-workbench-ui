@@ -55,7 +55,7 @@ git apply --exclude="infinite-canvas/web/src/app/design-preview/*" 云端交付/
 
 云端已经用包内真实的 Electron / Next / Go 在 Linux + Xvfb 下跑过完整测试入口，并与原样 0.5.23 逐项对比（结果见 VALIDATION.md）。本机仍需在 Windows 上执行：
 
-- 完整入口 `node desktop-app/run-tests.cjs`（当前 167 项，含新增的 `test-agent-prompt-diff.mjs`）。云端两边以相同原因失败的项目（Windows 专用、缺官方 CLI 等，见 VALIDATION.md 第三节）需要在本机确认结果。
+- 完整入口 `node desktop-app/run-tests.cjs`（当前 167 项，含新增的 `test-agent-prompt-diff.mjs`）。云端两边都失败的项目（Windows 专用、缺官方 CLI 等，见 VALIDATION.md 第二节）需要在本机确认结果。
 - `test-deepseek-agent-ui.mjs`：云端原测试在参数弹层动画结束前测量尺寸而失败（基线同样失败）；用“等 0.6 秒再测”的诊断副本，两边都完整通过，但 Agent 密钥的 DPAPI 加密保存在云端是替身，必须在本机用原测试确认。
 - Windows 打包、成品一致性、隔离启动、VBS 入口、托盘与系统通知。
 - 人工体验：四套皮肤切换；Agent 侧栏打开 / 收起 / 拖动交界 / 加宽 / 定位；中文输入法输入长提示词（第 39 条）；拖动排序视频；不同窗口宽度与 Windows 缩放比例。
