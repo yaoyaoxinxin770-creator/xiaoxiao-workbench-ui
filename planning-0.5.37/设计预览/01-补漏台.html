@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>设计预览 · D005 补漏台</title>
+<link rel="stylesheet" href="preview.css">
+<style>
+.board{width:1440px;height:900px;display:flex}
+.main{flex:1;min-width:0;display:flex;flex-direction:column;padding-top:26px}
+.toolbar{height:50px;display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:2px solid var(--ink);background:var(--card)}
+.body{flex:1;min-height:0;display:flex}
+.left{width:262px;border-right:2px solid var(--ink);background:var(--card);display:flex;flex-direction:column}
+.left .item{padding:9px 10px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+.left .item.on{background:var(--accent);box-shadow:inset 4px 0 0 var(--primary)}
+.center{flex:1;min-width:0;background:var(--dark);display:flex;flex-direction:column;padding:12px 16px 10px;gap:8px;color:var(--dark-fg)}
+.viewer{flex:1;min-height:0;border-radius:6px;position:relative;overflow:hidden;background:radial-gradient(120% 90% at 30% 20%,#4a3b44 0,#231c22 55%,#110e12 100%)}
+.viewer .lamp{position:absolute;left:10%;top:8%;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,150,.42),rgba(255,214,150,0) 70%)}
+.viewer .sofa{position:absolute;left:8%;right:8%;bottom:0;height:34%;background:linear-gradient(#3a2f36,#1c161b);border-radius:26px 26px 0 0}
+.viewer .p1{left:26%;width:150px;height:62%;background:rgba(240,220,228,.22)}
+.viewer .p2{left:58%;width:170px;height:70%;background:rgba(40,36,44,.85)}
+.chipd{position:absolute;background:rgba(18,16,19,.82);color:#fff;border-radius:4px;padding:3px 8px;font-size:11px}
+.shots{display:flex;gap:3px;height:22px}
+.shots div{flex:1;border-radius:3px;background:var(--dark3);font-size:10px;display:flex;align-items:center;justify-content:center;color:var(--dark-muted);position:relative}
+.shots .cur{background:#5a4a16;color:#ffe9a8;outline:1.5px solid var(--gold)}
+.shots .hl::after{content:"优";position:absolute;right:3px;top:-7px;background:var(--gold);color:#3a2a00;font-size:9px;font-weight:700;padding:0 3px;border-radius:3px}
+.ctrl{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--dark-muted)}
+.bar{flex:1;height:5px;background:var(--dark3);border-radius:3px;position:relative}
+.bar i{position:absolute;left:0;top:0;bottom:0;width:46%;background:var(--gold);border-radius:3px}
+.bar b{position:absolute;left:46%;top:-4px;width:13px;height:13px;margin-left:-6px;border-radius:50%;background:#fff}
+.right{width:316px;border-left:2px solid var(--ink);background:var(--card);padding:10px 12px;display:flex;flex-direction:column;gap:9px}
+.vers{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.vers .v{display:flex;flex-direction:column;gap:3px;font-size:10px;text-align:center;min-width:0}
+.vers .pill{font-size:10px;padding:0 2px;height:18px;border-width:1px}
+.vers .thumb{height:34px;border:2px solid transparent}
+.vers .sel .thumb{border-color:var(--primary);box-shadow:var(--sh-sm)}
+.vers .dim .thumb{opacity:.35;filter:grayscale(1)}
+.marks{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.marks .btn{justify-content:center;padding:0 4px}
+.hole{border:2px solid var(--warn);background:var(--warn-bg);border-radius:8px;padding:9px;display:flex;flex-direction:column;gap:7px}
+.tl{height:138px;background:var(--dark2);border-top:2px solid var(--ink);color:var(--dark-fg);padding:8px 14px 6px;display:flex;flex-direction:column;gap:6px}
+.track{display:flex;align-items:stretch;gap:0;height:66px;position:relative}
+.clip{height:66px;border-radius:5px;position:relative;border:1.5px solid var(--dark-line);overflow:hidden;flex:none}
+.clip .lab{position:absolute;left:4px;top:3px;font:600 10px/15px "DejaVu Sans Mono",monospace;background:rgba(18,16,19,.8);padding:0 4px;border-radius:3px}
+.clip .dur{position:absolute;right:4px;bottom:3px;font:10px/14px "DejaVu Sans Mono",monospace;color:#d8cfd4}
+.clip .flag{position:absolute;right:3px;top:3px;font-size:9px;font-weight:700;padding:0 4px;border-radius:3px;line-height:14px}
+.clip.none{background:transparent;border:1.5px dashed #7d7480;color:#a99fa6;display:flex;align-items:center;justify-content:center;font-size:10px}
+.clip.cur{border:2px solid var(--primary);box-shadow:0 0 0 2px rgba(232,69,44,.35)}
+.seam{width:16px;flex:none;display:flex;align-items:center;justify-content:center}
+.seam i{width:8px;height:8px;transform:rotate(45deg);background:#5c5560;display:block}
+.seam.bad i{background:var(--primary);box-shadow:0 0 0 3px rgba(232,69,44,.3)}
+.seam.ok i{background:var(--green)}
+.head{position:absolute;top:-6px;bottom:-4px;width:2px;background:#fff}
+.head::before{content:"";position:absolute;left:-5px;top:-2px;border:6px solid transparent;border-top-color:#fff}
+.dock{height:40px;background:var(--card);border-top:2px solid var(--ink);display:flex;align-items:center;gap:10px;padding:0 14px}
+.dock .in{flex:1;height:26px;border:2px solid var(--line);border-radius:999px;display:flex;align-items:center;padding:0 12px;color:var(--muted);font-size:12px}
+</style></head><body>
+<div class="board">
+  <div class="caption"><b>设计预览</b> D005 补漏台 · 按「漫画分镜」皮肤示意 · 只说明摆法和操作，不是成品；编号和名称均为占位</div>
+  <div class="rail"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+  <div class="main">
+    <div class="toolbar">
+      <span class="b">全部视频</span><span class="muted">/</span><span class="b">第 4 集</span>
+      <span class="seg" style="margin-left:6px"><span>网格</span><span class="on">补漏台</span><span>分镜对照</span></span>
+      <span class="btn pri">▶ 连播 <span class="kbd">空格</span></span>
+      <span class="btn on">只看接缝 · 2 秒 <span class="kbd">S</span></span>
+      <span class="grow"></span>
+      <span class="pill todo">待补 5</span><span class="pill star">高光 8</span><span class="pill bad">废片 23</span>
+      <span class="btn">导出采用清单</span><span class="btn">清理废片…</span><span class="btn">Agent</span><span class="btn ghost">③ 直接生成 <i class="car"></i></span>
+    </div>
+    <div class="body">
+      <div class="left">
+        <div class="tabs" style="padding:8px 8px 0"><span class="on">待补 5</span><span>高光 8</span><span>废片 23</span><span>全部</span></div>
+        <div class="item on">
+          <div class="row"><span class="pill todo">衔接</span><span class="b mono">V4-09 → V4-10</span></div>
+          <div class="small">站位：女主应在男主左侧</div>
+          <div class="row small muted"><span class="pill patch">候选 3</span><span>垫图已选</span></div>
+        </div>
+        <div class="item">
+          <div class="row"><span class="pill todo">镜头</span><span class="b mono">V4-12 · 镜头 03</span></div>
+          <div class="small">手部变形</div>
+          <div class="row small muted"><span class="pill plain">还没补</span></div>
+        </div>
+        <div class="item">
+          <div class="row"><span class="pill todo">衔接</span><span class="b mono">V4-14 → V4-15</span></div>
+          <div class="small">视线方向接不上</div>
+          <div class="row small muted"><span class="pill patch">候选 1 · 生成中 38%</span></div>
+        </div>
+        <div class="item">
+          <div class="row"><span class="pill todo">镜头</span><span class="b mono">V4-03 · 镜头 02</span></div>
+          <div class="small">表情不对</div>
+          <div class="row small muted"><span class="pill plain">先凑合用 v2</span></div>
+        </div>
+        <div class="item">
+          <div class="row"><span class="pill todo">镜头</span><span class="b mono">V4-07 · 镜头 01</span></div>
+          <div class="small">开场走位太快</div>
+          <div class="row small muted"><span class="pill plain">还没补</span></div>
+        </div>
+        <div class="grow"></div>
+        <div class="item" style="border-top:2px solid var(--ink);border-bottom:0"><div class="row small muted"><span>已解决 4</span><span class="grow"></span><span>展开 <i class="car r"></i></span></div></div>
+      </div>
+      <div class="center">
+        <div class="viewer">
+          <div class="lamp"></div><div class="sofa"></div><div class="fig p1"></div><div class="fig p2"></div>
+          <div class="chipd mono" style="left:10px;top:10px">V4-10 · 3　<span style="color:#9bbcff">补洞</span></div>
+          <div class="chipd" style="right:10px;top:10px">上下文试播：V4-09 末 2 秒 → 本段 → V4-11 首 2 秒</div>
+          <div class="chipd" style="left:10px;bottom:10px">镜头 03 · 她伸手拉住他的手臂</div>
+        </div>
+        <div class="shots"><div>镜头 01</div><div>镜头 02</div><div class="cur hl">镜头 03</div><div>镜头 04</div><div>镜头 05</div></div>
+        <div class="ctrl">
+          <span class="btn dark sm">▶</span><span class="mono">00:03.5 / 00:07.6</span><div class="bar"><i></i><b></b></div>
+          <span class="btn dark sm">◀ 帧</span><span class="btn dark sm">帧 ▶</span><span class="btn dark sm">1×</span>
+          <span class="btn dark sm">设为垫图帧 <span class="kbd">G</span></span><span class="btn dark sm">截音频</span>
+          <span class="btn dark sm">上一版 <span class="kbd">[</span></span><span class="btn dark sm">下一版 <span class="kbd">]</span></span>
+        </div>
+      </div>
+      <div class="right">
+        <div class="row"><span class="hd mono" style="font-size:15px">V4-10</span><span class="pill patch">正在看 v3 · 补洞</span><span class="grow"></span><span class="small muted">5 个版本</span></div>
+        <div class="vers">
+          <div class="v"><div class="thumb warm"></div><span class="pill pick" style="justify-content:center">v1 采用</span></div>
+          <div class="v dim"><div class="thumb cool"></div><span class="pill bad" style="justify-content:center">v2 废片</span></div>
+          <div class="v sel"><div class="thumb pink"></div><span class="pill patch" style="justify-content:center">v3 补洞</span></div>
+          <div class="v"><div class="thumb green"></div><span class="pill patch" style="justify-content:center">v4 补洞</span></div>
+          <div class="v"><div class="thumb" style="display:flex;align-items:center;justify-content:center;color:#cfc6cc;font-size:10px">38%</div><span class="pill plain" style="justify-content:center">v5 生成中</span></div>
+        </div>
+        <div class="marks">
+          <span class="btn" style="background:#dff3e6">采用 <span class="kbd">F</span></span>
+          <span class="btn on">高光 <span class="kbd">H</span></span>
+          <span class="btn">废片 <span class="kbd">D</span></span>
+          <span class="btn">待补 <span class="kbd">X</span></span>
+        </div>
+        <div class="row small muted"><span>本组未采用的</span><span class="btn sm ghost">全部标废片</span><span class="grow"></span><span class="btn sm ghost">备注</span></div>
+        <div class="hole">
+          <div class="row"><span class="pill todo">这个洞</span><span class="b">衔接 · V4-09 → V4-10</span></div>
+          <div class="small">站位：女主应在男主左侧</div>
+          <div class="row">
+            <div class="thumb warm" style="width:74px;height:42px;flex:none"><span class="n">垫图</span></div>
+            <div class="col small"><span class="mono b">V4-09-帧-00m07s12</span><span class="muted">取自上一段你暂停的那一帧</span><span style="color:var(--primary);font-weight:600">换一帧</span></div>
+          </div>
+          <div class="row"><span class="btn pri grow" style="justify-content:center">去补这个洞</span><span class="btn">发给 Agent</span></div>
+          <div class="note">会载入 V4-10 · 1 的原片素材，挂上垫图，并自动标成补洞版本。</div>
+        </div>
+        <div class="row small muted"><span class="pill star">镜头 03 · 优</span><span class="pill star">镜头 05 · 良</span></div>
+      </div>
+    </div>
+    <div class="tl">
+      <div class="row small" style="color:var(--dark-muted)"><span class="b" style="color:var(--dark-fg)">时间线 · 第 4 集</span><span>16 组 · 采用版合计 02:41 · 还有 2 组没生成</span><span class="grow"></span><span>菱形是接缝：红色有问题，绿色已确认</span></div>
+      <div class="track">
+        <div class="clip thumb cool" style="width:104px"><span class="lab">V4-06</span><span class="dur">0:10</span></div>
+        <div class="seam ok"><i></i></div>
+        <div class="clip thumb warm" style="width:126px"><span class="lab">V4-07</span><span class="dur">0:12</span><span class="flag" style="background:#fdf1de;color:#b45309">待补</span></div>
+        <div class="seam"><i></i></div>
+        <div class="clip thumb green" style="width:84px"><span class="lab">V4-08</span><span class="dur">0:08</span><span class="flag" style="background:#ffc93c;color:#3a2a00">优</span></div>
+        <div class="seam ok"><i></i></div>
+        <div class="clip thumb pink" style="width:150px"><span class="lab">V4-09</span><span class="dur">0:15</span></div>
+        <div class="seam bad"><i></i></div>
+        <div class="clip thumb pink cur" style="width:96px"><span class="lab">V4-10</span><span class="dur">0:08</span><span class="flag" style="background:#2563eb;color:#fff;right:auto;left:4px;top:auto;bottom:3px">补洞 3</span><div class="head" style="left:44px"></div></div>
+        <div class="seam"><i></i></div>
+        <div class="clip thumb cool" style="width:104px"><span class="lab">V4-11</span><span class="dur">0:10</span></div>
+        <div class="seam"><i></i></div>
+        <div class="clip thumb warm" style="width:126px"><span class="lab">V4-12</span><span class="dur">0:12</span><span class="flag" style="background:#fdf1de;color:#b45309">待补</span></div>
+        <div class="seam"><i></i></div>
+        <div class="clip none" style="width:84px">V4-13<br>没生成</div>
+        <div class="seam"><i></i></div>
+        <div class="clip thumb green" style="width:104px"><span class="lab">V4-14</span><span class="dur">0:10</span></div>
+        <div class="seam bad"><i></i></div>
+        <div class="clip" style="width:40px;background:#1e3a8a;border-color:#2563eb"><span class="lab" style="background:none;color:#cfe0ff">过渡</span></div>
+        <div class="seam"><i></i></div>
+        <div class="clip thumb cool" style="width:118px"><span class="lab">V4-15</span><span class="dur">0:11</span></div>
+      </div>
+      <div class="row small" style="color:var(--dark-muted)"><span><span class="kbd">↑</span> <span class="kbd">↓</span> 换组</span><span><span class="kbd">←</span> <span class="kbd">→</span> 逐帧，接缝模式下跳到上一个 / 下一个接缝</span><span class="grow"></span><span>窄蓝条 = 另起编号、插在两段中间的过渡片</span></div>
+    </div>
+    <div class="dock"><span class="b small">提示词面板</span><div class="in">已收起。点「去补这个洞」会自动展开并载入</div><span class="btn sm ghost">展开 <i class="car u"></i></span></div>
+  </div>
+</div>
+</body></html>
