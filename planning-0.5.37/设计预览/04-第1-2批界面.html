@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>设计预览 · 第 1、2 批界面（与实施单一致）</title>
+<link rel="stylesheet" href="preview.css">
+<style>
+.board{width:1440px;padding:40px 18px 18px;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.fr{padding:0;overflow:hidden}
+.fr>.t{display:flex;align-items:center;gap:8px;padding:7px 12px;border-bottom:2px solid var(--ink);background:var(--accent)}
+.fr>.c{padding:12px;display:flex;flex-direction:column;gap:9px}
+.wide{grid-column:1 / span 2}
+.box{border:1.5px solid var(--line);border-radius:8px;background:var(--bg);padding:8px}
+.reply{border:2px solid var(--ink);border-radius:10px;background:var(--card);padding:10px;display:flex;flex-direction:column;gap:8px;flex:1;min-width:0}
+.lab{font-size:11px;font-weight:700;color:var(--muted)}
+.menu{border:2px solid var(--ink);border-radius:8px;background:var(--card);box-shadow:var(--sh);padding:4px;display:flex;flex-direction:column}
+.menu div{padding:6px 9px;border-radius:5px;font-size:12px;display:flex;gap:8px;align-items:flex-start}
+.menu .on{background:var(--accent);font-weight:700}
+.menu .off{color:#a89f8c}
+.menu small{display:block;color:var(--muted);font-weight:400}
+.menu hr{border:0;border-top:1.5px solid var(--line);margin:3px 4px}
+.ck{display:inline-flex;width:14px;height:14px;border:2px solid var(--ink);border-radius:3px;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex:none;background:var(--card)}
+.ck.y{background:var(--primary);color:#fff}
+.att{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:8px;padding:3px 8px 3px 3px;background:var(--card);font-size:11px;position:relative}
+.att .thumb{width:34px;height:34px;flex:none}
+.status{font-size:11px;color:var(--muted);display:flex;gap:6px;align-items:center}
+.status b{color:var(--ink);font-weight:600}
+.status a{color:var(--primary);font-weight:700}
+.capsule{display:inline-flex;align-items:center;border:1.5px solid var(--primary);color:var(--primary);border-radius:999px;padding:0 6px;font-size:11px;font-weight:700;line-height:17px}
+.refs{display:flex;gap:8px;align-items:flex-start}
+.ref{width:66px;position:relative}
+.ref .thumb{height:66px;border:2px solid var(--ink);border-radius:9px}
+.ref .num{position:absolute;left:4px;top:4px;background:rgba(18,16,19,.7);color:#fff;font-size:10px;padding:0 4px;border-radius:3px}
+.ref .org{position:absolute;right:4px;top:4px;background:#dff3e6;color:var(--green);border:1px solid var(--green);font-size:9px;font-weight:700;padding:0 3px;border-radius:3px;line-height:13px}
+.ref .bar{position:absolute;left:2px;right:2px;bottom:2px;background:rgba(18,16,19,.65);color:#fff;font-size:9px;display:flex;justify-content:space-around;border-radius:0 0 7px 7px;line-height:15px}
+.drop{border:2px dashed var(--primary);background:#fde6e1;color:#b3271a;border-radius:9px;height:66px;width:118px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;text-align:center}
+.hint{border:1.5px solid var(--warn);background:var(--warn-bg);border-radius:6px;padding:4px 9px;font-size:11px;display:flex;gap:10px;align-items:center}
+.hint a{color:var(--primary);font-weight:700}
+.ibtn{display:inline-flex;width:32px;height:32px;border-radius:6px;align-items:center;justify-content:center;border:1.5px solid var(--line);background:var(--card);position:relative;font-size:14px;font-weight:700}
+.ibtn .cc{position:absolute;right:2px;bottom:2px;width:0;height:0;border:3px solid transparent;border-right-color:var(--ink);border-bottom-color:var(--ink)}
+.editor{border:1.5px solid var(--line);border-radius:10px;background:var(--bg);font-size:12px;line-height:1.9;padding:9px 11px}
+.findrow{display:flex;align-items:center;gap:5px;border:1.5px solid var(--ink);border-radius:8px;background:var(--accent);padding:4px 6px}
+.find{position:absolute;right:8px;top:8px;width:330px;border:2px solid var(--ink);border-radius:8px;background:var(--card);box-shadow:var(--sh);padding:6px;display:flex;flex-direction:column;gap:5px}
+.field{display:inline-flex;align-items:center;height:26px;border:1.5px solid var(--ink);border-radius:5px;padding:0 8px;background:var(--card);font-size:12px}
+.hit{background:#ffe08a;border-radius:2px}
+.hit.cur{background:#ff9d5c;outline:1.5px solid var(--ink)}
+.sw{display:inline-flex;align-items:center;width:34px;height:18px;border:2px solid var(--ink);border-radius:999px;background:var(--primary);padding:1px;justify-content:flex-end}
+.sw i{display:block;width:12px;height:12px;border-radius:50%;background:#fff;border:1.5px solid var(--ink)}
+.toast{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--ink);border-radius:8px;background:var(--card);box-shadow:var(--sh-sm);padding:6px 11px;font-size:12px}
+.okc{display:inline-flex;width:16px;height:16px;border-radius:50%;background:var(--green);color:#fff;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex:none}
+.tip{border:1.5px solid var(--ink);background:var(--ink);color:#fffdf7;border-radius:6px;padding:4px 8px;font-size:11px;display:inline-block}
+.spin{width:16px;height:16px;border-radius:50%;border:2.5px solid #d9ccb0;border-top-color:var(--primary);display:block}
+.zip{position:absolute;right:3px;bottom:2px;font-size:9px;font-weight:700;color:var(--green)}
+.role{width:84px;position:relative;font-size:11px;text-align:center}
+.role .thumb{height:84px;border:2px solid var(--ink);border-radius:9px;margin-bottom:3px}
+.role .pin{position:absolute;left:4px;top:4px;background:var(--gold);color:#3a2a00;font-size:9px;font-weight:700;padding:0 4px;border-radius:3px;line-height:14px}
+.role .pri{position:absolute;right:4px;top:4px;background:var(--primary);color:#fff;font-size:9px;font-weight:700;padding:0 4px;border-radius:3px;line-height:14px}
+</style></head><body>
+<div class="board">
+  <div class="caption"><b>设计预览</b> 第 1、2 批界面 · 和实施单 D002 D003A D004 D006 D007 D008 D011 一致 · 只说明摆法和操作，不是成品；名称均为占位</div>
+
+  <div class="card fr wide">
+    <div class="t"><span class="tag-d">D006</span><span class="b">Agent 回复卡片：按钮不改名，多一个下拉角标和一行"素材怎么处理"</span></div>
+    <div class="c">
+      <div class="row" style="align-items:stretch;gap:14px">
+        <div class="reply">
+          <span class="lab">① 平常的样子</span>
+          <div class="box small" style="line-height:1.7">【视频编号V4-10｜剧本4-6（咖啡店 日/内）后段】<br>站位以 <span class="capsule">@V4-09-帧-00m07s12</span> 为准：女主在男主左侧…</div>
+          <div class="row small" style="flex-wrap:wrap"><span class="muted">本轮附图</span>
+            <span class="att"><span class="ck y">✓</span><span class="thumb warm"></span>V4-09-帧-00m07s12</span>
+            <span class="att"><span class="ck"></span><span class="thumb cool"></span>粘贴图-143205-1</span></div>
+          <div class="small muted" style="margin-top:-4px">填入时一并加入参考区</div>
+          <div class="row"><span class="btn pri">✓ 填入提示词框 <i class="car"></i></span><span class="btn pri">▶ 填入并开始创作</span></div>
+          <div class="status"><span>素材：</span><b>将载入 V4-10 · 1 的原片素材</b><a>改</a></div>
+        </div>
+        <div class="reply">
+          <span class="lab">② 点角标或「改」：只切换方式，不会立刻回填</span>
+          <div class="row"><span class="btn pri">✓ 填入提示词框 <i class="car"></i></span><span class="btn pri">▶ 填入并开始创作</span></div>
+          <div class="menu" style="width:290px">
+            <div class="on"><span>●</span><span>沿用原片素材<small>载入这条视频生成时实际用的图、音频和参数</small></span></div>
+            <div><span>○</span><span>只填提示词<small>编辑区现在有什么素材就留什么</small></span></div>
+          </div>
+          <div class="note">选择会被记住，重启后保持。默认「沿用原片素材」。</div>
+        </div>
+        <div class="reply">
+          <span class="lab">③ 状态行随情况变化</span>
+          <div class="status"><span>素材：</span><b>沿用编辑区现有的（已是 V4-10 的素材）</b><a>改</a></div>
+          <div class="note" style="margin-top:-4px">编辑区已经在这一组上并挂着素材时，不重新载入，保住你刚做的手动调整。</div>
+          <div class="status"><span>素材：</span><b>这一组还没有原片，按提示词自动匹配</b><a>改</a></div>
+          <div class="status"><span>素材：</span><b>保持编辑区现有素材不变</b><a>改</a></div>
+          <div class="note" style="margin-top:-4px">选了「只填提示词」时。</div>
+          <div class="status"><span>素材来源：</span><span class="field" style="height:22px">V13 · 1 <i class="car" style="margin-left:6px"></i></span></div>
+          <div class="note" style="margin-top:-4px">同时关联了几条视频、又对不上编号时，让你选。</div>
+        </div>
+      </div>
+      <div class="row"><span class="toast"><span class="okc">✓</span>已填入，并载入 V4-10 · 1 的原片素材（5 图 1 音），另加入 1 张附图。可按 Ctrl+Z 撤回</span></div>
+    </div>
+  </div>
+
+  <div class="card fr">
+    <div class="t"><span class="tag-d">D006</span><span class="b">把 Agent 对话里的图拖进视频提示词区</span></div>
+    <div class="c">
+      <div class="row" style="align-items:flex-start;gap:12px">
+        <div class="col" style="gap:6px;width:236px">
+          <span class="lab">Agent 侧栏 · 你发出的消息</span>
+          <div class="box" style="background:var(--accent);border-color:var(--ink)">按这张图的站位改镜头 02</div>
+          <span class="att" style="border-color:var(--primary);box-shadow:var(--sh-sm);align-self:flex-start"><span class="thumb warm"></span>V4-09-帧…<span class="pill red">＋参考</span></span>
+          <span class="small muted">鼠标停上去出现「＋参考」；也可以直接拖。还没发出去的附件小卡同样能拖。</span>
+        </div>
+        <div style="font-size:22px;font-weight:700;color:var(--primary);padding-top:44px">→</div>
+        <div class="col grow" style="gap:6px">
+          <span class="lab">提示词面板 · 参考区</span>
+          <div class="refs">
+            <div class="ref"><div class="thumb pink"></div><span class="num">1</span></div>
+            <div class="ref"><div class="thumb cool"></div><span class="num">2</span></div>
+            <div class="drop">松手加为<br>参考图</div>
+          </div>
+          <span class="small muted">加进去的是原图，不是发给 Agent 的压缩副本。拖到已有的参考卡上也是新增，不替换。</span>
+        </div>
+      </div>
+      <div class="row"><span class="toast"><span class="okc">✓</span>已加为参考图「V4-09-帧-00m07s12」。可按 Ctrl+Z 撤回</span></div>
+    </div>
+  </div>
+
+  <div class="card fr">
+    <div class="t"><span class="tag-d">D003A</span><span class="b">原片优先：角标、差异提示行、重新匹配的右键菜单</span></div>
+    <div class="c">
+      <div class="row" style="align-items:flex-start;gap:14px">
+        <div class="col" style="gap:7px">
+          <span class="lab">参考区</span>
+          <div class="refs">
+            <div class="ref"><div class="thumb pink"></div><span class="num">1</span><span class="org">原片</span><div class="bar"><span>绑定</span><span>定位</span></div></div>
+            <div class="ref"><div class="thumb cool"></div><span class="num">2</span><span class="org">原片</span><div class="bar"><span>绑定</span><span>定位</span></div></div>
+            <div class="ref"><div class="thumb warm"></div><span class="num">3</span><div class="bar"><span>绑定</span><span>定位</span></div></div>
+          </div>
+          <span class="tip">沿用 V4-10 · 1 生成时用的素材</span>
+        </div>
+        <div class="col" style="gap:5px">
+          <span class="lab">工具栏里的「重新匹配」· 右键</span>
+          <div class="row"><span class="ibtn">⟳<i class="cc"></i></span><span class="small muted">左键照常重新匹配</span></div>
+          <div class="menu" style="width:310px">
+            <div class="on"><span>按原片重新匹配</span></div>
+            <div><span>按资产库当前重新匹配</span></div>
+            <hr>
+            <div style="white-space:nowrap"><span class="muted">默认依据</span><span>● 原片优先　○ 资产库当前</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="hint"><span>已按原片匹配 2 项，和资产库当前优先的不同：女主（粉色睡衣）、男主（黑大衣）</span><span class="grow"></span><a>换成当前的</a><a style="color:var(--muted)">知道了</a></div>
+      <div class="note">提示行只在两边结果不一样时出现。没生成过的组没有角标、没有提示行，和现在一样。</div>
+    </div>
+  </div>
+
+  <div class="card fr">
+    <div class="t"><span class="tag-d">D004</span><span class="b">查找替换条：夹在参考素材条和输入框之间，不盖住正文</span></div>
+    <div class="c">
+      <div class="col" style="gap:6px;border:2px solid var(--ink);border-radius:12px;padding:9px;background:var(--card)">
+        <div class="refs"><div class="ref" style="width:48px"><div class="thumb pink" style="height:48px"></div><span class="num">1</span></div><div class="ref" style="width:48px"><div class="thumb cool" style="height:48px"></div><span class="num">2</span></div><div class="ref" style="width:48px"><div class="thumb warm" style="height:48px"></div><span class="num">3</span></div><span class="small muted" style="align-self:center">参考素材条（打开查找条时它上移一行，正文不动）</span></div>
+        <div class="findrow"><span class="field" style="width:132px">餐厅</span><span class="btn sm ghost" style="padding:0 5px">Aa</span><span class="small mono muted">2 / 2</span><span class="btn sm ghost" style="padding:0 6px">↑</span><span class="btn sm ghost" style="padding:0 6px">↓</span><span class="field" style="width:132px;margin-left:6px">咖啡店</span><span class="btn sm">替换</span><span class="btn sm pri">全部替换</span><span class="grow"></span><span class="btn sm ghost" style="padding:0 6px">✕</span></div>
+        <div class="editor"><span style="color:var(--primary);font-weight:700">【场景与连续状态】</span><span class="hit">餐厅</span>靠窗的位置，下午。<br><span class="b">【镜头01】</span>3.0s｜全景，<span class="capsule">@女主</span> 推开<span class="hit cur">餐厅</span>的门，四处张望。<br><span class="b">【镜头02】</span>4.5s｜<span class="capsule">@男主</span> 抬头：<span style="background:var(--accent);border-radius:3px;padding:0 3px">“你来了。”</span><br><span class="b">【镜头03】</span>3.5s｜两人在 <span class="capsule">@餐厅-夜</span> 的灯下对坐。</div>
+      </div>
+      <div class="small muted">计数后面会提示：另有 1 处在素材引用里（@餐厅-夜），不会替换。</div>
+      <div class="row small muted"><span class="ibtn" style="width:28px;height:28px">⌕</span><span>工具栏里垃圾桶左边的放大镜，或</span><span class="kbd">Ctrl</span><span class="kbd">F</span><span>　回车下一处，Esc 关闭</span></div>
+      <div class="row"><span class="toast"><span class="okc">✓</span>已替换 2 处，可按 Ctrl+Z 撤回</span></div>
+    </div>
+  </div>
+
+  <div class="card fr">
+    <div class="t"><span class="tag-d">D011 · D002</span><span class="b">音频区底栏：前缀开关、声线归属、直接生成的提示</span></div>
+    <div class="c">
+      <div class="box" style="background:var(--card)">
+        <div class="row" style="flex-wrap:wrap;gap:7px">
+          <span class="pill" style="background:var(--accent)">seed_audio_v1</span>
+          <span class="field">全能配音 <i class="car" style="margin-left:6px"></i></span>
+          <span class="small muted">入库名称</span><span class="field" style="min-width:150px">女主-明天再说吧</span>
+          <span class="small">前缀</span><span class="sw"><i></i></span>
+          <span class="pill pick">声线归属 @女主　改</span>
+        </div>
+        <div class="row" style="margin-top:9px"><span class="grow"></span><span class="small muted">直接生成 · 不再确认</span><span class="btn pri">↑ 开始创作音频</span></div>
+      </div>
+      <div class="box small" style="line-height:1.75">
+        <b>前缀开</b>　女主-明天再说吧　　<b>前缀关</b>　明天再说吧<br>
+        <span class="muted">前缀和声线归属取参考音频所属的角色。参考音频自己被改名成一句台词也不影响。拨开关立刻重算名称。</span>
+      </div>
+      <div class="row"><span class="toast"><span class="okc">✓</span>已直接提交配音 · 预计 12 积分 · 入库名「女主-明天再说吧」</span></div>
+      <div class="note">「直接生成 · 不再确认」只在顶部创作方式是 ③ 时出现。①、② 下照旧先弹确认。</div>
+    </div>
+  </div>
+
+  <div class="card fr">
+    <div class="t"><span class="tag-d">D008</span><span class="b">Agent 附件小卡：大图自动压缩</span></div>
+    <div class="c">
+      <div class="row" style="gap:10px;align-items:flex-start">
+        <div class="col" style="gap:4px;align-items:flex-start"><span class="att"><span class="thumb" style="display:flex;align-items:center;justify-content:center;background:var(--sec)"><i class="spin"></i></span>站位图.png</span><span class="small muted">处理中，发送按钮暂不可点</span></div>
+        <div class="col" style="gap:4px;align-items:flex-start"><span class="att" style="padding-right:36px"><span class="thumb warm"></span>站位图.png<span class="zip">已压缩</span></span><span class="tip">原图 18.4MB（5120×2880）→ 发送 0.9MB（2048×1152）</span></div>
+        <div class="col" style="gap:4px;align-items:flex-start"><span class="att"><span class="thumb cool"></span>小图.jpg</span><span class="small muted">不用压缩的原样发送</span></div>
+      </div>
+      <div class="row"><span class="toast"><span class="okc">✓</span>3 张大图已自动压缩后发送，原图不变</span></div>
+      <div class="note">对话历史里只留缩略图，不再把整张图存进去。重启后放大看到的是缩略图，会标「历史缩略图」。</div>
+    </div>
+  </div>
+
+  <div class="card fr wide">
+    <div class="t"><span class="tag-d">D007</span><span class="b">角色库里右键单张图：置顶此图</span></div>
+    <div class="c">
+      <div class="row" style="align-items:flex-start;gap:26px">
+        <div class="col" style="gap:5px">
+          <span class="lab">进到角色「女主」里，右键一张图</span>
+          <div class="menu" style="width:190px">
+            <div class="on"><span>置顶此图</span></div><div><span>发给 Agent 分析</span></div><div><span>设为优先</span></div><div><span>禁用素材</span></div><div><span>替换图片…</span></div><div><span class="muted">……</span></div>
+          </div>
+        </div>
+        <div class="col" style="gap:7px">
+          <span class="lab">排序：优先 → 置顶 → 其他</span>
+          <div class="row" style="gap:9px;align-items:flex-start">
+            <div class="role"><div class="thumb cool"></div><span class="pri">优先</span>连衣裙</div>
+            <div class="role"><div class="thumb warm" style="box-shadow:0 0 0 3px var(--gold)"></div><span class="pin">置顶</span>工作服</div>
+            <div class="role"><div class="thumb pink"></div>粉色睡衣</div>
+            <div class="role"><div class="thumb green"></div>校服</div>
+          </div>
+          <span class="small muted">刚置顶的那张闪一下，让你看到它去了哪。</span>
+        </div>
+        <div class="col grow" style="gap:9px">
+          <span class="lab">提示里带撤销</span>
+          <span class="toast" style="align-self:flex-start"><span class="okc">✓</span>已置顶「工作服」　<b style="color:var(--primary)">撤销</b></span>
+          <div class="note">置顶只管排在前面，不影响自动匹配。<br>想让匹配优先选它，才用「设为优先」。<br>和「置顶人物」（整个角色置顶）分别记录，互不覆盖。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>
