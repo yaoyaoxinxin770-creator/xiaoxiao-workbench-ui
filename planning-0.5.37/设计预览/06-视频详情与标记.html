@@ -1,0 +1,171 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;cursor:pointer}
+input{font:inherit;color:inherit}
+a{color:#c5361f}a:hover{color:#9c2a18}
+</style>
+</head><body>
+
+<div style="min-height: 960px; display: flex; align-items: center; justify-content: center; padding: 28px 20px; background: #45403a; color: #1b1a17; font: 13px/1.45 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif">
+
+<section aria-label="视频详情" style="width: 100%; max-width: 1360px; display: flex; flex-direction: column; border: 2px solid #1b1a17; border-radius: 12px; background: #fffdf7; box-shadow: 6px 6px 0 #1b1a17; overflow: hidden">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 2px solid #1b1a17">
+<strong style="font: 700 17px 'JetBrains Mono', monospace">V4-10 · 1</strong>
+<span style="padding: 0 9px; border: 1.5px solid #1a7a43; border-radius: 999px; background: #dff3e6; color: #1a7a43; font-size: 11px; font-weight: 700">采用</span>
+<span style="font-size: 12px; color: #4a463d">第 4 集 · 即梦 · 账号 A · seedance 2.5 · 8 秒</span>
+<span style="flex: 1 1 0"></span>
+<button type="button" aria-label="关闭详情" style="width: 30px; height: 30px; border: 0; border-radius: 6px; background: transparent; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 14px; border-bottom: 1.5px solid #cdbf9f; background: #fbf5e9">
+<span style="font-size: 11px; color: #4a463d">颜色</span>
+<button type="button" aria-label="标记 青绿" title="青绿" style="width: 22px; height: 22px; border: 2px solid transparent; border-radius: 50%; background: #06b6c9; padding: 0"></button><button type="button" aria-label="标记 紫色" title="紫色" style="width: 22px; height: 22px; border: 2px solid #1b1a17; border-radius: 50%; background: #b56af5; padding: 0"></button><button type="button" aria-label="标记 橙色" title="橙色" style="width: 22px; height: 22px; border: 2px solid transparent; border-radius: 50%; background: #ff9732; padding: 0"></button><button type="button" aria-label="标记 不可用" title="不可用" style="width: 22px; height: 22px; border: 2px solid transparent; border-radius: 50%; background: #ef4444; padding: 0"></button>
+<button type="button" style="height: 30px; padding: 0 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 12px; font-weight: 600">备注 / 发给 Agent</button>
+<span style="width: 0; height: 22px; border-left: 1.5px solid #cdbf9f"></span>
+
+<button type="button" aria-pressed="true" style="display: flex; align-items: center; gap: 5px; height: 30px; padding: 0 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #dff3e6; box-shadow: 2px 2px 0 #1b1a17; font-size: 12px; font-weight: 700">采用<span style="padding: 0 4px; border: 1px solid #6e6858; border-radius: 3px; font: 500 10px/14px 'JetBrains Mono', monospace; color: #4a463d">F</span></button>
+
+<button type="button" aria-pressed="true" style="display: flex; align-items: center; gap: 5px; height: 30px; padding: 0 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #ffe9a8; box-shadow: 2px 2px 0 #1b1a17; font-size: 12px; font-weight: 700">高光<span style="padding: 0 4px; border: 1px solid #6e6858; border-radius: 3px; font: 500 10px/14px 'JetBrains Mono', monospace; color: #4a463d">H</span></button>
+
+<button type="button" aria-pressed="false" style="display: flex; align-items: center; gap: 5px; height: 30px; padding: 0 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; box-shadow: none; font-size: 12px; font-weight: 700">废片<span style="padding: 0 4px; border: 1px solid #6e6858; border-radius: 3px; font: 500 10px/14px 'JetBrains Mono', monospace; color: #4a463d">D</span></button>
+
+<button type="button" aria-pressed="false" style="display: flex; align-items: center; gap: 5px; height: 30px; padding: 0 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; box-shadow: none; font-size: 12px; font-weight: 700">待补<span style="padding: 0 4px; border: 1px solid #6e6858; border-radius: 3px; font: 500 10px/14px 'JetBrains Mono', monospace; color: #4a463d">X</span></button>
+
+<span style="width: 0; height: 22px; border-left: 1.5px solid #cdbf9f"></span>
+<button type="button" style="height: 30px; padding: 0 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 12px; font-weight: 600">重新编辑</button>
+<button type="button" style="height: 30px; padding: 0 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 12px; font-weight: 600">打开视频文件夹位置</button>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: stretch">
+
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 10px; padding: 12px 14px">
+
+<div style="display: flex; flex-direction: column; border-radius: 8px; background: #121013; overflow: hidden">
+<div style="display: flex; gap: 3px; padding: 8px 10px 6px">
+
+<button type="button" style="position: relative; flex: 24 1 0; height: 24px; border: 0; border-radius: 3px; background: #2a262d; color: #b9aeb5; font-size: 11px; overflow: hidden"><span style="position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: rgba(255,201,60,.38)"></span><span style="position: relative">镜头 01</span></button>
+
+<button type="button" style="position: relative; flex: 26 1 0; height: 24px; border: 1.5px solid #ffc93c; border-radius: 3px; background: #3a3220; color: #ffe9a8; font-size: 11px; overflow: hidden"><span style="position: absolute; left: 0; top: 0; bottom: 0; width: 54%; background: rgba(255,201,60,.38)"></span><span style="position: relative">镜头 02</span></button>
+
+<button type="button" style="position: relative; flex: 26 1 0; height: 24px; border: 0; border-radius: 3px; background: #2a262d; color: #b9aeb5; font-size: 11px; overflow: hidden"><span style="position: absolute; left: 0; top: 0; bottom: 0; width: 0%; background: rgba(255,201,60,.38)"></span><span style="position: relative">镜头 03</span><span style="position: absolute; right: 3px; top: 3px; padding: 0 4px; border-radius: 3px; background: #ffc93c; color: #3a2a00; font-size: 9px; font-weight: 700; line-height: 14px">优</span></button>
+
+</div>
+<div style="height: 372px; background: #2b2530; display: flex; align-items: flex-end; justify-content: center; gap: 80px">
+<svg aria-hidden="true" width="150" height="250" viewBox="0 0 150 250" style="fill: rgba(255,255,255,.13)"><path d="M75 20a34 34 0 1 1 0 68 34 34 0 0 1 0-68zM14 250c0-70 26-128 61-128s61 58 61 128z"></path></svg>
+<svg aria-hidden="true" width="170" height="290" viewBox="0 0 170 290" style="fill: rgba(0,0,0,.34)"><path d="M85 22a38 38 0 1 1 0 76 38 38 0 0 1 0-76zM16 290c0-84 30-152 69-152s69 68 69 152z"></path></svg>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 7px; padding: 8px 10px; background: #1c191e; color: #f2edf0; font-size: 11px">
+<button type="button" aria-label="播放" style="width: 30px; height: 26px; border: 1.5px solid #3a343d; border-radius: 5px; background: #2a262d; color: #f2edf0; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" style="fill: currentColor; stroke: none"><path d="M6 3l14 9-14 9z"></path></svg></button>
+<div style="position: relative; flex: 1 1 140px; height: 5px; border-radius: 3px; background: #2a262d"><span style="position: absolute; left: 0; top: 0; bottom: 0; width: 50%; border-radius: 3px; background: #ffc93c"></span><span style="position: absolute; left: 50%; top: -4px; width: 13px; height: 13px; margin-left: -6px; border-radius: 50%; background: #ffffff"></span></div>
+<span style="font: 500 11px 'JetBrains Mono', monospace">00:03.8 / 00:07.6</span>
+
+<button type="button" aria-pressed="false" style="height: 26px; padding: 0 8px; border: 1.5px solid #3a343d; border-radius: 5px; background: #2a262d; color: #f2edf0; font-size: 11px; font-weight: 400">-1 秒</button>
+
+<button type="button" aria-pressed="false" style="height: 26px; padding: 0 8px; border: 1.5px solid #3a343d; border-radius: 5px; background: #2a262d; color: #f2edf0; font-size: 11px; font-weight: 400">上一帧</button>
+
+<button type="button" aria-pressed="false" style="height: 26px; padding: 0 8px; border: 1.5px solid #3a343d; border-radius: 5px; background: #2a262d; color: #f2edf0; font-size: 11px; font-weight: 400">下一帧</button>
+
+<button type="button" aria-pressed="false" style="height: 26px; padding: 0 8px; border: 1.5px solid #3a343d; border-radius: 5px; background: #2a262d; color: #f2edf0; font-size: 11px; font-weight: 400">+1 秒</button>
+
+<button type="button" aria-pressed="false" style="height: 26px; padding: 0 8px; border: 1.5px solid #3a343d; border-radius: 5px; background: #2a262d; color: #f2edf0; font-size: 11px; font-weight: 400">1×</button>
+
+<button type="button" aria-pressed="false" style="height: 26px; padding: 0 8px; border: 1.5px solid #3a343d; border-radius: 5px; background: #2a262d; color: #f2edf0; font-size: 11px; font-weight: 400">保存到资产库</button>
+
+<button type="button" aria-pressed="false" style="height: 26px; padding: 0 8px; border: 1.5px solid #3a343d; border-radius: 5px; background: #2a262d; color: #f2edf0; font-size: 11px; font-weight: 400">截取当前帧发给 Agent</button>
+
+<button type="button" aria-pressed="true" style="height: 26px; padding: 0 8px; border: 1.5px solid #ffc93c; border-radius: 5px; background: #ffc93c; color: #3a2a00; font-size: 11px; font-weight: 700">截音频</button>
+
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 9px; padding: 11px 12px; border: 2px solid #1b1a17; border-radius: 10px; background: #fffdf7; box-shadow: 3px 3px 0 #1b1a17">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 9px">
+<strong style="font-size: 13px">截音频</strong>
+<span style="font: 500 12px 'JetBrains Mono', monospace; color: #4a463d">00:02.4 – 00:05.0　共 2.6 秒</span>
+<span style="padding: 0 8px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #f3e9d4; font-size: 11px">镜头 02</span>
+<span style="flex: 1 1 0"></span>
+<button type="button" style="height: 28px; padding: 0 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 12px; font-weight: 600">截这个镜头</button>
+<button type="button" style="height: 28px; padding: 0 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 12px; font-weight: 600">试听所选</button>
+</div>
+<div style="position: relative; height: 40px; border-radius: 6px; background: #f3e9d4; overflow: hidden">
+<span style="position: absolute; left: 6px; right: 6px; top: 9px; bottom: 9px; background: repeating-linear-gradient(90deg, #ab9d7f 0 2px, transparent 2px 5px)"></span>
+<span style="position: absolute; left: 31.5%; width: 34.3%; top: 0; bottom: 0; border-left: 4px solid #1b1a17; border-right: 4px solid #1b1a17; background: rgba(255,201,60,.55)"></span>
+</div>
+<div style="font-size: 11px; color: #4a463d">拖两边的把手调整范围；播放时按 I 定起点、O 定终点。</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 9px">
+<label style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #4a463d">名称<input type="text" value="V4-10-镜头02-音" style="width: 178px; height: 30px; padding: 0 8px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; color: #1b1a17"></label>
+<span style="font-size: 12px; color: #4a463d">声线归属</span>
+<button type="button" aria-label="声线归属" style="display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 9px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 12px">女主<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round"><path d="M6 9l6 6 6-6"></path></svg></button>
+<span style="flex: 1 1 0"></span>
+<button type="button" style="height: 32px; padding: 0 12px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; box-shadow: 2px 2px 0 #1b1a17; font-size: 12px; font-weight: 700">存入音频库</button>
+<button type="button" style="height: 32px; padding: 0 12px; border: 2px solid #1b1a17; border-radius: 6px; background: #cf3a22; color: #ffffff; box-shadow: 2px 2px 0 #1b1a17; font-size: 12px; font-weight: 700">存入并去补台词</button>
+</div>
+</div>
+</div>
+
+<aside aria-label="作品信息" style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; border-left: 2px solid #1b1a17">
+<div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1.5px solid #cdbf9f">
+<strong style="flex: 1 1 auto">作品信息 · 视频提示词</strong>
+<button type="button" style="height: 26px; padding: 0 9px; border: 1.5px solid #cdbf9f; border-radius: 6px; background: #fffdf7; font-size: 11px">复制</button>
+<button type="button" aria-label="回到顶部" style="width: 26px; height: 26px; border: 1.5px solid #cdbf9f; border-radius: 6px; background: #fffdf7; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round"><path d="M6 15l6-6 6 6"></path></svg></button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 11px; padding: 12px 14px">
+<div style="padding: 8px 10px; border: 1.5px solid #8a6400; border-radius: 8px; background: #fff6d8; font-size: 12px; line-height: 1.6"><strong>备注</strong>　镜头 02 的台词不对，要补一句“先说正事”。站位没问题。</div>
+<div style="font-size: 12px; line-height: 1.85">
+<div><strong style="color: #c5361f">【视频编号V4-10｜剧本4-6（咖啡店 日/内）后段】</strong></div>
+<div>总时长：7.6 秒　<strong style="color: #c5361f">【承接视频编号V4-09】</strong></div>
+<div><strong style="color: #c5361f">【出场人物】</strong></div>
+<div>女主：资产【女主-粉色睡衣】　男主：资产【男主-黑大衣】</div>
+<div><strong>【镜头01】</strong>2.4s｜近景，男主把菜单推过去。</div>
+<div style="padding: 0 4px; margin: 0 -4px; border-radius: 4px; background: #ffe9a8"><strong>【镜头02】</strong>2.6s｜女主按住菜单：<span style="background: #ffc93c; border-radius: 3px; padding: 0 3px">“先点喝的。”</span></div>
+<div><strong>【镜头03】</strong>2.6s｜她伸手拉住他的手臂，两人对视。</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+
+<div style="display: flex; flex-direction: column; gap: 1px; padding: 6px 9px; border: 1.5px solid #cdbf9f; border-radius: 6px; background: #fbf5e9"><span style="font-size: 10px; color: #4a463d">渠道</span><strong style="font-size: 12px">即梦 · 账号 A</strong></div>
+
+<div style="display: flex; flex-direction: column; gap: 1px; padding: 6px 9px; border: 1.5px solid #cdbf9f; border-radius: 6px; background: #fbf5e9"><span style="font-size: 10px; color: #4a463d">模型</span><strong style="font-size: 12px">seedance 2.5</strong></div>
+
+<div style="display: flex; flex-direction: column; gap: 1px; padding: 6px 9px; border: 1.5px solid #cdbf9f; border-radius: 6px; background: #fbf5e9"><span style="font-size: 10px; color: #4a463d">时长</span><strong style="font-size: 12px">8 秒</strong></div>
+
+<div style="display: flex; flex-direction: column; gap: 1px; padding: 6px 9px; border: 1.5px solid #cdbf9f; border-radius: 6px; background: #fbf5e9"><span style="font-size: 10px; color: #4a463d">比例</span><strong style="font-size: 12px">16:9</strong></div>
+
+<div style="display: flex; flex-direction: column; gap: 1px; padding: 6px 9px; border: 1.5px solid #cdbf9f; border-radius: 6px; background: #fbf5e9"><span style="font-size: 10px; color: #4a463d">清晰度</span><strong style="font-size: 12px">720P</strong></div>
+
+<div style="display: flex; flex-direction: column; gap: 1px; padding: 6px 9px; border: 1.5px solid #cdbf9f; border-radius: 6px; background: #fbf5e9"><span style="font-size: 10px; color: #4a463d">补帧</span><strong style="font-size: 12px">30 FPS</strong></div>
+
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<strong style="font-size: 12px">生成时实际用的素材</strong>
+<div style="display: flex; flex-wrap: wrap; gap: 7px">
+
+<div title="女主-粉色睡衣" style="position: relative; width: 54px; height: 54px; border: 2px solid #1b1a17; border-radius: 8px; background: #7a4a5e"><span style="position: absolute; left: 3px; top: 3px; padding: 0 4px; border-radius: 3px; background: rgba(18,16,19,.72); color: #ffffff; font-size: 10px; line-height: 14px">1</span></div>
+
+<div title="男主-黑大衣" style="position: relative; width: 54px; height: 54px; border: 2px solid #1b1a17; border-radius: 8px; background: #2f4660"><span style="position: absolute; left: 3px; top: 3px; padding: 0 4px; border-radius: 3px; background: rgba(18,16,19,.72); color: #ffffff; font-size: 10px; line-height: 14px">2</span></div>
+
+<div title="咖啡店-日" style="position: relative; width: 54px; height: 54px; border: 2px solid #1b1a17; border-radius: 8px; background: #6b4a3a"><span style="position: absolute; left: 3px; top: 3px; padding: 0 4px; border-radius: 3px; background: rgba(18,16,19,.72); color: #ffffff; font-size: 10px; line-height: 14px">3</span></div>
+
+<div title="菜单" style="position: relative; width: 54px; height: 54px; border: 2px solid #1b1a17; border-radius: 8px; background: #3f5a48"><span style="position: absolute; left: 3px; top: 3px; padding: 0 4px; border-radius: 3px; background: rgba(18,16,19,.72); color: #ffffff; font-size: 10px; line-height: 14px">4</span></div>
+
+<div title="杯子" style="position: relative; width: 54px; height: 54px; border: 2px solid #1b1a17; border-radius: 8px; background: #5a4a6a"><span style="position: absolute; left: 3px; top: 3px; padding: 0 4px; border-radius: 3px; background: rgba(18,16,19,.72); color: #ffffff; font-size: 10px; line-height: 14px">5</span></div>
+
+<div title="女主-原声" style="position: relative; width: 54px; height: 54px; border: 2px solid #1b1a17; border-radius: 8px; background: #5e5140"><span style="position: absolute; left: 3px; top: 3px; padding: 0 4px; border-radius: 3px; background: rgba(18,16,19,.72); color: #ffffff; font-size: 10px; line-height: 14px">音</span></div>
+
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px">
+<strong style="font-size: 12px">这条的高光</strong>
+<span style="padding: 0 8px; border: 1.5px solid #8a6400; border-radius: 999px; background: #ffe9a8; color: #5c4300; font-size: 11px; font-weight: 700">镜头 03 · 优</span>
+<button type="button" style="height: 22px; padding: 0 8px; border: 1.5px dashed #857a62; border-radius: 999px; background: transparent; font-size: 11px; color: #4a463d">＋ 给当前镜头标高光</button>
+</div>
+</div>
+</aside>
+
+</div>
+</section>
+</div>
+</body></html>

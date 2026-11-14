@@ -1,0 +1,531 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<style>
+body{margin:0}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;cursor:pointer}
+</style>
+</head><body>
+
+<div style="min-height: 100vh; display: flex; flex-direction: column; background: #fbf5e9; color: #1b1a17; font: 13px/1.45 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif">
+
+<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 44px; padding: 5px 12px; background: #fffdf7; border-bottom: 2px solid #1b1a17">
+<button type="button" style="height: 30px; padding: 0 12px; border: 2px solid #1b1a17; border-radius: 6px; background: #ffe9a8; font-weight: 700">示例剧目</button>
+<span style="flex: 1 1 0"></span>
+<div role="group" aria-label="生成渠道" style="display: flex; border: 2px solid #1b1a17; border-radius: 6px; overflow: hidden; background: #fffdf7">
+<button type="button" style="height: 26px; padding: 0 10px; border: 0; border-right: 2px solid #1b1a17; background: transparent; font-size: 12px; color: #4a463d">小云雀</button>
+<button type="button" aria-pressed="true" style="height: 26px; padding: 0 10px; border: 0; border-right: 2px solid #1b1a17; background: #1b1a17; color: #fffdf7; font-size: 12px; font-weight: 700">即梦 CLI</button>
+<button type="button" style="height: 26px; padding: 0 10px; border: 0; background: transparent; font-size: 12px; color: #4a463d">其他渠道</button>
+</div>
+</header>
+
+<div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: stretch">
+
+<nav aria-label="工作台功能导航" style="flex: none; width: 60px; background: #1b1a17; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0">
+<button type="button" aria-label="晓晓的 AI 工作台" style="width: 36px; height: 36px; margin-bottom: 8px; border: 0; border-radius: 9px; background: #cf3a22; color: #ffffff; font-size: 17px; font-weight: 700">晓</button>
+
+<button type="button" style="width: 52px; padding: 6px 0 5px; border: 0; border-radius: 8px; background: transparent; color: #d9ccb0; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 400">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M4 4h16v16H4zM4 9h16M9 9v11"></path></svg>
+画布
+</button>
+
+<button type="button" style="width: 52px; padding: 6px 0 5px; border: 0; border-radius: 8px; background: transparent; color: #d9ccb0; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 400">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+项目
+</button>
+
+<button type="button" style="width: 52px; padding: 6px 0 5px; border: 0; border-radius: 8px; background: #cf3a22; color: #ffffff; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 700">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M3 7h12v10H3zM15 10l6-3v10l-6-3z"></path></svg>
+视频
+</button>
+
+<button type="button" style="width: 52px; padding: 6px 0 5px; border: 0; border-radius: 8px; background: transparent; color: #d9ccb0; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 400">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M4 4h16v16H4zM4 16l5-5 4 4 3-3 4 4M9 9h.01"></path></svg>
+生图
+</button>
+
+<button type="button" style="width: 52px; padding: 6px 0 5px; border: 0; border-radius: 8px; background: transparent; color: #d9ccb0; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 400">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z"></path></svg>
+自动发送
+</button>
+
+<button type="button" style="width: 52px; padding: 6px 0 5px; border: 0; border-radius: 8px; background: transparent; color: #d9ccb0; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 400">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M5 4h14v16H5zM9 8h6M9 12h6M9 16h3"></path></svg>
+模板库
+</button>
+
+<button type="button" style="width: 52px; padding: 6px 0 5px; border: 0; border-radius: 8px; background: transparent; color: #d9ccb0; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 400">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M4 5h4v14H4zM10 5h4v14h-4zM16 6l4 1-3 13-4-1z"></path></svg>
+公共库
+</button>
+
+</nav>
+
+<main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 9px 14px; background: #fffdf7; border-bottom: 2px solid #1b1a17">
+<strong>全部视频</strong><span style="color: #6e6858">/</span><strong>第 9 集</strong>
+<div role="group" aria-label="视图" style="display: flex; margin-left: 6px; border: 2px solid #1b1a17; border-radius: 6px; overflow: hidden; box-shadow: 2px 2px 0 #1b1a17">
+<button type="button" style="height: 28px; padding: 0 13px; border: 0; border-right: 2px solid #1b1a17; background: #fffdf7; font-size: 12px; font-weight: 600">网格</button>
+<button type="button" style="height: 28px; padding: 0 13px; border: 0; border-right: 2px solid #1b1a17; background: #fffdf7; font-size: 12px; font-weight: 600">补漏台</button>
+<button type="button" aria-pressed="true" style="height: 28px; padding: 0 13px; border: 0; background: #1b1a17; color: #fffdf7; font-size: 12px; font-weight: 700">分镜对照</button>
+</div>
+<button type="button" style="height: 32px; padding: 0 11px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 12px; font-weight: 600">导入分镜</button>
+<button type="button" style="height: 32px; padding: 0 11px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 12px; font-weight: 600">导入剧本</button>
+<span style="flex: 1 1 0"></span>
+<span style="padding: 1px 10px; border: 1.5px solid #1a7a43; border-radius: 999px; background: #dff3e6; color: #1a7a43; font-size: 11px; font-weight: 700">6 组对上 · 1 组未对上</span>
+<span style="padding: 1px 10px; border: 1.5px solid #8a6400; border-radius: 999px; background: #fff6d8; color: #6b4e00; font-size: 11px; font-weight: 700">台词 10 句 · 一致 9 · 不一致 1</span>
+<span style="padding: 1px 10px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #fffdf7; color: #4a463d; font-size: 11px; font-weight: 700">其余 15 行 · 对上 14 · 靠位置 1</span>
+<button type="button" style="height: 22px; padding: 0 10px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #fffdf7; color: #4a463d; font-size: 11px; font-weight: 700">人名对应：女主 = 林夏 等 2 个</button>
+<button type="button" style="height: 22px; padding: 0 10px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #fffdf7; color: #4a463d; font-size: 11px">全部收起</button>
+</div>
+
+<div style="flex: 1 1 auto; min-height: 0; display: flex; flex-wrap: wrap; align-items: stretch">
+
+<section aria-label="场次目录" style="flex: 0 1 204px; min-width: 180px; background: #fffdf7; border-right: 2px solid #1b1a17; display: flex; flex-direction: column; gap: 4px; padding: 10px 8px">
+<strong style="padding: 2px 6px 6px; font-size: 12px">场次目录</strong>
+<div style="display: flex; flex-direction: column; gap: 3px; padding: 8px; border-radius: 6px; background: #1b1a17; color: #fffdf7">
+<span style="display: flex; gap: 7px"><strong style="font-family: 'JetBrains Mono', monospace">9-1</strong><span>咖啡店</span></span>
+<span style="display: flex; font-size: 11px; color: #d9ccb0"><span style="flex: 1 1 auto">6 组</span><span>100%</span></span>
+<span style="height: 4px; border-radius: 2px; background: #5bd08f"></span>
+</div>
+
+<button type="button" style="display: flex; align-items: center; gap: 6px; height: 28px; margin-left: 12px; padding: 0 8px; border: 0; border-radius: 5px; background: #ffe9a8; font-size: 12px; text-align: left"><span style="flex: 1 1 auto; font-weight: 700">第 1 版</span><span style="font: 500 11px 'JetBrains Mono', 'Noto Sans SC', monospace; color: #4a463d">V9-01、02</span></button>
+
+<button type="button" style="display: flex; align-items: center; gap: 6px; height: 28px; margin-left: 12px; padding: 0 8px; border: 0; border-radius: 5px; background: transparent; font-size: 12px; text-align: left"><span style="flex: 1 1 auto; font-weight: 400">第 2 版</span><span style="font: 500 11px 'JetBrains Mono', 'Noto Sans SC', monospace; color: #4a463d">V9-B1、B2</span></button>
+
+<button type="button" style="display: flex; align-items: center; gap: 6px; height: 28px; margin-left: 12px; padding: 0 8px; border: 0; border-radius: 5px; background: transparent; font-size: 12px; text-align: left"><span style="flex: 1 1 auto; font-weight: 400">两版共用</span><span style="font: 500 11px 'JetBrains Mono', 'Noto Sans SC', monospace; color: #4a463d">V9-03</span></button>
+
+<button type="button" style="display: flex; align-items: center; gap: 6px; height: 28px; margin-left: 12px; padding: 0 8px; border: 0; border-radius: 5px; background: transparent; font-size: 12px; text-align: left"><span style="flex: 1 1 auto; font-weight: 400">跨到 9-2</span><span style="font: 500 11px 'JetBrains Mono', 'Noto Sans SC', monospace; color: #4a463d">V9-04</span></button>
+
+<button type="button" style="display: flex; flex-direction: column; gap: 3px; padding: 8px; border: 0; border-radius: 6px; background: transparent; text-align: left">
+<span style="display: flex; gap: 7px"><strong style="font-family: 'JetBrains Mono', monospace">9-2</strong><span>咖啡店门口</span></span>
+<span style="display: flex; font-size: 11px; color: #4a463d"><span style="flex: 1 1 auto">从 V9-04 的后半开始</span><span>100%</span></span>
+<span style="height: 4px; border-radius: 2px; background: #1a7a43"></span>
+</button>
+<button type="button" style="display: flex; flex-direction: column; gap: 3px; padding: 8px; border: 0; border-radius: 6px; background: transparent; text-align: left">
+<span style="display: flex; align-items: center; gap: 7px"><strong style="font-family: 'JetBrains Mono', monospace">9-3</strong><span>林夏家</span><span style="margin-left: auto; padding: 0 7px; border: 1.5px solid #8a4b06; border-radius: 999px; background: #fdf1de; color: #8a4b06; font-size: 10px; font-weight: 700">缺分镜</span></span>
+<span style="font-size: 11px; color: #4a463d">剧本 3 行</span>
+</button>
+<button type="button" style="display: flex; align-items: center; gap: 7px; margin-top: 6px; padding: 8px; border: 0; border-top: 1.5px solid #cdbf9f; background: transparent; text-align: left; font-size: 12px"><span style="flex: 1 1 auto">未对上剧本</span><span style="font: 500 11px 'JetBrains Mono', 'Noto Sans SC', monospace; color: #4a463d">1 组</span></button>
+</section>
+
+<section aria-label="分镜与剧本" style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 9px; padding: 10px 14px 16px; background-image: radial-gradient(rgba(27,26,23,.08) 1px, transparent 1.3px); background-size: 9px 9px">
+
+<div style="display: grid; grid-template-columns: 200px minmax(0, 1fr) minmax(0, 430px); gap: 12px; padding: 0 12px; font-size: 11px; font-weight: 700; color: #4a463d">
+<span>成片</span><span>分镜（视频提示词）</span>
+<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">剧本原文<span style="display: flex; align-items: center; gap: 4px; font-weight: 400"><span style="width: 9px; height: 9px; border-radius: 50%; background: #1a7a43"></span>台词一致</span><span style="display: flex; align-items: center; gap: 4px; font-weight: 400"><span style="width: 9px; height: 9px; border-radius: 50%; background: #d99a00"></span>台词不一致</span><span style="display: flex; align-items: center; gap: 4px; font-weight: 400"><span style="width: 9px; height: 9px; border-radius: 50%; border: 2px solid #1a7a43"></span>画面对得上</span><span style="display: flex; align-items: center; gap: 4px; font-weight: 400"><span style="width: 9px; height: 9px; border-radius: 50%; border: 2px dashed #857a62"></span>靠位置</span></span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 3px 2px 6px; border-bottom: 2px solid #1b1a17">
+<strong style="font: 700 14px 'JetBrains Mono', monospace">9-1</strong><strong style="font-size: 14px">日/内　咖啡店</strong><span style="font-size: 11px; color: #4a463d">6 组 · 剧本 14 行 · 覆盖 100%</span>
+<span style="flex: 1 1 0"></span>
+<span style="font-size: 12px; color: #4a463d">这一场有两个版本，成片用</span>
+<div role="group" aria-label="成片用哪一版" style="display: flex; border: 2px solid #1b1a17; border-radius: 6px; overflow: hidden; box-shadow: 2px 2px 0 #1b1a17">
+<button type="button" aria-pressed="true" style="height: 28px; padding: 0 12px; border: 0; border-right: 2px solid #1b1a17; background: #cf3a22; color: #ffffff; font-size: 12px; font-weight: 700">第 1 版</button>
+<button type="button" style="height: 28px; padding: 0 12px; border: 0; background: #fffdf7; font-size: 12px; font-weight: 600">第 2 版</button>
+</div>
+<span style="font-size: 11px; color: #4a463d">连播和补漏台的时间线按选中的走</span>
+</div>
+
+
+
+
+
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 4px; padding: 5px 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #ffe9a8">
+<strong style="font-size: 13px">第 1 版</strong><span style="font: 500 12px 'JetBrains Mono', 'Noto Sans SC', monospace">V9-01、V9-02</span><span style="font-size: 11px; color: #4a463d">剧本 6 行，△ 和「某某说」的写法</span>
+<span style="flex: 1 1 0"></span>
+<span style="padding: 0 9px; border: 1.5px solid #1a7a43; border-radius: 999px; background: #dff3e6; color: #1a7a43; font-size: 11px; font-weight: 700">成片用这一版</span>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article style="display: grid; grid-template-columns: 200px minmax(0, 1fr) minmax(0, 430px); gap: 12px; padding: 10px; border: 2px solid #1b1a17; border-radius: 8px; background: #fffdf7; box-shadow: 3px 3px 0 #1b1a17">
+<div style="display: flex; flex-direction: column; gap: 7px">
+
+<div style="position: relative; height: 112px; border: 2px solid #1b1a17; background: #6b4a3a"><span style="position: absolute; left: 5px; top: 5px; padding: 0 6px; border-radius: 3px; background: rgba(18,16,19,.78); color: #ffffff; font: 700 11px/18px 'JetBrains Mono', monospace">V9-01</span><span style="position: absolute; right: 5px; bottom: 5px; padding: 0 6px; border-radius: 3px; background: rgba(18,16,19,.78); color: #ffffff; font: 500 10px/16px 'JetBrains Mono', monospace">0:07</span></div>
+<div style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #1b1a17"></span><span style="width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid #857a62"></span><span style="flex: 1 1 0"></span><button type="button" style="height: 22px; padding: 0 8px; border: 1.5px solid #1a7a43; border-radius: 5px; background: #dff3e6; color: #1a7a43; font-size: 11px; font-weight: 700">采用</button><button type="button" style="height: 22px; padding: 0 8px; border: 1.5px solid #cdbf9f; border-radius: 5px; background: #fffdf7; font-size: 11px">废片</button></div>
+
+
+<span style="font: 500 11px 'JetBrains Mono', 'Noto Sans SC', monospace; color: #4a463d">7.0 秒 · 3 镜 · 2 个版本</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0; font-size: 12px; line-height: 1.7">
+<strong style="color: #c5361f">【视频编号V9-01｜剧本9-1【第1版】（咖啡店 日/内）前段】</strong>
+<span style="color: #4a463d">总时长：7.0秒　【承接9-0结尾】</span>
+<div><strong>【镜头01】</strong>2.0s｜特写，门上的风铃 + 固定</div><div><strong>【镜头02】</strong>2.6s｜中景，咖啡店门口 + 轻微横移</div><div><strong>【镜头03】</strong>2.4s｜近景，靠窗的男主 + 固定</div>
+<div style="margin: 0 -4px; padding: 0 4px; border-radius: 4px; box-shadow: 0 0 0 2px #1b1a17"><span style="margin-right: 6px; padding: 0 5px; border-radius: 3px; background: #f3e9d4; color: #4a463d; font: 500 10px/16px 'JetBrains Mono', 'Noto Sans SC', monospace">镜头 03</span><strong style="color: #c5361f">【男主】</strong>　<span style="background: #ffe9a8; border-radius: 3px; padding: 0 4px">你来了。</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px">
+<button type="button" style="border: 0; background: transparent; padding: 0; color: #4a463d; font-size: 12px; text-decoration: underline">展开全文（共 3 镜）</button>
+<span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px 0 3px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #f3e9d4; font-size: 11px"><span style="width: 16px; height: 16px; border-radius: 50%; background: #4a3f52"></span>女主</span><span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px 0 3px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #f3e9d4; font-size: 11px"><span style="width: 16px; height: 16px; border-radius: 50%; background: #2f4660"></span>男主</span><span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px 0 3px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #f3e9d4; font-size: 11px"><span style="width: 16px; height: 16px; border-radius: 50%; background: #6b4a3a"></span>咖啡店</span>
+</div>
+<div style="display: flex; gap: 8px"><button type="button" style="height: 26px; padding: 0 9px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 11px; font-weight: 700">重新编辑</button><button type="button" style="height: 26px; padding: 0 9px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 11px; font-weight: 700">发给 Agent</button></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px; min-width: 0; font-size: 12px">
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: transparent; border: 2px solid #1a7a43"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">△ 门上的风铃响了一声。</span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: transparent; border: 2px solid #1a7a43"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">△ 林夏推门进来，四处张望。</span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: #1a7a43; border: 0"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: #ffe9a8; box-shadow: 0 0 0 3px #ffe9a8">周野（抬头）说：“你来了。”</span></div>
+
+
+</div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 8px 10px; border: 2px solid #1b1a17; border-radius: 8px; background: #fffdf7">
+<span style="position: relative; flex: none; width: 76px; height: 44px; border: 2px solid #1b1a17; background: #2f4660"><span style="position: absolute; left: 3px; top: 3px; padding: 0 5px; border-radius: 3px; background: rgba(18,16,19,.78); color: #ffffff; font: 700 10px/16px 'JetBrains Mono', monospace">V9-02</span></span>
+<span style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 1px"><strong style="font-size: 12px; color: #c5361f; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">【视频编号V9-02｜剧本9-1【第1版】（咖啡店 日/内）后段】</strong><span style="font-size: 11px; color: #4a463d">8.0 秒 · 3 镜 · 承接 V9-01</span></span>
+<span style="padding: 0 9px; border: 1.5px solid #1a7a43; border-radius: 999px; background: #dff3e6; color: #1a7a43; font-size: 11px; font-weight: 700">剧本 3 行 · 台词 2 句全对上</span>
+<button type="button" style="height: 26px; padding: 0 9px; border: 1.5px solid #cdbf9f; border-radius: 6px; background: #fffdf7; font-size: 11px">展开</button>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 4px; padding: 5px 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7">
+<strong style="font-size: 13px">第 2 版</strong><span style="font: 500 12px 'JetBrains Mono', 'Noto Sans SC', monospace">V9-B1、V9-B2</span><span style="font-size: 11px; color: #4a463d">剧本 6 行，小说体：「」里的话当台词，其余当画面</span>
+<span style="flex: 1 1 0"></span>
+
+<span style="padding: 0 9px; border: 1.5px solid #857a62; border-radius: 999px; background: #f3e9d4; color: #4a463d; font-size: 11px; font-weight: 700">备选，不进连播</span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 8px 10px; border: 2px solid #1b1a17; border-radius: 8px; background: #fffdf7">
+<span style="position: relative; flex: none; width: 76px; height: 44px; border: 2px solid #1b1a17; background: #5a4a6a"><span style="position: absolute; left: 3px; top: 3px; padding: 0 5px; border-radius: 3px; background: rgba(18,16,19,.78); color: #ffffff; font: 700 10px/16px 'JetBrains Mono', monospace">V9-B1</span></span>
+<span style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 1px"><strong style="font-size: 12px; color: #c5361f; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">【视频编号V9-B1｜剧本9-1【第2版】（咖啡店 日/内）前段】</strong><span style="font-size: 11px; color: #4a463d">7.6 秒 · 3 镜 · 承接 9-0 结尾</span></span>
+<span style="padding: 0 9px; border: 1.5px solid #1a7a43; border-radius: 999px; background: #dff3e6; color: #1a7a43; font-size: 11px; font-weight: 700">剧本 3 行 · 台词 1 句全对上</span>
+<button type="button" style="height: 26px; padding: 0 9px; border: 1.5px solid #cdbf9f; border-radius: 6px; background: #fffdf7; font-size: 11px">展开</button>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article style="display: grid; grid-template-columns: 200px minmax(0, 1fr) minmax(0, 430px); gap: 12px; padding: 10px; border: 2px solid #1b1a17; border-radius: 8px; background: #fffdf7; box-shadow: 3px 3px 0 #1b1a17">
+<div style="display: flex; flex-direction: column; gap: 7px">
+
+
+<div style="position: relative; height: 112px; border: 2px dashed #ab9d7f; background: #fbf5e9; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #6e6858"><span style="position: absolute; left: 5px; top: 5px; padding: 0 6px; border-radius: 3px; background: rgba(18,16,19,.78); color: #ffffff; font: 700 11px/18px 'JetBrains Mono', monospace">V9-B2</span>还没生成</div>
+<button type="button" style="height: 28px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 12px; font-weight: 700">载入并创作</button>
+
+<span style="font: 500 11px 'JetBrains Mono', 'Noto Sans SC', monospace; color: #4a463d">8.4 秒 · 4 镜</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0; font-size: 12px; line-height: 1.7">
+<strong style="color: #c5361f">【视频编号V9-B2｜剧本9-1【第2版】（咖啡店 日/内）后段】</strong>
+<span style="color: #4a463d">总时长：8.4秒　【承接视频编号V9-B1】</span>
+<div><strong>【镜头01】</strong>2.0s｜特写，男主的手指 + 固定</div><div><strong>【镜头02】</strong>2.4s｜近景，男主 + 固定</div><div><strong>【镜头03】</strong>2.0s｜特写，男主的眼睛 + 缓推</div>
+<div style="margin: 0 -4px; padding: 0 4px; border-radius: 4px; box-shadow: none"><span style="margin-right: 6px; padding: 0 5px; border-radius: 3px; background: #f3e9d4; color: #4a463d; font: 500 10px/16px 'JetBrains Mono', 'Noto Sans SC', monospace">镜头 02</span><strong style="color: #c5361f">【男主】</strong>　<span style="background: #ffe9a8; border-radius: 3px; padding: 0 4px">我以为你不会来了……</span></div><div style="margin: 0 -4px; padding: 0 4px; border-radius: 4px; box-shadow: none"><span style="margin-right: 6px; padding: 0 5px; border-radius: 3px; background: #f3e9d4; color: #4a463d; font: 500 10px/16px 'JetBrains Mono', 'Noto Sans SC', monospace">镜头 03</span><strong style="color: #c5361f">【男主】</strong>　<span style="background: #ffe9a8; border-radius: 3px; padding: 0 4px">看来是我想多了。</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px">
+<button type="button" style="border: 0; background: transparent; padding: 0; color: #4a463d; font-size: 12px; text-decoration: underline">展开全文（共 4 镜）</button>
+<span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px 0 3px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #f3e9d4; font-size: 11px"><span style="width: 16px; height: 16px; border-radius: 50%; background: #4a3f52"></span>女主</span><span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px 0 3px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #f3e9d4; font-size: 11px"><span style="width: 16px; height: 16px; border-radius: 50%; background: #2f4660"></span>男主</span><span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px 0 3px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #f3e9d4; font-size: 11px"><span style="width: 16px; height: 16px; border-radius: 50%; background: #6b4a3a"></span>咖啡店</span>
+</div>
+<div style="display: flex; gap: 8px"><button type="button" style="height: 26px; padding: 0 9px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 11px; font-weight: 700">重新编辑</button><button type="button" style="height: 26px; padding: 0 9px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 11px; font-weight: 700">发给 Agent</button></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px; min-width: 0; font-size: 12px">
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: transparent; border: 2px solid #1a7a43"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">周野头也没抬，手指一下一下敲着桌面：</span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: #1a7a43; border: 0"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">「我以为你不会来了……看来是我想多了。」<span style="margin-left: 6px; padding: 0 7px; border: 1.5px solid #1d4ed8; border-radius: 999px; background: #e3ecff; color: #1d4ed8; font-size: 10px; font-weight: 700; white-space: nowrap">拆成 2 镜 · 镜头 02、03</span></span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: transparent; border: 2px solid #1a7a43"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">我攥紧包带，在他对面坐下。</span></div>
+
+
+</div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 4px; padding: 5px 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7">
+<strong style="font-size: 13px">两版共用</strong><span style="font: 500 12px 'JetBrains Mono', 'Noto Sans SC', monospace">V9-03</span><span style="font-size: 11px; color: #4a463d">不管成片用哪一版，后面都接这一组</span>
+<span style="flex: 1 1 0"></span>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 8px 10px; border: 2px solid #1b1a17; border-radius: 8px; background: #fffdf7">
+<span style="position: relative; flex: none; width: 76px; height: 44px; border: 2px solid #1b1a17; background: #3f5a48"><span style="position: absolute; left: 3px; top: 3px; padding: 0 5px; border-radius: 3px; background: rgba(18,16,19,.78); color: #ffffff; font: 700 10px/16px 'JetBrains Mono', monospace">V9-03</span></span>
+<span style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 1px"><strong style="font-size: 12px; color: #c5361f; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">【视频编号V9-03｜剧本9-1（咖啡店 日/内）两版共用的后段】</strong><span style="font-size: 11px; color: #4a463d">12.0 秒 · 5 镜 · 承接 V9-02（第1版）／V9-B2（第2版）</span></span>
+<span style="padding: 0 9px; border: 1.5px solid #1a7a43; border-radius: 999px; background: #dff3e6; color: #1a7a43; font-size: 11px; font-weight: 700">剧本 5 行 · 台词 3 句全对上</span>
+<button type="button" style="height: 26px; padding: 0 9px; border: 1.5px solid #cdbf9f; border-radius: 6px; background: #fffdf7; font-size: 11px">展开</button>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 4px; padding: 5px 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7">
+<strong style="font-size: 13px">跨两场</strong><span style="font: 500 12px 'JetBrains Mono', 'Noto Sans SC', monospace">V9-04</span><span style="font-size: 11px; color: #4a463d">这一组前半是 9-1 的结尾，后半是 9-2 的开头</span>
+<span style="flex: 1 1 0"></span>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article style="display: grid; grid-template-columns: 200px minmax(0, 1fr) minmax(0, 430px); gap: 12px; padding: 10px; border: 2px solid #1b1a17; border-radius: 8px; background: #fffdf7; box-shadow: 3px 3px 0 #1b1a17">
+<div style="display: flex; flex-direction: column; gap: 7px">
+
+<div style="position: relative; height: 112px; border: 2px solid #1b1a17; background: #39505e"><span style="position: absolute; left: 5px; top: 5px; padding: 0 6px; border-radius: 3px; background: rgba(18,16,19,.78); color: #ffffff; font: 700 11px/18px 'JetBrains Mono', monospace">V9-04</span><span style="position: absolute; right: 5px; bottom: 5px; padding: 0 6px; border-radius: 3px; background: rgba(18,16,19,.78); color: #ffffff; font: 500 10px/16px 'JetBrains Mono', monospace">0:13</span></div>
+<div style="display: flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #1b1a17"></span><span style="width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid #857a62"></span><span style="flex: 1 1 0"></span><button type="button" style="height: 22px; padding: 0 8px; border: 1.5px solid #1a7a43; border-radius: 5px; background: #dff3e6; color: #1a7a43; font-size: 11px; font-weight: 700">采用</button><button type="button" style="height: 22px; padding: 0 8px; border: 1.5px solid #cdbf9f; border-radius: 5px; background: #fffdf7; font-size: 11px">废片</button></div>
+
+
+<span style="font: 500 11px 'JetBrains Mono', 'Noto Sans SC', monospace; color: #4a463d">13.0 秒 · 6 镜 · 1 个版本</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0; font-size: 12px; line-height: 1.7">
+<strong style="color: #c5361f">【视频编号V9-04｜剧本9-1（咖啡店 日/内）结尾＋9-2（咖啡店门口 日/外）开头】</strong>
+<span style="color: #4a463d">总时长：13.0秒　【承接视频编号V9-03】</span>
+<div><strong>【镜头01】</strong>2.0s｜中景，窗外 + 固定</div><div><strong>【镜头02】</strong>2.4s｜近景，女主 + 固定</div><div><strong>【镜头05】</strong>2.2s｜中景，门口的两个人 + 轻微横移</div>
+<div style="margin: 0 -4px; padding: 0 4px; border-radius: 4px; box-shadow: none"><span style="margin-right: 6px; padding: 0 5px; border-radius: 3px; background: #f3e9d4; color: #4a463d; font: 500 10px/16px 'JetBrains Mono', 'Noto Sans SC', monospace">镜头 02</span><strong style="color: #c5361f">【女主】</strong>　<span style="background: #ffe9a8; border-radius: 3px; padding: 0 4px">算了，先喝口水吧。</span></div><div style="margin: 0 -4px; padding: 0 4px; border-radius: 4px; box-shadow: none"><span style="margin-right: 6px; padding: 0 5px; border-radius: 3px; background: #f3e9d4; color: #4a463d; font: 500 10px/16px 'JetBrains Mono', 'Noto Sans SC', monospace">镜头 05</span><strong style="color: #c5361f">【男主】</strong>　<span style="background: #ffe9a8; border-radius: 3px; padding: 0 4px">送你到地铁口。</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px">
+<button type="button" style="border: 0; background: transparent; padding: 0; color: #4a463d; font-size: 12px; text-decoration: underline">展开全文（共 6 镜）</button>
+<span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px 0 3px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #f3e9d4; font-size: 11px"><span style="width: 16px; height: 16px; border-radius: 50%; background: #4a3f52"></span>女主</span><span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px 0 3px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #f3e9d4; font-size: 11px"><span style="width: 16px; height: 16px; border-radius: 50%; background: #2f4660"></span>男主</span><span style="display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px 0 3px; border: 1.5px solid #cdbf9f; border-radius: 999px; background: #f3e9d4; font-size: 11px"><span style="width: 16px; height: 16px; border-radius: 50%; background: #6b4a3a"></span>咖啡店</span>
+</div>
+<div style="display: flex; gap: 8px"><button type="button" style="height: 26px; padding: 0 9px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 11px; font-weight: 700">重新编辑</button><button type="button" style="height: 26px; padding: 0 9px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; font-size: 11px; font-weight: 700">发给 Agent</button></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px; min-width: 0; font-size: 12px">
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: transparent; border: 2px solid #1a7a43"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">△ 窗外开始下雨。</span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: #d99a00; border: 0"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">林夏说：“算了，先喝水。”</span></div>
+
+<div style="margin-left: 16px; padding: 6px 9px; border: 1.5px solid #8a6400; border-radius: 6px; background: #fff6d8; font-size: 11px; line-height: 1.7"><strong>剧本</strong>　算了，先喝水。<br><strong>分镜</strong>　算了，先喝口水吧。<span style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 2px"><button type="button" style="border: 0; background: transparent; padding: 0; color: #c5361f; font-size: 11px; font-weight: 700; text-decoration: underline">复制剧本原句</button><button type="button" style="border: 0; background: transparent; padding: 0; color: #c5361f; font-size: 11px; font-weight: 700; text-decoration: underline">载入并定位到这句</button><button type="button" style="border: 0; background: transparent; padding: 0; color: #4a463d; font-size: 11px; text-decoration: underline">标为没问题</button></span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: transparent; border: 2px solid #1a7a43"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">△ 他笑了一下，把自己那杯推给她。</span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 7px; border-top: 2px solid #1b1a17; line-height: 1.55; font-weight: 700"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: transparent; border: 0"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">9-2　日/外　咖啡店门口</span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: transparent; border: 2px solid #1a7a43"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">△ 雨越下越大。</span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: transparent; border: 2px solid #1a7a43"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">△ 周野撑开伞，往她那边偏了偏。</span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: #1a7a43; border: 0"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">周野说：“送你到地铁口。”</span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: transparent; border: 2px solid #1a7a43"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">△ 林夏没说话，往伞下靠了半步。</span></div>
+
+
+<div style="display: flex; align-items: flex-start; gap: 7px; padding-top: 0; border-top: 0; line-height: 1.55; font-weight: 400"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: transparent; border: 2px dashed #857a62"></span><span style="flex: 1 1 auto; min-width: 0; border-radius: 3px; background: transparent; box-shadow: 0 0 0 3px transparent">△ 两个人的影子在积水里叠在一起。<span style="margin-left: 6px; padding: 0 7px; border: 1.5px solid #857a62; border-radius: 999px; background: #f3e9d4; color: #4a463d; font-size: 10px; font-weight: 700; white-space: nowrap">靠位置</span></span></div>
+
+
+</div>
+</article>
+
+
+
+
+
+
+
+
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; padding: 3px 2px 6px; border-bottom: 2px solid #1b1a17">
+<strong style="font: 700 14px 'JetBrains Mono', monospace">9-3</strong><strong style="font-size: 14px">夜/内　林夏家</strong><span style="font-size: 11px; color: #4a463d">缺分镜 · 剧本 3 行</span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article style="display: grid; grid-template-columns: 200px minmax(0, 1fr) minmax(0, 430px); gap: 12px; padding: 10px; border: 2px dashed #ab9d7f; border-radius: 8px; background: rgba(255,253,247,.75)">
+<div style="height: 76px; border: 2px dashed #ab9d7f; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #6e6858">没有成片</div>
+<div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 8px; font-size: 12px; color: #4a463d">这一场还没有分镜<button type="button" style="height: 28px; padding: 0 11px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; color: #1b1a17; font-size: 12px; font-weight: 700">导入分镜</button></div>
+<div style="display: flex; flex-direction: column; gap: 5px; min-width: 0; font-size: 12px">
+<div style="display: flex; align-items: flex-start; gap: 7px; line-height: 1.55; color: #4a463d"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: #c9bfa6"></span><span>△ 她把湿了的外套挂起来。</span></div><div style="display: flex; align-items: flex-start; gap: 7px; line-height: 1.55; color: #4a463d"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: #c9bfa6"></span><span>△ 手机亮了一下，是周野发来的消息。</span></div><div style="display: flex; align-items: flex-start; gap: 7px; line-height: 1.55; color: #4a463d"><span style="flex: none; width: 9px; height: 9px; margin-top: 5px; border-radius: 50%; background: #c9bfa6"></span><span>林夏（VO）：“他问我到家了没有。”</span></div>
+</div>
+</article>
+
+
+
+
+
+
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; padding: 3px 2px 6px; border-bottom: 2px solid #1b1a17">
+<strong style="font: 700 14px 'JetBrains Mono', monospace"></strong><strong style="font-size: 14px">未对上剧本</strong><span style="font-size: 11px; color: #4a463d">1 组</span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article style="display: grid; grid-template-columns: 200px minmax(0, 1fr) minmax(0, 430px); gap: 12px; align-items: center; padding: 10px; border: 2px solid #1b1a17; border-radius: 8px; background: #fffdf7">
+<div style="position: relative; height: 76px; border: 2px solid #1b1a17; background: #5e5140"><span style="position: absolute; left: 5px; top: 5px; padding: 0 6px; border-radius: 3px; background: rgba(18,16,19,.78); color: #ffffff; font: 700 11px/18px 'JetBrains Mono', monospace">V9-05</span></div>
+<div style="display: flex; flex-direction: column; gap: 3px; min-width: 0; font-size: 12px"><strong style="color: #c5361f">【视频编号V9-05｜片尾彩蛋】</strong><span style="color: #4a463d">4.0 秒 · 1 镜</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 12px; color: #4a463d">表头里没有写剧本场次<button type="button" style="height: 26px; padding: 0 10px; border: 2px solid #1b1a17; border-radius: 6px; background: #fffdf7; color: #1b1a17; font-size: 12px; font-weight: 700">指定场次</button></div>
+</article>
+
+
+
+
+</section>
+</div>
+
+<div style="display: flex; align-items: center; gap: 10px; padding: 8px 14px 10px; border-top: 2px solid #1b1a17; background: #fffdf7">
+<button type="button" aria-label="展开提示词区域" style="flex: 1 1 auto; height: 36px; padding: 0 16px; border: 2px solid #1b1a17; border-radius: 999px; background: #fffdf7; box-shadow: 3px 3px 0 #1b1a17; text-align: left; color: #6e6858">提示词面板已收起。点「载入并创作」或「重新编辑」会展开并载入这一组</button>
+</div>
+
+</main>
+</div>
+</div>
+</body></html>
